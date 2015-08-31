@@ -61,7 +61,7 @@ angular.module('starter.controllers', [])
           });
         });
         $ionicLoading.hide();
-        $state.go('tab.rooms');
+        $state.go("tab.rooms");
       }).catch(function(error) {
         alert('Authentication failed ' + error.message);
         $ionicLoading.hide();
@@ -90,16 +90,38 @@ angular.module('starter.controllers', [])
   $scope.chats = Chats.all();
 })
 
-.controller('RoomsCtrl', function ($scope, $state) {
+.controller('RoomsCtrl', function ($scope, $state, $rootScope, GPS) {
   console.log("Rooms Controller initialized");
-  // $scope.rooms = Rooms.all();
 
-  // $scope.openChatRoom = function(roomId) {
-  //   $state.go('tab.chat', {
-  //     roomId: roomId
-  //   });
-  // };
-});
+  //set up user list
+  $scope.users = [];
+  //set User position
+  GPS.getGeo().then(function(position) {
+    var longitude = position.coords.longitude;
+    var latitude = position.coords.latitude;
+    geoFire.set($rootScope.uid, [latitude, longitude]).then(function () {
+      console.log("Provided key has been added to GeoFire");
+
+      var geoQuery = geoFire.query({
+        center: [latitude, longitude],
+        radius: 10.000 //kilometers
+      });
+
+      geoQuery.on("key_entered", function(key, location, distance) {
+        console.log('something');
+        console.log("User " + key + " found at " + location + " (" + distance + " km away)");
+      });
+
+      geoQuery.on("key_exited", function(key, location, distance) {
+        console.log("User " + key + " left query to " + location + " (" + distance + " km away)");
+      });
+
+    }, function (error) {
+      console.log("Error: " + error);
+    });
+  });
+
+  });
 
 // .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
 //   $scope.chat = Chats.get($stateParams.chatId);

@@ -2,6 +2,16 @@ angular.module('starter.services', ['firebase'])
 
 .factory("Auth", ["$firebaseAuth", "$rootScope", function ($firebaseAuth, $rootScope) {
   return $firebaseAuth(ref);
+}])
+
+.factory('GPS', ['$cordovaGeolocation', function($cordovaGeolocation) {
+  return {
+    getGeo: function(options) {
+      options = options || { timeout: 30000, enableHighAccuracy: true };
+
+      return $cordovaGeolocation.getCurrentPosition(options);
+    }
+  }
 }]);
 
 // .factory("Rooms", function($firebase) {
