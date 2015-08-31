@@ -8,8 +8,8 @@
 
 var ref = new Firebase('PUT URL HERE');
 
-
 var geoFire = new GeoFire(ref.child("geolocation"));
+
 
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova', 'firebase'])
 .run(function($ionicPlatform, $rootScope) {
@@ -88,21 +88,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   })
 
   .state('tab.chat', {
-      url: '/chat',
-      views: {
-        'tab-chat': {
-          templateUrl: 'templates/tab-chat.html',
-          controller: 'ChatCtrl'
-        }
-      },
-      resolve: {
-        "currentAuth" : ["Auth",
-          function(Auth) {
-            return Auth.$requireAuth();
-          }
-        ]
+    url: '/chat',
+    views: {
+      'tab-chat': {
+        templateUrl: 'templates/tab-chat.html',
+        controller: 'ChatCtrl'
       }
-    })
+    },
+    resolve: {
+      "currentAuth" : ["Auth",
+        function(Auth) {
+          return Auth.$requireAuth();
+        }
+      ]
+    }
+  })
 
   .state('profile', {
       url: '/profile/:userId',
@@ -130,17 +130,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     })
 
   .state('message', {
-      url: '/messages/:userId',
-      templateUrl: 'templates/tab-chat.html',
-      controller: 'MessageCtrl',
-      resolve: {
-        "currentAuth": ["Auth",
-          function(Auth) {
-            return Auth.$waitForAuth();
-          }
-        ]
+    url: '/messages/:userId',
+    templateUrl: 'templates/tab-chat.html',
+    controller: 'MessageCtrl',
+    resolve: {
+      "currentAuth": ["Auth",
+        function(Auth) {
+          return Auth.$waitForAuth();
+        }
+      ]
+    }
+  })
+
+  .state('tab.friends', {
+    url: '/friends',
+    views: {
+      'tab-friends': {
+        templateUrl: 'templates/tab-friends.html',
+        controller: 'FriendsCtrl'
       }
-    });
+    }
+  });
   //   .state('tab.chat-detail', {
   //     url: '/chats/:chatId',
   //     views: {
