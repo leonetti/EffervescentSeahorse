@@ -1,7 +1,5 @@
 angular.module('starter.controllers', [])
 
-// .controller('DashCtrl', function($scope) {})
-
 .controller('LoginCtrl', function($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope) {
 
   console.log('login controller initiated');
@@ -53,15 +51,16 @@ angular.module('starter.controllers', [])
         password: user.pwdForLogin
       }).then(function(authData) {
         console.log('Logged in as ' + authData.uid);
-        $rootScope.uid = authData.uid;
+        //$rootScope.uid = authData.uid;
+        window.localStorage['uid'] = authData.uid;
         ref.child("users").child(authData.uid).once('value', function (snapshot) {
           var val = snapshot.val();
           $scope.$apply(function() {
-            $rootScope.displayName = val;
+            window.localStorage['displayName'] = val;
           });
         });
         $ionicLoading.hide();
-        $state.go('tab.rooms');
+        $state.go("tab.rooms");
       }).catch(function(error) {
         alert('Authentication failed ' + error.message);
         $ionicLoading.hide();
@@ -74,39 +73,52 @@ angular.module('starter.controllers', [])
 
 
 .controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  // $scope.chats = Chats.all();
-  // $scope.remove = function(chat) {
-  //   Chats.remove(chat);
-  // };
   console.log("Chat Controller initialized");
   $scope.chats = Chats.all();
 })
 
-.controller('RoomsCtrl', function ($scope, $state) {
+.controller('RoomsCtrl', function ($scope, $state, $rootScope, GPS, $ionicLoading) {
   console.log("Rooms Controller initialized");
-  // $scope.rooms = Rooms.all();
 
-  // $scope.openChatRoom = function(roomId) {
-  //   $state.go('tab.chat', {
-  //     roomId: roomId
-  //   });
-  // };
+  //set up user list
+  $scope.users = [];
+
+  $ionicLoading.show({
+    template: 'Loading Matches...'
+  });
+  //set User position
+  GPS.getGeo().then(function(position) {
+    var longitude = position.coords.longitude;
+    var latitude = position.coords.latitude;
+    var uid = window.localStorage['uid'];
+    geoFire.set(uid, [latitude, longitude]).then(function () {
+      console.log("Provided key has been added to GeoFire");
+
+      var geoQuery = geoFire.query({
+        center: [latitude, longitude],
+        radius: 10.000 //kilometers
+      });
+
+      geoQuery.on("key_entered", function(key, location, distance) {
+        $ionicLoading.hide();
+        console.log("User " + key + " found at " + location + " (" + distance + " km away)");
+        if(key !== uid) {
+          ref.child("users").child(key).once('value', function (snapshot) {
+            var val = snapshot.val();
+            $scope.$apply(function () {
+              $scope.users.push(val);
+            });
+          });
+        }
+      });
+
+      geoQuery.on("key_exited", function(key, location, distance) {
+        console.log("User " + key + " left query to " + location + " (" + distance + " km away)");
+      });
+
+    }, function (error) {
+      console.log("Error: " + error);
+    });
+  });
+
 });
-
-// .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-//   $scope.chat = Chats.get($stateParams.chatId);
-// })
-
-// .controller('AccountCtrl', function($scope) {
-//   $scope.settings = {
-//     enableFriends: true
-//   };
-// });

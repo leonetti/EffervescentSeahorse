@@ -6,9 +6,9 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 var ref = new Firebase('PUT OUR DATABASE ID HERE');
+var geoFire = new GeoFire(ref.child("geolocation"));
 
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'firebase'])
-
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova', 'firebase'])
 .run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
