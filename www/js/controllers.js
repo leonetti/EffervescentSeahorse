@@ -72,9 +72,16 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  console.log("Chat Controller initialized");
-  $scope.chats = Chats.all();
+.controller('ChatCtrl', function($scope, Chats, $rootScope) {
+
+
+  $scope.messages= Chats.all;
+
+  $scope.sendMessage = function(message) {
+    ref.child('messages').child($rootScope.uid).push({
+      'text': message
+    });
+  };
 })
 
 .controller('RoomsCtrl', function ($scope, $state, $rootScope, GPS, $ionicLoading) {
@@ -82,6 +89,10 @@ angular.module('starter.controllers', [])
 
   //set up user list
   $scope.users = [];
+
+  $scope.sendToProfile = function(user) {
+    $state.go('profile')
+  }
 
   $ionicLoading.show({
     template: 'Loading Matches...'
@@ -105,6 +116,7 @@ angular.module('starter.controllers', [])
         if(key !== uid) {
           ref.child("users").child(key).once('value', function (snapshot) {
             var val = snapshot.val();
+            val.uid = key;
             $scope.$apply(function () {
               $scope.users.push(val);
             });
@@ -121,4 +133,26 @@ angular.module('starter.controllers', [])
     });
   });
 
+})
+
+.controller('ProfileCtrl', function($scope, $state, $stateParams) {
+  console.log('Profile Controller initialized');
+  console.log($stateParams.userId);
+  $scope.user;
+  ref.child("users").child($stateParams.userId).once('value', function (snapshot) {
+    var val = snapshot.val();
+    val.uid = $stateParams.userId;
+    $scope.$apply(function () {
+      $scope.user = (val);
+    });
+  });
+  $scope.sendChat = function() {
+    console.log('inSendChat');
+    $state.go('tab.chat');
+  };
+})
+
+.controller('MessageCtrl', function($scope, $stateParams) {
+  $scope.sendMessage = function(message) {
+  }
 });

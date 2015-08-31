@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var ref = new Firebase('PUT OUR DATABASE ID HERE');
+var ref = new Firebase('URL');
 var geoFire = new GeoFire(ref.child("geolocation"));
 
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova', 'firebase'])
@@ -84,18 +84,44 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.chat', {
+      url: '/chat',
       views: {
         'tab-chat': {
           templateUrl: 'templates/tab-chat.html',
-          controller: 'ChatsCtrl'
+          controller: 'ChatCtrl'
         }
       },
       resolve: {
         "currentAuth" : ["Auth",
           function(Auth) {
             return Auth.$requireAuth();
+          }
+        ]
+      }
+    })
+
+  .state('profile', {
+      url: '/profile/:userId',
+      templateUrl: 'templates/profile.html',
+      controller: 'ProfileCtrl',
+      resolve: {
+        "currentAuth": ["Auth",
+          function(Auth) {
+            return Auth.$waitForAuth();
+          }
+        ]
+      }
+    })
+
+  .state('message', {
+      url: '/messages/:userId',
+      templateUrl: 'templates/tab-chat.html',
+      controller: 'MessageCtrl',
+      resolve: {
+        "currentAuth": ["Auth",
+          function(Auth) {
+            return Auth.$waitForAuth();
           }
         ]
       }

@@ -14,20 +14,6 @@ angular.module('starter.services', ['firebase'])
   }
 }]);
 
-// .factory("Rooms", function($firebase) {
-//   var ref = new Firebase('https://crackling-heat-1995.firebaseio.com/');
-//   var rooms = $firebase(ref.child('rooms')).$asArray();
-
-//   return {
-//     all: function () {
-//       return rooms;
-//     },
-//     get: function (roomId) {
-//       // Simple index lookup
-//       return rooms.$getRecord(roomId);
-//     }
-//   };
-// });
 
 
 // .factory('Chats', function() {
