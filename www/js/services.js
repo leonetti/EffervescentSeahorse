@@ -12,28 +12,7 @@ angular.module('starter.services', ['firebase'])
       return $cordovaGeolocation.getCurrentPosition(options);
     }
   }
-}])
-
-.factory("Chats", function($rootScope) {
-  var chatRef = new Firebase("https://crackling-heat-1995.firebaseio.com/messages/" + $rootScope.uid);
-
-  var messages = [];
-
-  chatRef.on('value', function(snapshot) {
-    // console.log(snapshot.val());
-    var key = snapshot.val();
-    // var key = snapshot.val()[$rootScope.uid];
-    console.log(key);
-    messages.push({key: key.text});
-    // console.log(messages);
-  });
-
-  var Message = {
-    all: messages
-  };
-
-  return Message;
-});
+}]);
 
 
 

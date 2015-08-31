@@ -152,7 +152,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('MessageCtrl', function() {
+.controller('MessageCtrl', function($scope, $stateParams) {
   $scope.sendMessage = function(message) {
   }
 });
