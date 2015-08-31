@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var ref = new Firebase('https://vivid-fire-2453.firebaseio.com/');
+var ref = new Firebase('PUT OUR DATABASE ID HERE');
 var geoFire = new GeoFire(ref.child("geolocation"));
 
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova', 'firebase'])
