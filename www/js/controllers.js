@@ -262,4 +262,21 @@ angular.module('starter.controllers', [])
     });
     $scope.text = '';
   };
+})
+
+.controller('FriendsCtrl', function($scope) {
+  $scope.friends = [];
+
+  ref.child("friends").child(window.localStorage['uid']).once('value', function (snapshot) {
+    var friendsId = snapshot.val();
+    for(var i = 0; i < friendsId.length; i++) {
+      var key = friendsId[i];
+      ref.child("users").child(key).once('value', function (snapshot) {
+        var val = snapshot.val();
+        $scope.$apply(function () {
+          $scope.friends.push(val);
+        });
+      });
+    }
+  });
 });
