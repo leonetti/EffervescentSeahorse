@@ -1,0 +1,9 @@
+<ion-view view-title="{{user.displayName}}">
+  <ion-content class="padding">
+    <img ng-src="{{user.profile-pic}}" style="width: 64px; height: 64px">
+    <p>PROFILE PAGE</p>
+    <p>
+      <a href="#/messages/{{user.uid}}">CHAT WITH {{user.displayName}} HERE</a>
+    </p>
+  </ion-content>
+</ion-view>
