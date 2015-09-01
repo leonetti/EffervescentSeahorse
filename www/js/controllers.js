@@ -257,7 +257,7 @@ angular.module('starter.controllers', [])
       "receiver" : {
         text: message,
         color: 'red',
-        aligh: 'left'
+        align: 'left'
       }
     });
     $scope.text = '';
