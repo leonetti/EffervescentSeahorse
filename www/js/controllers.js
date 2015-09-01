@@ -160,6 +160,7 @@ angular.module('starter.controllers', [])
     $state.go('tab.chat');
   };
 
+
   $scope.addFriend = function(){
     /* FOR LAMBERT */
   }
@@ -205,5 +206,60 @@ angular.module('starter.controllers', [])
     ref.child('interests').child(userId).push({
       'activity': item,
     });
+  }
+})
+
+.controller('MessageCtrl', function($scope, $stateParams, $timeout) {
+  $scope.user;
+  $scope.text = '';
+  $scope.messages = [];
+
+
+  ref.child("users").child($stateParams.userId).once('value', function (snapshot) {
+    var val = snapshot.val();
+    val.uid = $stateParams.userId;
+    $timeout(function () {
+      $scope.user = (val);
+    });
+  });
+  console.log($stateParams.userId);
+
+  ref.child('rooms').child(window.localStorage['uid']).child($stateParams.userId).on('value', function(snapshot) {
+    $scope.messages = [];
+    $timeout(function() {
+      for(var key in snapshot.val()) {
+        if(snapshot.val()[key].sender) {
+          $scope.messages.push(snapshot.val()[key].sender);
+        } else if(snapshot.val()[key].receiver) {
+          $scope.messages.push(snapshot.val()[key].receiver);
+        }
+      }
+    });
+    console.log($scope.messages);
+  });
+
+  $scope.setStyle = function(color, align) {
+    return {
+      'color': color,
+      'text-align': align
+    }
+  }
+
+  $scope.sendMessage = function(message) {
+    ref.child("rooms").child(window.localStorage['uid']).child($stateParams.userId).push({
+      "sender" : {
+        text: message,
+        color: 'green',
+        align: 'right'
+      }
+    });
+    ref.child("rooms").child($stateParams.userId).child(window.localStorage['uid']).push({
+      "receiver" : {
+        text: message,
+        color: 'red',
+        align: 'left'
+      }
+    });
+    $scope.text = '';
   };
 });
