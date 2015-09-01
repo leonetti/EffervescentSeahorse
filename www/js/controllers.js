@@ -162,8 +162,20 @@ angular.module('starter.controllers', [])
 
 
   $scope.addFriend = function(){
-    /* FOR LAMBERT */
-  }
+    var userId = window.localStorage['uid'];
+    var friendId = $stateParams.userId;
+
+    // add the friendId to userId's friends if the friend does not already exist
+    ref.child('friends').child(userId).once('value', function(snapshot) {
+      for (var id in snapshot.val()) {
+        if (snapshot.val()[id] === friendId) {
+          return;
+        }
+      }
+      ref.child('friends').child(userId).push(friendId);
+      ref.child('friends').child(friendId).push(userId);
+    });
+  };
 })
 
 .controller('EditProfileCtrl', function ($scope, $rootScope, $ionicActionSheet, ImageService) {
@@ -264,17 +276,16 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('FriendsCtrl', function($scope) {
-  $scope.friends = [];
+.controller('FriendsCtrl', function($scope, $timeout) {
 
-  ref.child("friends").child(window.localStorage['uid']).once('value', function (snapshot) {
+  ref.child("friends").child(window.localStorage['uid']).on('value', function (snapshot) {
+    $scope.friends = [];
     var friendsId = snapshot.val();
-    for(var i = 0; i < friendsId.length; i++) {
-      var key = friendsId[i];
-      ref.child("users").child(key).once('value', function (snapshot) {
-        var val = snapshot.val();
-        $scope.$apply(function () {
-          $scope.friends.push(val);
+    for (var id in friendsId) {
+      var uId = friendsId[id];
+      ref.child('users').child(uId).once('value', function(snapshot) {
+        $timeout(function() {
+          $scope.friends.push([uId, snapshot.val()]);
         });
       });
     }

@@ -1,8 +1,8 @@
 <ion-view view-title="Friends">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="friend in friends" href="#/tab/friends/{{friend.id}}">
-        {{friend.displayName}}
+      <ion-item ng-repeat="friend in friends" href="#/profile/{{friend[0]}}">
+        {{friend[1].displayName}}
       </ion-item>
     </ion-list>
   </ion-content>
