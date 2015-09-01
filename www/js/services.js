@@ -62,7 +62,7 @@ angular.module('starter.services', ['firebase'])
   return {
     getGeo: function(options) {
       options = options || { timeout: 30000, enableHighAccuracy: true };
-
+      console.log('getGeo');
       return $cordovaGeolocation.getCurrentPosition(options);
     }
   }
