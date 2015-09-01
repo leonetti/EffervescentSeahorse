@@ -2,12 +2,12 @@
   <ion-content>
     <label class="item item-input">
       <i class="icon ion-search placeholder-icon"></i>
-      <input type="text" placeholder="Filter By Activity">
+      <input type="text" placeholder="Filter By Activity" ng-model="query">
     </label>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="user in users" type="item-text-wrap" href="#/profile/{{user.uid}}">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="user in users | filter:query" type="item-text-wrap" href="#/profile/{{user.uid}}" >
         <h2>{{user.displayName}}</h2>
-        <p>{{user.uid}}</p>
+        <span ng-repeat='interest in user.interests'>{{interest.activity}} &nbsp;</span>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>
