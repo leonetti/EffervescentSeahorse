@@ -86,13 +86,12 @@ angular.module('starter.controllers', [])
 
 .controller('RoomsCtrl', function ($scope, $state, $rootScope, GPS, $ionicLoading) {
   console.log("Rooms Controller initialized");
-
   //set up user list
   $scope.users = [];
 
   $scope.sendToProfile = function(user) {
-    $state.go('profile')
-  }
+    $state.go('profile');
+  };
 
   $ionicLoading.show({
     template: 'Loading Matches...'
@@ -132,7 +131,10 @@ angular.module('starter.controllers', [])
       console.log("Error: " + error);
     });
   });
-
+})
+.controller('MessageCtrl', function($scope, $stateParams) {
+  $scope.sendMessage = function(message) {
+  };
 })
 
 .controller('ProfileCtrl', function($scope, $state, $stateParams) {
@@ -146,13 +148,62 @@ angular.module('starter.controllers', [])
       $scope.user = (val);
     });
   });
+
+  ref.child('interests').child($stateParams.userId).once('value', function (snapshot) {
+    $scope.$apply(function() {
+      console.log('hi', snapshot.val());
+      $scope.interests = snapshot.val();
+    });
+  });
   $scope.sendChat = function() {
     console.log('inSendChat');
     $state.go('tab.chat');
   };
+
+  $scope.addFriend = function(){
+    /* FOR LAMBERT */
+  }
 })
 
-.controller('MessageCtrl', function($scope, $stateParams) {
-  $scope.sendMessage = function(message) {
-  }
+.controller('EditProfileCtrl', function ($scope, $rootScope, $ionicActionSheet, ImageService) {
+  // $scope.activities = ['basketball', 'tennis']
+  var userId = window.localStorage.uid;
+
+  ref.on('value', function(snapshot){
+    $scope.$apply(function(){
+      $scope.activities = snapshot.val().activities;
+      if(snapshot.val().interests){
+        $scope.interests = snapshot.val().interests[userId];
+      }
+    });
+  });
+
+  $scope.addMedia = function() {
+    $scope.hideSheet = $ionicActionSheet.show({
+      buttons: [
+        { text: 'Take photo' },
+        { text: 'Photo from library' }
+      ],
+      titleText: 'Choose Profile Picture',
+      cancelText: 'Cancel',
+      buttonClicked: function(index) {
+        $scope.addImage(index);
+      }
+    });
+  };
+
+  $scope.addImage = function(type) {
+    $scope.hideSheet();
+    ImageService.handleMediaDialog(type).then(function() {
+      $scope.$apply();
+    });
+  };
+
+  $scope.addInterest = function(item){
+    console.log('Iwork');
+    console.log(userId)
+    ref.child('interests').child(userId).push({
+      'activity': item,
+    });
+  };
 });

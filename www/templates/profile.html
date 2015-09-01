@@ -2,8 +2,12 @@
   <ion-content class="padding">
     <img ng-src="{{user.profile-pic}}" style="width: 64px; height: 64px">
     <p>PROFILE PAGE</p>
+    <ul>
+        <li ng-repeat='interest in interests'>{{interest.activity}}</li>
+    </ul>
     <p>
       <a href="#/messages/{{user.uid}}">CHAT WITH {{user.displayName}} HERE</a>
     </p>
+    <button ng-click='addFriend()'>Add As Friend</button>
   </ion-content>
 </ion-view>
