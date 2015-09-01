@@ -1,17 +1,15 @@
 <ion-view view-title="Chat Room">
   <ion-content>
-    <h1>CHAT</h1>
+    <h1>CHAT with {{user.displayName}}</h1>
     <ul>
-      <li ng-repeat="message in messages">
+      <li ng-repeat="message in messages track by $index" ng-style="setStyle(message.color, message.align)">
        {{message.text}}
       </li>
     </ul>
     <div class="list card padding">
-      <label class="item item-input">
-        <input type="text" ng-model="user.message">
-      </label>
+      <input type="text" ng-model="text" id="user-message">
     </div>
-    <button ng-click="sendMessage(user.message)" class="button button-block button-positive activated">
+    <button ng-click="sendMessage(text)" class="button button-block button-positive activated">
         Send
     </button>
   </ion-content>
