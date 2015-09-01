@@ -90,8 +90,8 @@ angular.module('starter.controllers', [])
   $scope.users = [];
 
   $scope.sendToProfile = function(user) {
-    $state.go('profile')
-  }
+    $state.go('profile');
+  };
 
   $ionicLoading.show({
     template: 'Loading Matches...'
@@ -134,7 +134,7 @@ angular.module('starter.controllers', [])
 })
 .controller('MessageCtrl', function($scope, $stateParams) {
   $scope.sendMessage = function(message) {
-  }
+  };
 })
 
 .controller('ProfileCtrl', function($scope, $state, $stateParams) {
@@ -148,14 +148,26 @@ angular.module('starter.controllers', [])
       $scope.user = (val);
     });
   });
+
+  ref.child('interests').child($stateParams.userId).once('value', function (snapshot) {
+    $scope.$apply(function() {
+      console.log('hi', snapshot.val());
+      $scope.interests = snapshot.val();
+    });
+  });
   $scope.sendChat = function() {
     console.log('inSendChat');
     $state.go('tab.chat');
   };
+
+  $scope.addFriend = function(){
+    /* FOR LAMBERT */
+  }
 })
+
 .controller('EditProfileCtrl', function ($scope, $rootScope, $ionicActionSheet, ImageService) {
   // $scope.activities = ['basketball', 'tennis']
-  var userId = $rootScope.uid;
+  var userId = window.localStorage.uid;
 
   ref.on('value', function(snapshot){
     $scope.$apply(function(){
@@ -188,9 +200,10 @@ angular.module('starter.controllers', [])
   };
 
   $scope.addInterest = function(item){
+    console.log('Iwork');
+    console.log(userId)
     ref.child('interests').child(userId).push({
       'activity': item,
     });
   };
 });
->>>>>>> Working on editing user profile

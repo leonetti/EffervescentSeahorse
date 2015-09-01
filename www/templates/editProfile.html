@@ -7,7 +7,6 @@
         <li ng-repeat='interest in interests'>{{interest.activity}}</li>
     </ul>
     <select class="button button-full button-energized" ng-model = 'activityOptions' ng-change='addInterest(activityOptions)'>
-      Add To Interest
       <option ng-repeat='activity in activities' value='{{activity}}'>{{ activity }}</option>
     </select>
     </ion-content>
