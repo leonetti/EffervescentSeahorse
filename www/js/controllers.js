@@ -84,7 +84,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('RoomsCtrl', function ($scope, $state, $rootScope, GPS, $ionicLoading) {
+.controller('RoomsCtrl', function ($scope, $state, $rootScope, GPS, $ionicLoading, $timeout) {
   console.log("Rooms Controller initialized");
   //set up user list
   $scope.users = [];
@@ -101,6 +101,7 @@ angular.module('starter.controllers', [])
     var longitude = position.coords.longitude;
     var latitude = position.coords.latitude;
     var uid = window.localStorage['uid'];
+    console.log(position.coords);
     geoFire.set(uid, [latitude, longitude]).then(function () {
       console.log("Provided key has been added to GeoFire");
 
@@ -116,9 +117,18 @@ angular.module('starter.controllers', [])
           ref.child("users").child(key).once('value', function (snapshot) {
             var val = snapshot.val();
             val.uid = key;
-            $scope.$apply(function () {
-              $scope.users.push(val);
+
+            ref.child('interests').child(key).once('value', function (snapshot) {
+              $scope.$apply(function() {
+
+                val.interests = snapshot.val();
+                console.log(val.interests);
+                $timeout(function () {
+                  $scope.users.push(val);
+                });
+              });
             });
+
           });
         }
       });
@@ -130,6 +140,8 @@ angular.module('starter.controllers', [])
     }, function (error) {
       console.log("Error: " + error);
     });
+  }).catch(function(error){
+    console.error(error);
   });
 })
 .controller('MessageCtrl', function($scope, $stateParams) {
@@ -201,7 +213,7 @@ angular.module('starter.controllers', [])
 
   $scope.addInterest = function(item){
     console.log('Iwork');
-    console.log(userId)
+    console.log(userId);
     ref.child('interests').child(userId).push({
       'activity': item,
     });
