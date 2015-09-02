@@ -1,28 +1,26 @@
 <ion-view view-title="Login">
-    <ion-content class="padding">
-        <div class="list">
-            <img src="http://www.mindstreamacademy.org/wp-content/uploads/2013/03/fitness-icon-badge.jpg" class="logo">
-            <div class="logoText">
-                Actively Connected
-            </div>
-        </div>
-        <div class="list card padding">
-            <label class="item item-input">
-                <span class="input-label">Email</span>
-                <input type="text" ng-model="user.email">
-            </label>
-            <label class="item item-input">
-                <span class="input-label">Password</span>
-                <input type="password" ng-model="user.pwdForLogin">
-            </label>
-            <button ng-click="signIn(user)" class="button button-block button-positive activated">
-                Sign In
-            </button>
-        </div>
-        <div class="list" style="text-align:center">
-            <button ng-click="modal.show()" class="button button-small button-outline icon-left ion-person-add button-positive">
-                Create New Account
-            </button>
-        </div>
-    </ion-content>
+  <ion-content class="padding" id="login--wrapper">
+    <div class="list">
+      <img src="../img/logo-test.png" class="logo">
+      <div class="logo--text">
+          Actively <span class="bold">Connected</span>
+      </div>
+    </div>
+    <div class="list padding">
+      <label class="item item-input" id="user--email--input">
+          <input type="text" placeholder="email" ng-model="user.email" id="user--email--text">
+      </label>
+      <label class="item item-input" id="user--password--input">
+          <input type="password" placeholder="password" ng-model="user.pwdForLogin" id="user--password--text">
+      </label>
+      <button ng-click="signIn(user)" class="button button-block button-positive activated" id="sign--in">
+          Sign In
+      </button>
+    </div>
+    <div class="list" style="text-align:center">
+      <button ng-click="modal.show()" class="button button-small button-outline icon-left ion-person-add button-positive" id="create--user">
+          Signup
+      </button>
+    </div>
+  </ion-content>
 </ion-view>
