@@ -4,17 +4,17 @@ angular.module('starter.services', ['firebase'])
   return $firebaseAuth(ref);
 }])
 .factory('ImageService', function($cordovaCamera, $q, $cordovaFile) {
- 
+
   function makeid() {
     var text = '';
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
- 
+
     for (var i = 0; i < 5; i++) {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return text;
   };
- 
+
   function optionsForType(type) {
     var source;
     switch (type) {
@@ -34,7 +34,7 @@ angular.module('starter.services', ['firebase'])
       saveToPhotoAlbum: false
     };
   }
- 
+
   function saveMedia(type) {
     return $q(function(resolve, reject) {
       var options = optionsForType(type);
