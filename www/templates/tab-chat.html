@@ -1,16 +1,23 @@
-<ion-view view-title="Chat Room">
-  <ion-content>
-    <h1>CHAT with {{user.displayName}}</h1>
-    <ul>
+<ion-view view-title="{{user.displayName}}">
+  <ion-content class="card" id="chat-content">
+    <ul id="user-room">
       <li ng-repeat="message in messages track by $index" ng-style="setStyle(message.color, message.align)">
        {{message.text}}
       </li>
     </ul>
-    <div class="list card padding">
-      <input type="text" ng-model="text" id="user-message">
-    </div>
-    <button ng-click="sendMessage(text)" class="button button-block button-positive activated">
-        Send
-    </button>
   </ion-content>
+  <div id="footer">
+    <div class="item item-input card" id="footer__bar">
+     <form name="search_form" ng-submit="sendMessage(text)" id="user__form">
+      <label class="item-input-wrapper" id="chat__input">
+        <div class="button--input--text button--camera">+</div>
+        <input type="text" name="search_input" ng-model="text" id="user-message">
+        <button class="button button--input">
+          <p class="button--input--text">Send</p>
+        </button>
+      </label>
+    </form>
+   </div>
+  </div>
 </ion-view>
+
