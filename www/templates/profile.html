@@ -8,6 +8,7 @@
     <p>
       <a href="#/messages/{{user.uid}}">CHAT WITH {{user.displayName}} HERE</a>
     </p>
-    <button ng-click='addFriend()'>Add As Friend</button>
+    <button ng-click='addFriend()' ng-hide="sentReq">Add As Friend</button>
+    <button ng-show="sentReq">Friend Request Sent!</button>
   </ion-content>
 </ion-view>

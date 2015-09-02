@@ -137,7 +137,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ProfileCtrl', function($scope, $state, $stateParams) {
+.controller('ProfileCtrl', function($scope, $state, $stateParams, $timeout) {
   console.log('Profile Controller initialized');
   console.log($stateParams.userId);
   $scope.user;
@@ -174,6 +174,9 @@ angular.module('starter.controllers', [])
         }
       }
       ref.child('friendRequests').child(friendId).push(userId);
+      $timeout(function() {
+        $scope.sentReq = true;
+      });
     });
     // notify that friend request has been sent
   };
