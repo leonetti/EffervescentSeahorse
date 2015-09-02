@@ -333,6 +333,15 @@ angular.module('starter.controllers', [])
 .controller('FriendsCtrl', function($scope, $timeout) {
   var userId = window.localStorage['uid'];
 
+  // check for friend requests
+  ref.child('friendRequests').child(userId).on('value', function(snapshot) {
+    $timeout(function() {
+      if (snapshot.val()) {
+        $scope.hasReq = true;
+      }
+    });
+  });
+
   // getting friends
   ref.child("friends").child(userId).on('value', function (snapshot) {
     $scope.friends = [];
