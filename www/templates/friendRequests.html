@@ -1,0 +1,12 @@
+<ion-view view-title="Friend Requests">
+  <ion-content>
+    <ion-list>
+      <!-- <ion-item ng-repeat="friend in friendRequests" href="#/profile/{{friend[0]}}"> -->
+      <ion-item ng-repeat="friend in friendRequests">
+        {{friend[1].displayName}}
+        <button class="ion-checkmark-round rightButton" ng-click="acceptRequest(friend)"></button>
+        <button class="ion-close-round rightButton" ng-click="rejectRequest(friend)"></button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

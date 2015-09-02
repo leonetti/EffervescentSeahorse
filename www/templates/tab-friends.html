@@ -1,6 +1,7 @@
 <ion-view view-title="Friends">
   <ion-content>
     <ion-list>
+      <ion-item href="#/friends/friendrequests" ng-show="hasReq">View Friend Requests<div class="ion-alert rightButton"></div></ion-item>
       <ion-item ng-repeat="friend in friends" href="#/profile/{{friend[0]}}">
         {{friend[1].displayName}}
       </ion-item>

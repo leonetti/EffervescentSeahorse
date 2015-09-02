@@ -149,7 +149,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ProfileCtrl', function($scope, $state, $stateParams) {
+.controller('ProfileCtrl', function($scope, $state, $stateParams, $timeout) {
   console.log('Profile Controller initialized');
   console.log($stateParams.userId);
   $scope.user;
@@ -176,16 +176,20 @@ angular.module('starter.controllers', [])
   $scope.addFriend = function(){
     var userId = window.localStorage['uid'];
     var friendId = $stateParams.userId;
-
-    // add the friendId to userId's friends if the friend does not already exist
+    // if they are not already friends, should send the friend a request so they can accept or reject
     ref.child('friends').child(userId).once('value', function(snapshot) {
       for (var id in snapshot.val()) {
         if (snapshot.val()[id] === friendId) {
+          // ideally make the add friend button not available somehow
+          console.log('This person is already your friend');
           return;
         }
       }
-      ref.child('friends').child(userId).push(friendId);
-      ref.child('friends').child(friendId).push(userId);
+      ref.child('friendRequests').child(friendId).push(userId);
+      // notify that friend request has been sent
+      $timeout(function() {
+        $scope.sentReq = true;
+      });
     });
   };
 })
@@ -288,9 +292,77 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('FriendsCtrl', function($scope, $timeout) {
+// need to make a new friend request controller to pass in stateparam user id
+.controller('FriendReqCtrl', function($scope, $timeout) {
+  var userId = window.localStorage['uid'];
+  // getting friend requests
+  $scope.acceptRequest = function(friend) {
+    var friendId = friend[0];
 
-  ref.child("friends").child(window.localStorage['uid']).on('value', function (snapshot) {
+    // if the friend is already in user's friendlist, it won't add them again
+    ref.child('friends').child(userId).once('value', function(snapshot) {
+      for (var id in snapshot.val()) {
+        if (snapshot.val()[id] === friendId) {
+          return;
+        }
+      }
+      ref.child('friends').child(userId).push(friendId);
+      ref.child('friends').child(friendId).push(userId);
+    });
+
+    // remove this person from friend request
+    ref.child('friendRequests').child(userId).once('value', function(snapshot) {
+      for (var id in snapshot.val()) {
+        if (snapshot.val()[id] === friendId) {
+          ref.child('friendRequests').child(userId).child(id).remove();
+        }
+      }
+    });
+  };
+
+  $scope.rejectRequest = function(friend) {
+    var friendId = friend[0];
+    // remove from friend request
+    ref.child('friendRequests').child(userId).once('value', function(snapshot) {
+      for (var id in snapshot.val()) {
+        if (snapshot.val()[id] === friendId) {
+          ref.child('friendRequests').child(userId).child(id).remove();
+        }
+      }
+    });
+  };
+
+  // getting friend requests
+  ref.child('friendRequests').child(userId).on('value', function(snapshot) {
+    $scope.friendRequests = [];
+    var friendsId = snapshot.val();
+    for (var id in friendsId) {
+      var uId = friendsId[id];
+      ref.child('users').child(uId).once('value', function(snapshot) {
+        $timeout(function() {
+          $scope.friendRequests.push([uId, snapshot.val()]);
+        });
+      });
+    }
+  });
+})
+
+.controller('FriendsCtrl', function($scope, $timeout) {
+  var userId = window.localStorage['uid'];
+
+  // check for friend requests
+  ref.child('friendRequests').child(userId).on('value', function(snapshot) {
+    $timeout(function() {
+      if (snapshot.val()) {
+        $scope.hasReq = true;
+      } else {
+        $scope.hasReq = false;
+      }
+    });
+  });
+
+  // getting friends
+  ref.child("friends").child(userId).on('value', function (snapshot) {
     $scope.friends = [];
     var friendsId = snapshot.val();
     for (var id in friendsId) {
