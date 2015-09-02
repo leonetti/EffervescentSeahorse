@@ -359,4 +359,11 @@ angular.module('starter.controllers', [])
       });
     }
   });
+})
+
+.controller('LogoutCtrl', function($scope, $state) {
+  $scope.logout = function() {
+    delete window.localStorage['uid'];
+    $state.go('login');
+  };
 });
