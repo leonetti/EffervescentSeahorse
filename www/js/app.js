@@ -5,6 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
+
 var ref = new Firebase('URL');
 var geoFire = new GeoFire(ref.child("geolocation"));
 

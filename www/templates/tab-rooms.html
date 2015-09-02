@@ -10,6 +10,7 @@
   <ion-content>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right room--item" ng-repeat="user in users | filter:query" type="item-text-wrap" href="#/profile/{{user.uid}}" >
+      <img ng-src="data:image/png;base64,{{user.profilepicture}}" style="width: 64px; height: 64px">
         <h2 id="room--username">{{user.displayName}}</h2>
         <span class="room--activity" ng-repeat='interest in user.interests'>{{interest.activity}} &nbsp;</span>
         <i class="icon ion-chevron-right icon-accessory" id="right--arrow--rooms"></i>

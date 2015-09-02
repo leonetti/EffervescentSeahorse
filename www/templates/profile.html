@@ -6,8 +6,9 @@
 
 <ion-view view-title="{{user.displayName}}">
   <ion-content class="padding" id="profile--wrapper">
-    <img ng-src="{{user.profile-pic}}" style="width: 64px; height: 64px">
+    <img ng-src="data:image/png;base64,{{user.profilepicture}}" style="width: 64px; height: 64px">
     <p>PROFILE PAGE</p>
+    <div>{{user.bio}}</div>
     <ul>
         <li ng-repeat='interest in interests'>{{interest.activity}}</li>
     </ul>
