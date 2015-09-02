@@ -7,7 +7,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('LoginCtrl', function($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope) {
-
   var auth = $firebaseAuth(ref);
 
   $ionicModal.fromTemplateUrl('templates/signup.html', {
@@ -221,8 +220,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('MessageCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate) {
-  $scope.user;
+.controller('MessageCtrl', function($scope, $stateParams, $timeout) {
   $scope.text = '';
   $scope.messages = [];
 
