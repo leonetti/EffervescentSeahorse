@@ -179,9 +179,7 @@ angular.module('starter.controllers', [])
     });
   };
 })
-
 .controller('EditProfileCtrl', function ($scope, $rootScope, $ionicActionSheet, ImageService) {
-  // $scope.activities = ['basketball', 'tennis']
   var userId = window.localStorage.uid;
 
   ref.on('value', function(snapshot){
@@ -219,6 +217,13 @@ angular.module('starter.controllers', [])
       'activity': item
     });
   }
+
+  $scope.addBio = function(item){
+    ref.child('users').child(userId).update({
+      'bio': item,
+    });
+  };
+  
 })
 
 .controller('MessageCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate) {
