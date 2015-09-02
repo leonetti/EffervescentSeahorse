@@ -2,8 +2,6 @@ angular.module('starter.controllers', [])
 
 .controller('LoginCtrl', function($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope) {
 
-  console.log('login controller initiated');
-
   var auth = $firebaseAuth(ref);
 
   $ionicModal.fromTemplateUrl('templates/signup.html', {
@@ -13,7 +11,6 @@ angular.module('starter.controllers', [])
   });
 
   $scope.createUser = function(user) {
-    console.log('createUer function called!');
     if(user && user.email && user.password && user.displayname) {
       $ionicLoading.show({
         template: 'Signing Up'
@@ -50,7 +47,6 @@ angular.module('starter.controllers', [])
         email: user.email,
         password: user.pwdForLogin
       }).then(function(authData) {
-        console.log('Logged in as ' + authData.uid);
         //$rootScope.uid = authData.uid;
         window.localStorage['uid'] = authData.uid;
         ref.child("users").child(authData.uid).once('value', function (snapshot) {
@@ -85,7 +81,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('RoomsCtrl', function ($scope, $state, $rootScope, GPS, $ionicLoading, $timeout) {
-  console.log("Rooms Controller initialized");
   //set up user list
   $scope.users = [];
 
@@ -94,16 +89,14 @@ angular.module('starter.controllers', [])
   };
 
   $ionicLoading.show({
-    template: 'Loading Matches...'
+    template: '<p>Loading Matches...</p><ion-spinner></ion-spinner>'
   });
   //set User position
   GPS.getGeo().then(function(position) {
     var longitude = position.coords.longitude;
     var latitude = position.coords.latitude;
     var uid = window.localStorage['uid'];
-    console.log(position.coords);
     geoFire.set(uid, [latitude, longitude]).then(function () {
-      console.log("Provided key has been added to GeoFire");
 
       var geoQuery = geoFire.query({
         center: [latitude, longitude],
@@ -111,22 +104,17 @@ angular.module('starter.controllers', [])
       });
 
       geoQuery.on("key_entered", function(key, location, distance) {
-        $ionicLoading.hide();
-        console.log("User " + key + " found at " + location + " (" + distance + " km away)");
         if(key !== uid) {
           ref.child("users").child(key).once('value', function (snapshot) {
             var val = snapshot.val();
             val.uid = key;
 
             ref.child('interests').child(key).once('value', function (snapshot) {
-              $scope.$apply(function() {
-
-                val.interests = snapshot.val();
-                console.log(val.interests);
-                $timeout(function () {
+              $ionicLoading.hide();
+              val.interests = snapshot.val();
+                $scope.$apply(function(){
                   $scope.users.push(val);
                 });
-              });
             });
 
           });
@@ -150,9 +138,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ProfileCtrl', function($scope, $state, $stateParams, $timeout) {
-  console.log('Profile Controller initialized');
-  console.log($stateParams.userId);
-  $scope.user;
   ref.child("users").child($stateParams.userId).once('value', function (snapshot) {
     var val = snapshot.val();
     val.uid = $stateParams.userId;
@@ -163,12 +148,10 @@ angular.module('starter.controllers', [])
 
   ref.child('interests').child($stateParams.userId).once('value', function (snapshot) {
     $scope.$apply(function() {
-      console.log('hi', snapshot.val());
       $scope.interests = snapshot.val();
     });
   });
   $scope.sendChat = function() {
-    console.log('inSendChat');
     $state.go('tab.chat');
   };
 
@@ -181,7 +164,6 @@ angular.module('starter.controllers', [])
       for (var id in snapshot.val()) {
         if (snapshot.val()[id] === friendId) {
           // ideally make the add friend button not available somehow
-          console.log('This person is already your friend');
           return;
         }
       }
@@ -229,16 +211,13 @@ angular.module('starter.controllers', [])
   };
 
   $scope.addInterest = function(item){
-    console.log('Iwork');
-    console.log(userId);
     ref.child('interests').child(userId).push({
-      'activity': item,
+      'activity': item
     });
   }
 })
 
 .controller('MessageCtrl', function($scope, $stateParams, $timeout) {
-  $scope.user;
   $scope.text = '';
   $scope.messages = [];
 
@@ -250,7 +229,6 @@ angular.module('starter.controllers', [])
       $scope.user = (val);
     });
   });
-  console.log($stateParams.userId);
 
   ref.child('rooms').child(window.localStorage['uid']).child($stateParams.userId).on('value', function(snapshot) {
     $scope.messages = [];
@@ -263,7 +241,6 @@ angular.module('starter.controllers', [])
         }
       }
     });
-    console.log($scope.messages);
   });
 
   $scope.setStyle = function(color, align) {
