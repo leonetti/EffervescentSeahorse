@@ -220,8 +220,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('MessageCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate) {
-  $scope.user;
+.controller('MessageCtrl', function($scope, $stateParams, $timeout) {
   $scope.text = '';
   $scope.messages = [];
 
