@@ -144,10 +144,6 @@ angular.module('starter.controllers', [])
     console.error(error);
   });
 })
-.controller('MessageCtrl', function($scope, $stateParams) {
-  $scope.sendMessage = function(message) {
-  };
-})
 
 .controller('ProfileCtrl', function($scope, $state, $stateParams, $timeout) {
   console.log('Profile Controller initialized');
@@ -237,11 +233,10 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('MessageCtrl', function($scope, $stateParams, $timeout) {
+.controller('MessageCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate) {
   $scope.user;
   $scope.text = '';
   $scope.messages = [];
-
 
   ref.child("users").child($stateParams.userId).once('value', function (snapshot) {
     var val = snapshot.val();
@@ -263,7 +258,7 @@ angular.module('starter.controllers', [])
         }
       }
     });
-    console.log($scope.messages);
+    $ionicScrollDelegate.scrollBottom();
   });
 
   $scope.setStyle = function(color, align) {
@@ -274,21 +269,24 @@ angular.module('starter.controllers', [])
   }
 
   $scope.sendMessage = function(message) {
-    ref.child("rooms").child(window.localStorage['uid']).child($stateParams.userId).push({
-      "sender" : {
-        text: message,
-        color: 'green',
-        align: 'right'
-      }
-    });
-    ref.child("rooms").child($stateParams.userId).child(window.localStorage['uid']).push({
-      "receiver" : {
-        text: message,
-        color: 'red',
-        align: 'left'
-      }
-    });
-    $scope.text = '';
+    if(message !== "") {
+      ref.child("rooms").child(window.localStorage['uid']).child($stateParams.userId).push({
+        "sender" : {
+          text: message,
+          color: 'green',
+          align: 'right'
+        }
+      });
+      ref.child("rooms").child($stateParams.userId).child(window.localStorage['uid']).push({
+        "receiver" : {
+          text: message,
+          color: 'red',
+          align: 'left'
+        }
+      });
+      $scope.text = '';
+    }
+    $ionicScrollDelegate.scrollBottom();
   };
 })
 
