@@ -7,7 +7,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('LoginCtrl', function($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope) {
-
   var auth = $firebaseAuth(ref);
 
   $ionicModal.fromTemplateUrl('templates/signup.html', {
