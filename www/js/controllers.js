@@ -1,5 +1,11 @@
 angular.module('starter.controllers', [])
 
+.controller('MyCtrl', function($scope, $ionicHistory) {
+  $scope.myGoBack = function() {
+    $ionicHistory.goBack();
+  };
+})
+
 .controller('LoginCtrl', function($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope) {
 
   var auth = $firebaseAuth(ref);
@@ -134,10 +140,12 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ProfileCtrl', function($scope, $state, $stateParams, $timeout) {
+  $scope.user;
+  $scope.interests;
   ref.child("users").child($stateParams.userId).once('value', function (snapshot) {
     var val = snapshot.val();
     val.uid = $stateParams.userId;
-    $scope.$apply(function () {
+    $timeout(function () {
       $scope.user = (val);
     });
   });

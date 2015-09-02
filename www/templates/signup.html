@@ -1,23 +1,20 @@
 <ion-modal-view>
-  <ion-header-bar class="bar bar-header bar-positive">
-    <h1 class="title">Create New Account</h1>
-    <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+  <ion-header-bar class="bar bar-header">
+    <h1 class="title" id="new--account--title">Create New Account</h1>
+    <button class="button button-clear button-primary" ng-click="modal.hide()" id="new--account--cancel">Cancel</button>
   </ion-header-bar>
-  <ion-content class="padding">
-    <div class="list">
-      <label class="item item-input">
-        <span class="input-label">Email Address</span>
-        <input ng-model="user.email" type="text">
+  <ion-content class="padding" id="signup--wrapper">
+    <div class="list" id="create--new--user">
+      <label class="item item-input signup--input top--input">
+        <input ng-model="user.email" placeholder="email" type="text" class="input--text" id="signup--email--input">
       </label>
-      <label class="item item-input">
-        <span class="input-label">Passsword</span>
-        <input ng-model="user.password" type="password">
+      <label class="item item-input signup--input">
+        <input ng-model="user.password" placeholder="password" type="password" class="input--text" id="signup--password--input">
       </label>
-      <label class="item item-input">
-        <span class="input-label">Display Name</span>
-        <input ng-model="user.displayname" type="text">
+      <label class="item item-input signup--input bottom--input">
+        <input ng-model="user.displayname" placeholder="display name" type="text" class="input--text" id="signup--display--input">
       </label>
-      <button class="button button-full button-positive" ng-click="createUser(user)">Create</button>
+      <button class="button button-full button-positive" ng-click="createUser(user)" id="signup--user">Create</button>
     </div>
   </ion-content>
 </ion-modal-view>

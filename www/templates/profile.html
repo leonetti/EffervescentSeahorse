@@ -1,5 +1,12 @@
+<ion-nav-bar ng-controller="MyCtrl" class="nav__bar">
+  <ion-nav-back-button id="back__button"
+    ng-click="myGoBack()"> &nbsp; Filter
+  </ion-nav-back-button>
+  <h4>Signup</h4>
+</ion-nav-bar>
+
 <ion-view view-title="{{user.displayName}}">
-  <ion-content class="padding">
+  <ion-content class="padding" id="profile--wrapper">
     <img ng-src="{{user.profile-pic}}" style="width: 64px; height: 64px">
     <p>PROFILE PAGE</p>
     <ul>
