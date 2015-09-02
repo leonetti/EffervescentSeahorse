@@ -174,11 +174,11 @@ angular.module('starter.controllers', [])
         }
       }
       ref.child('friendRequests').child(friendId).push(userId);
+      // notify that friend request has been sent
       $timeout(function() {
         $scope.sentReq = true;
       });
     });
-    // notify that friend request has been sent
   };
 })
 
@@ -286,6 +286,8 @@ angular.module('starter.controllers', [])
   // getting friend requests
   $scope.acceptRequest = function(friend) {
     var friendId = friend[0];
+
+    // if the friend is already in user's friendlist, it won't add them again
     ref.child('friends').child(userId).once('value', function(snapshot) {
       for (var id in snapshot.val()) {
         if (snapshot.val()[id] === friendId) {
@@ -341,6 +343,8 @@ angular.module('starter.controllers', [])
     $timeout(function() {
       if (snapshot.val()) {
         $scope.hasReq = true;
+      } else {
+        $scope.hasReq = false;
       }
     });
   });
