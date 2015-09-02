@@ -94,7 +94,7 @@ angular.module('starter.controllers', [])
   };
 
   $ionicLoading.show({
-    template: 'Loading Matches...'
+    template: '<p>Loading Matches...</p><ion-spinner></ion-spinner>'
   });
   //set User position
   GPS.getGeo().then(function(position) {
