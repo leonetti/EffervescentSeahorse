@@ -1,9 +1,14 @@
 <ion-view view-title="Friends">
+  <label class="item item-input">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="text" placeholder="Filter" ng-model="query">
+  </label>
   <ion-content>
     <ion-list>
-      <ion-item href="#/friends/friendrequests" ng-show="hasReq">View Friend Requests<div class="ion-alert rightButton"></div></ion-item>
-      <ion-item ng-repeat="friend in friends" href="#/profile/{{friend[0]}}">
-        {{friend[1].displayName}}
+      <ion-item href="#/friends/friendrequests" ng-show="hasReq" class="friend--lower">View Friend Requests<div class="ion-alert rightButton"></div></ion-item>
+      <ion-item ng-repeat="friend in friends | filter:query" href="#/profile/{{friend[0]}}" class="item-remove-animate item-avatar item-icon-right friend--lower">
+        <h2 id="room--username">{{friend[1].displayName}}</h2>
+        <i class="icon ion-chevron-right icon-accessory" id="right--arrow--rooms"></i>
       </ion-item>
     </ion-list>
   </ion-content>
