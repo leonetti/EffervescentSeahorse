@@ -82,22 +82,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('tab.chat', {
-    url: '/chat',
-    views: {
-      'tab-chat': {
-        templateUrl: 'templates/tab-chat.html',
-        controller: 'ChatCtrl'
-      }
-    },
-    resolve: {
-      "currentAuth" : ["Auth",
-        function(Auth) {
-          return Auth.$requireAuth();
-        }
-      ]
-    }
-  })
+  // .state('tab.chat', {
+  //   url: '/chat',
+  //   views: {
+  //     'tab-chat': {
+  //       templateUrl: 'templates/tab-chat.html',
+  //       controller: 'ChatCtrl'
+  //     }
+  //   },
+  //   resolve: {
+  //     "currentAuth" : ["Auth",
+  //       function(Auth) {
+  //         return Auth.$requireAuth();
+  //       }
+  //     ]
+  //   }
+  // })
 
   .state('profile', {
       url: '/profile/:userId',

@@ -72,16 +72,6 @@ angular.module('starter.controllers', [])
   };
 })
 
-
-.controller('ChatCtrl', function($scope, Chats, $rootScope) {
-  $scope.messages= Chats.all;
-  $scope.sendMessage = function(message) {
-    ref.child('messages').child($rootScope.uid).push({
-      'text': message
-    });
-  };
-})
-
 .controller('RoomsCtrl', function ($scope, $state, $rootScope, GPS, $ionicLoading, $timeout) {
   //set up user list
   $scope.users = [];
@@ -166,26 +156,32 @@ angular.module('starter.controllers', [])
     $state.go('tab.chat');
   };
 
-
-  $scope.addFriend = function(){
-    var userId = window.localStorage['uid'];
-    var friendId = $stateParams.userId;
-    // if they are not already friends, should send the friend a request so they can accept or reject
-    // if the friend request has already been sent, should not make a new friend request
-    ref.child('friendRequests').child(friendId).once('value', function(snapshot) {
-      for (var id in snapshot.val()) {
-        if (snapshot.val()[id] === userId) {
-          $timeout(function() {
-            $scope.sentReq = true;
-            return;
-          });
-        }
+  var userId = window.localStorage['uid'];
+  var friendId = $stateParams.userId;
+  // check if they are already friends
+  ref.child('friends').child(userId).once('value', function(snapshot) {
+    for (var id in snapshot.val()) {
+      if (snapshot.val()[id] === friendId) {
+        $timeout(function() {
+          $scope.friendStatus = true;
+        });
       }
-    });
+    }
+  });
+  // check if the friend request has already been sent
+  ref.child('friendRequests').child(friendId).once('value', function(snapshot) {
+    for (var id in snapshot.val()) {
+      if (snapshot.val()[id] === userId) {
+        $timeout(function() {
+          $scope.sentReq = true;
+        });
+      }
+    }
+  });
+  $scope.addFriend = function(){
     ref.child('friends').child(userId).once('value', function(snapshot) {
       for (var id in snapshot.val()) {
         if (snapshot.val()[id] === friendId) {
-          // ideally make the add friend button not available somehow
           return;
         }
       }
@@ -194,6 +190,19 @@ angular.module('starter.controllers', [])
       $timeout(function() {
         $scope.sentReq = true;
       });
+    });
+  };
+
+  $scope.removeFriend = function() {
+    var userId = window.localStorage['uid'];
+    var friendId = $stateParams.userId;
+
+    ref.child('friends').child(userId).once('value', function(snapshot) {
+      for (var id in snapshot.val()) {
+        if (snapshot.val()[id] === friendId) {
+          ref.child('friends').child(userId).child(id).remove();
+        }
+      }
     });
   };
 })
