@@ -1,13 +1,20 @@
-<ion-view view-title="{{user.displayName}}">
-  <ion-content class="card" id="chat-content">
+<ion-nav-bar view-title ng-controller="MyCtrl" class="nav__bar">
+  <ion-nav-back-button id="back__button"
+    ng-click="myGoBack()"> &nbsp; {{user.displayName}}
+    <p class="my-title">ABC</p>
+  </ion-nav-back-button>
+</ion-nav-bar>
+
+<ion-view view-title="Chat With {{user.displayName}}">
+  <ion-content id="chat-content">
     <ul id="user-room">
-      <li ng-repeat="message in messages track by $index" ng-style="setStyle(message.color, message.align)">
+      <li ng-repeat="message in messages track by $index" ng-style="setStyle(message.sender)">
        {{message.text}}
       </li>
     </ul>
   </ion-content>
   <div id="footer">
-    <div class="item item-input card" id="footer__bar">
+    <div class="item item-input" id="footer__bar">
      <form name="search_form" ng-submit="sendMessage(text)" id="user__form">
       <label class="item-input-wrapper" id="chat__input">
         <div class="button--input--text button--camera">+</div>

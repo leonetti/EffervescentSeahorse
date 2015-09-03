@@ -74,10 +74,7 @@ angular.module('starter.controllers', [])
 
 
 .controller('ChatCtrl', function($scope, Chats, $rootScope) {
-
-
   $scope.messages= Chats.all;
-
   $scope.sendMessage = function(message) {
     ref.child('messages').child($rootScope.uid).push({
       'text': message
@@ -233,44 +230,39 @@ angular.module('starter.controllers', [])
     });
   });
 
-  ref.child('rooms').child(window.localStorage['uid']).child($stateParams.userId).on('value', function(snapshot) {
+  ref.child('rooms').child(parseInt($stateParams.userId,16) + parseInt(window.localStorage['uid'],16)).child('messages').on('value', function(snapshot) {
     $scope.messages = [];
     $timeout(function() {
       for(var key in snapshot.val()) {
-        if(snapshot.val()[key].sender) {
-          $scope.messages.push(snapshot.val()[key].sender);
-        } else if(snapshot.val()[key].receiver) {
-          $scope.messages.push(snapshot.val()[key].receiver);
-        }
+        $scope.messages.push(snapshot.val()[key]);
       }
     });
     $ionicScrollDelegate.scrollBottom();
   });
 
-  $scope.setStyle = function(color, align) {
-    return {
-      'color': color,
-      'text-align': align
+  $scope.setStyle = function(id) {
+    if(id === window.localStorage['uid']) {
+      return {
+        'color': 'green',
+        'text-align': 'right'
+      }
+    } else {
+      return {
+        'color': 'red',
+        'text-align': 'left'
+      }
     }
+
   }
 
   $scope.sendMessage = function(message) {
     if(message !== "") {
-      ref.child("rooms").child(window.localStorage['uid']).child($stateParams.userId).push({
-        "sender" : {
-          text: message,
-          color: 'green',
-          align: 'right'
-        }
+      var room;
+      room = ref.child('rooms').child(parseInt($stateParams.userId,16) + parseInt(window.localStorage['uid'],16));
+      room.child('messages').push({
+        sender: window.localStorage['uid'],
+        text: message
       });
-      ref.child("rooms").child($stateParams.userId).child(window.localStorage['uid']).push({
-        "receiver" : {
-          text: message,
-          color: 'red',
-          align: 'left'
-        }
-      });
-      $scope.text = '';
     }
     $ionicScrollDelegate.scrollBottom();
   };

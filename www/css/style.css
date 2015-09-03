@@ -245,7 +245,7 @@ body {
 }
 
 .room--item:first-child {
-  margin-top: 50px;
+  margin-top: 90px;
 }
 
 .room--item:last-child {
@@ -257,6 +257,17 @@ body {
   font-style: italic;
   font-size: 12px;
 }
+
+#filter--rooms {
+  margin: 44px auto 0 auto;
+}
+
+/*#ios--room--filler {
+  margin-top: 44px;
+  width: 100%;
+  height: 44px;
+  background-color: green;
+}*/
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -377,7 +388,9 @@ p.button--input--text {
 
 
 #chat-content {
+  margin-top: 50px;
   margin-bottom: 60px;
+  font-size: 20px;
 }
 
 .button--input {
