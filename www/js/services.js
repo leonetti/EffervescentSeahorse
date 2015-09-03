@@ -26,12 +26,15 @@ angular.module('starter.services', ['firebase'])
         break;
     }
     return {
+      quality: 50,
       destinationType: Camera.DestinationType.DATA_URL,
       sourceType: source,
       allowEdit: false,
       encodingType: Camera.EncodingType.JPEG,
       popoverOptions: CameraPopoverOptions,
-      saveToPhotoAlbum: false
+      saveToPhotoAlbum: false,
+      targetWidth: 500,
+      targetHeight: 500,
     };
   }
 
@@ -40,7 +43,7 @@ angular.module('starter.services', ['firebase'])
       var options = optionsForType(type);
 
       $cordovaCamera.getPicture(options).then(function(imageData) {
-          ref.child('users').child(window.localStorage.uid).update({
+          ref.child('profilepicture').child(window.localStorage.uid).update({
             'profilepicture': imageData,
           })
           .then(function(info) {

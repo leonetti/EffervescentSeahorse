@@ -6,11 +6,15 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 var ref = new Firebase('URL');
 =======
 var ref = new Firebase('FUCK YOU REBASES');
 >>>>>>> FUCK YOU REBASE
+=======
+var ref = new Firebase('No');
+>>>>>>> Working on edit profile
 var geoFire = new GeoFire(ref.child("geolocation"));
 
 
