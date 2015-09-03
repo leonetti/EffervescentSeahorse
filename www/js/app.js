@@ -6,10 +6,14 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 <<<<<<< HEAD
+<<<<<<< HEAD
 var ref = new Firebase('URL');
 =======
 var ref = new Firebase('No');
 >>>>>>> Working on edit profile
+=======
+var ref = new Firebase('No');
+>>>>>>> c716cd2d5343013199d05f6bb65a0dea56dcba02
 var geoFire = new GeoFire(ref.child("geolocation"));
 
 
