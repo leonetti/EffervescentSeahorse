@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var ref = new Firebase('FUCK YOU REBASES');
+var ref = new Firebase('No');
 var geoFire = new GeoFire(ref.child("geolocation"));
 
 
