@@ -171,6 +171,17 @@ angular.module('starter.controllers', [])
     var userId = window.localStorage['uid'];
     var friendId = $stateParams.userId;
     // if they are not already friends, should send the friend a request so they can accept or reject
+    // if the friend request has already been sent, should not make a new friend request
+    ref.child('friendRequests').child(friendId).once('value', function(snapshot) {
+      for (var id in snapshot.val()) {
+        if (snapshot.val()[id] === userId) {
+          $timeout(function() {
+            $scope.sentReq = true;
+            return;
+          });
+        }
+      }
+    });
     ref.child('friends').child(userId).once('value', function(snapshot) {
       for (var id in snapshot.val()) {
         if (snapshot.val()[id] === friendId) {
