@@ -1,10 +1,16 @@
+<ion-nav-bar ng-controller="MyCtrl" class="nav__bar">
+  <ion-nav-back-button id="back__button"
+    ng-click="myGoBack()"> &nbsp; Filter
+  </ion-nav-back-button>
+  <h4>Edit Profile</h4>
+</ion-nav-bar>
 <ion-view view-title="EditProfile">
     <ion-content>
     <button class="button button-full button-energized" ng-click="addMedia()">
       Change Profile Picture!
     </button>
     <ul>
-        <li ng-repeat='interest in interests'>{{interest.activity}}</li>
+        <li ng-repeat='interest in interests' ng-model='hi' ng-click='removeInterest({{interest.activity}})'>{{interest.activity}}</li>
     </ul>
     <select class="button button-full button-energized" ng-model = 'activityOptions' ng-change='addInterest(activityOptions)'>
       <option ng-repeat='activity in activities' value='{{activity}}'>{{ activity }}</option>

@@ -118,9 +118,15 @@ angular.module('starter.controllers', [])
             ref.child('interests').child(key).once('value', function (snapshot) {
               $ionicLoading.hide();
               val.interests = snapshot.val();
+
+              ref.child('profilepicture').child(key).once('value', function (snapshot) {
+                if(snapshot.val()){
+                  val.profilepicture = snapshot.val().profilepicture;
+                }
                 $scope.$apply(function(){
                   $scope.users.push(val);
                 });
+              });
             });
 
           });
@@ -142,6 +148,16 @@ angular.module('starter.controllers', [])
 .controller('ProfileCtrl', function($scope, $state, $stateParams, $timeout) {
   $scope.user;
   $scope.interests;
+  ref.child('interests').child($stateParams.userId).once('value', function (snapshot) {
+    $scope.$apply(function() {
+      $scope.interests = snapshot.val();
+    });
+  });
+
+  ref.child('profilepicture').child($stateParams.userId).once('value', function (snapshot) {
+    $scope.profpic = snapshot.val().profilepicture;
+  });
+
   ref.child("users").child($stateParams.userId).once('value', function (snapshot) {
     var val = snapshot.val();
     val.uid = $stateParams.userId;
@@ -150,11 +166,6 @@ angular.module('starter.controllers', [])
     });
   });
 
-  ref.child('interests').child($stateParams.userId).once('value', function (snapshot) {
-    $scope.$apply(function() {
-      $scope.interests = snapshot.val();
-    });
-  });
   $scope.sendChat = function() {
     $state.go('tab.chat');
   };
@@ -223,6 +234,10 @@ angular.module('starter.controllers', [])
       'bio': item,
     });
   };
+
+  $scope.removeInterest = function(item){
+    console.log(this.interest);
+  }
   
 })
 
