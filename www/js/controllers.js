@@ -361,10 +361,12 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('LogoutCtrl', function($scope, $state) {
+.controller('LogoutCtrl', function($scope, $state, $window) {
   $scope.logout = function() {
-    ref.unauth();
+    delete window.localStorage['displayName'];
     delete window.localStorage['uid'];
+    ref.unauth();
     $state.go('login');
+    $window.location.reload(true);
   };
 });
