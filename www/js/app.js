@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var ref = new Firebase('INSERT HERE');
+var ref = new Firebase('URL');
 var geoFire = new GeoFire(ref.child("geolocation"));
 
 
@@ -23,9 +23,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       // org.apache.cordova.statusbar required
       StatusBar.styleLightContent();
     }
-    $rootScope.logout = function () {
-      console.log("Logging out from the app");
-    };
   });
 })
 
@@ -147,13 +144,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         templateUrl: 'templates/tab-friends.html',
         controller: 'FriendsCtrl'
       }
+    },
+    resolve: {
+      "currentAuth": ["Auth",
+        function(Auth) {
+          return Auth.$waitForAuth();
+        }
+      ]
     }
   })
 
   .state('friendrequests', {
     url: '/friends/friendrequests',
     templateUrl: 'templates/friendRequests.html',
-    controller: 'FriendReqCtrl'
+    controller: 'FriendReqCtrl',
+    resolve: {
+      "currentAuth": ["Auth",
+        function(Auth) {
+          return Auth.$waitForAuth();
+        }
+      ]
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
