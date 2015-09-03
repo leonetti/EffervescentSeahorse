@@ -204,6 +204,7 @@ angular.module('starter.controllers', [])
         }
       }
     });
+
     ref.child('friends').child(friendId).once('value', function(snapshot) {
       for (var id in snapshot.val()) {
         if (snapshot.val()[id] === userId) {
