@@ -1,7 +1,14 @@
+<ion-nav-bar ng-controller="MyCtrl" class="nav__bar">
+  <ion-nav-back-button id="back__button"
+    ng-click="myGoBack()"> &nbsp; Friends
+  </ion-nav-back-button>
+  <h4>Signup</h4>
+</ion-nav-bar>
+
 <ion-view view-title="Friend Requests">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="friend in friendRequests">
+      <ion-item ng-repeat="friend in friendRequests" class="friend--lower">
         <h2 id="room--username">{{friend[1].displayName}}</h2>
         <button class="ion-checkmark-round rightButton" ng-click="acceptRequest(friend)"></button>
         <button class="ion-close-round rightButton" ng-click="rejectRequest(friend)"></button>
