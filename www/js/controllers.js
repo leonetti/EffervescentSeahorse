@@ -186,7 +186,11 @@ angular.module('starter.controllers', [])
     });
   };
 })
+<<<<<<< HEAD
 .controller('EditProfileCtrl', function ($scope, $rootScope, $ionicActionSheet, ImageService, $timeout) {
+=======
+.controller('EditProfileCtrl', function ($scope, $rootScope, $ionicActionSheet, ImageService) {
+>>>>>>> 7ee9f6cdea7c30e8db0e7362d03aebd410973635
   var userId = window.localStorage.uid;
 
   ref.on('value', function(snapshot){
