@@ -251,9 +251,7 @@ angular.module('starter.controllers', [])
   };
 
   $scope.removeInterest = function(item){
-    var activity = this.interest.activity
-    console.log(activity)
-    console.log($scope.interests);
+    var activity = this.interest.activity;
     for(var i in $scope.interests){
       if($scope.interests[i].activity === activity){
         ref.child('interests').child(userId).child(i).remove();
