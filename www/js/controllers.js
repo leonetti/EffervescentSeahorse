@@ -186,14 +186,27 @@ angular.module('starter.controllers', [])
     });
   };
 })
-.controller('EditProfileCtrl', function ($scope, $rootScope, $ionicActionSheet, ImageService) {
+.controller('EditProfileCtrl', function ($scope, $rootScope, $ionicActionSheet, ImageService, $timeout) {
   var userId = window.localStorage.uid;
 
   ref.on('value', function(snapshot){
-    $scope.$apply(function(){
-      $scope.activities = snapshot.val().activities;
+    $timeout(function(){
+      var activityObj = {};
+      var activities = snapshot.val().activities;
+      var activitiesArr = [];
       if(snapshot.val().interests){
         $scope.interests = snapshot.val().interests[userId];
+        $scope.profilepic = snapshot.val().profilepicture[userId].profilepicture;
+        //for(var i in $scope.interests)
+        for(var i in $scope.interests){
+          activityObj[$scope.interests[i].activity] = 1
+        }
+        for(var i = 0; i < activities.length; i++){
+          if(!activityObj[activities[i]]){
+            activitiesArr.push(activities[i]);
+          }
+        }
+        $scope.activities = activitiesArr;
       }
     });
   });
@@ -220,9 +233,15 @@ angular.module('starter.controllers', [])
   };
 
   $scope.addInterest = function(item){
-    ref.child('interests').child(userId).push({
-      'activity': item
-    });
+    for(var i in $scope.interests){
+      if($scope.interests[i].activity === item){
+        alert('Already have that interests');
+        return;
+      }
+    }
+        ref.child('interests').child(userId).push({
+          'activity': item
+        });
   }
 
   $scope.addBio = function(item){
@@ -232,7 +251,17 @@ angular.module('starter.controllers', [])
   };
 
   $scope.removeInterest = function(item){
-    console.log(this.interest);
+    var activity = this.interest.activity
+    console.log(activity)
+    console.log($scope.interests);
+    for(var i in $scope.interests){
+      if($scope.interests[i].activity === activity){
+        ref.child('interests').child(userId).child(i).remove();
+        alert('removed that shit!');
+        return;
+      }
+    }
+
   }
   
 })
