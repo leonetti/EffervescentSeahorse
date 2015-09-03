@@ -7,7 +7,7 @@
     <ion-list>
       <ion-item href="#/friends/friendrequests" ng-show="hasReq" class="friend--lower">View Friend Requests<div class="ion-alert rightButton"></div></ion-item>
       <ion-item ng-repeat="friend in friends | filter:query" href="#/profile/{{friend[0]}}" class="item-remove-animate item-avatar item-icon-right friend--lower">
-        <h2 id="room--username">{{friend[1].displayName}}</h2>
+        <h2>{{friend[1].displayName}}</h2>
         <i class="icon ion-chevron-right icon-accessory" id="right--arrow--rooms"></i>
       </ion-item>
     </ion-list>
