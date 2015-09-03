@@ -16,7 +16,7 @@
         <li ng-repeat='interest in interests'>{{interest.activity}}</li>
     </ul>
     <button ng-show="sentReq">Friend Request Sent!</button>
-    <button ng-click='removeFriend()' ng-hide="friendStatus">Remove Friend</button>
+    <button ng-click='removeFriend()' ng-show="friendStatus">Remove Friend</button>
   </ion-content>
     <button class='chat__button'>
       <a href="#/messages/{{user.uid}}">CHAT WITH {{user.displayName}} HERE</a>
