@@ -148,7 +148,7 @@ angular.module('starter.controllers', [])
   var userId = window.localStorage['uid'];
   var friendId = $stateParams.userId;
   // check if they are already friends
-  ref.child('friends').child(userId).once('value', function(snapshot) {
+  ref.child('friends').child(userId).on('value', function(snapshot) {
     for (var id in snapshot.val()) {
       if (snapshot.val()[id] === friendId) {
         $timeout(function() {
@@ -158,7 +158,7 @@ angular.module('starter.controllers', [])
     }
   });
   // check if the friend request has already been sent
-  ref.child('friendRequests').child(friendId).once('value', function(snapshot) {
+  ref.child('friendRequests').child(friendId).on('value', function(snapshot) {
     for (var id in snapshot.val()) {
       if (snapshot.val()[id] === userId) {
         $timeout(function() {
@@ -192,6 +192,17 @@ angular.module('starter.controllers', [])
           ref.child('friends').child(userId).child(id).remove();
         }
       }
+    });
+    ref.child('friends').child(friendId).once('value', function(snapshot) {
+      for (var id in snapshot.val()) {
+        if (snapshot.val()[id] === userId) {
+          ref.child('friends').child(friendId).child(id).remove();
+        }
+      }
+    });
+
+    $timeout(function() {
+      $scope.friendStatus = false;
     });
   };
 })

@@ -16,6 +16,6 @@
     </p>
     <button ng-click='addFriend()' ng-hide="friendStatus || sentReq">Add As Friend</button>
     <button ng-show="sentReq">Friend Request Sent!</button>
-    <button ng-click='removeFriend()' ng-hide="friendStatus">Remove Friend</button>
+    <button ng-click='removeFriend()' ng-show="friendStatus">Remove Friend</button>
   </ion-content>
 </ion-view>
