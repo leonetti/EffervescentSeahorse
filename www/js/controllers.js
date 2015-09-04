@@ -261,44 +261,23 @@ angular.module('starter.controllers', [])
     }
 
   }
-  
+
 })
 
 .controller('MessageCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate) {
-  var chat = new Firechat(ref);
-  chat.setUser(window.localStorage['uid'], window.localStorage['displayName'], function(user) {
-    console.log(user);
-    chat.getRoom($stateParams.userId, function(room) {
-      chat.enterRoom(room.id)
+  $scope.user;
+  $scope.text = '';
+  $scope.messages = [];
+
+  ref.child('rooms').child(window.localStorage['uid']).child($stateParams.userId).on('value', function(snapshot) {
+    $scope.messages = [];
+    $timeout(function() {
+      for(var key in snapshot.val()) {
+        $scope.messages.push(snapshot.val()[key]);
+      }
     });
-    chat.createRoom($stateParams.userId, 'private', function(roomId) {
-      chat.enterRoom(roomId);
-      chat.inviteUser($stateParams.userId, roomId);
-    });
-    chat.resumeSession();
+    $ionicScrollDelegate.scrollBottom();
   });
-
-
-  // $scope.user;
-  // $scope.text = '';
-
-  // ref.child("users").child($stateParams.userId).once('value', function (snapshot) {
-  //   var val = snapshot.val();
-  //   val.uid = $stateParams.userId;
-  //   $timeout(function () {
-  //     $scope.user = (val);
-  //   });
-  // });
-
-  // ref.child('rooms').child(parseInt($stateParams.userId,16) + parseInt(window.localStorage['uid'],16)).child('messages').on('value', function(snapshot) {
-  //   $scope.messages = [];
-  //   $timeout(function() {
-  //     for(var key in snapshot.val()) {
-  //       $scope.messages.push(snapshot.val()[key]);
-  //     }
-  //   });
-  //   $ionicScrollDelegate.scrollBottom();
-  // });
 
   $scope.setStyle = function(id) {
     if(id === window.localStorage['uid']) {
@@ -312,20 +291,15 @@ angular.module('starter.controllers', [])
         'text-align': 'left'
       }
     }
-
-  }
+  };
 
   $scope.sendMessage = function(message) {
     $scope.messages = [];
     if(message !== "") {
-      chat.sendMessage($stateParams.userId, message, messageType='default', function() {
-        $scope.messages.push({
-          sender: window.localStorage['uid'],
-          text: message
-        });
-        console.log($scope.messages);
-
-      });
+      ref.child('rooms').child(window.localStorage['uid']).child($stateParams.userId).push({
+        sender: window.localStorage['uid'],
+        text: message
+      })
       // var room;
       // room = ref.child('rooms').child(parseInt($stateParams.userId,16) + parseInt(window.localStorage['uid'],16));
       // room.child('messages').push({
