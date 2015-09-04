@@ -164,6 +164,7 @@ angular.module('starter.controllers', [])
       if (snapshot.val()[id] === friendId) {
         $timeout(function() {
           $scope.friendStatus = true;
+          $scope.sentReq = false;
         });
       }
     }
@@ -422,12 +423,14 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('LogoutCtrl', function($scope, $state, $window) {
+.controller('LogoutCtrl', function($scope, $state, $window, $ionicHistory) {
   $scope.logout = function() {
     delete window.localStorage['displayName'];
     delete window.localStorage['uid'];
     ref.unauth();
+    $ionicHistory.clearCache().then(function() {
+      console.log('cleared views');
+    });
     $state.go('login');
-    $window.location.reload(true);
   };
 });
