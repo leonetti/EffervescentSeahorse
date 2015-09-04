@@ -300,12 +300,6 @@ angular.module('starter.controllers', [])
         sender: window.localStorage['uid'],
         text: message
       })
-      // var room;
-      // room = ref.child('rooms').child(parseInt($stateParams.userId,16) + parseInt(window.localStorage['uid'],16));
-      // room.child('messages').push({
-      //   sender: window.localStorage['uid'],
-      //   text: message
-      // });
     }
     $ionicScrollDelegate.scrollBottom();
   };
