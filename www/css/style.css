@@ -475,3 +475,25 @@ p.button--input--text {
 h2.sections{
   font-size: 15px
 }
+
+.profile__box{
+  width:100%;
+  height:160px;
+  border: 2px solid lightgrey;
+  margin: 5px 5px 5px 5px;
+}
+
+.profpic{
+  height:95%;
+  width:auto;
+  margin: 1px 1px 1px 1px;
+  border: 2px solid black;
+}
+
+.bio__info{
+  position: absolute;
+  top: 5px;
+  right: 0;
+  height: 95%;
+  width: 235px;
+}
