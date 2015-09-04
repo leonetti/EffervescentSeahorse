@@ -2,19 +2,23 @@
   <ion-nav-back-button id="back__button"
     ng-click="myGoBack()"> &nbsp; Filter
   </ion-nav-back-button>
+  <h4>Profile</h4>
 </ion-nav-bar>
 
 <ion-view view-title="{{user.displayName}}">
   <ion-content class="padding" id="profile--wrapper">
-    <img ng-src="{{user.profile-pic}}" style="width: 64px; height: 64px">
-    <p>PROFILE PAGE</p>
+    <p class='page__title'>PROFILE PAGE</p>
+    <img ng-src="data:image/png;base64,{{ profpic }}">
+    <h2 class='sections'>Bio</h2>
+    <div>{{user.bio}}</div>
+    <h2 class='sections'>Interests</h2>
     <ul>
         <li ng-repeat='interest in interests'>{{interest.activity}}</li>
     </ul>
-    <p>
-      <a href="#/messages/{{user.uid}}">CHAT WITH {{user.displayName}} HERE</a>
-    </p>
-    <button ng-click='addFriend()' ng-hide="sentReq">Add As Friend</button>
     <button ng-show="sentReq">Friend Request Sent!</button>
   </ion-content>
+    <button class='chat__button'>
+      <a href="#/messages/{{user.uid}}">CHAT WITH {{user.displayName}} HERE</a>
+    <button>
+    <button ng-click='addFriend()' ng-hide="sentReq" class='friend__button'>Add As Friend</button>
 </ion-view>

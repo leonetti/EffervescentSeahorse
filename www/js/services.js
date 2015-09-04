@@ -3,8 +3,8 @@ angular.module('starter.services', ['firebase'])
 .factory("Auth", ["$firebaseAuth", "$rootScope", function ($firebaseAuth, $rootScope) {
   return $firebaseAuth(ref);
 }])
-.factory('ImageService', function($cordovaCamera, $q, $cordovaFile) {
-
+.factory('ImageService', function($cordovaCamera, $q, $cordovaFile, $firebaseArray) {
+ 
   function makeid() {
     var text = '';
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -26,12 +26,15 @@ angular.module('starter.services', ['firebase'])
         break;
     }
     return {
-      destinationType: Camera.DestinationType.FILE_URI,
+      quality: 50,
+      destinationType: Camera.DestinationType.DATA_URL,
       sourceType: source,
       allowEdit: false,
       encodingType: Camera.EncodingType.JPEG,
       popoverOptions: CameraPopoverOptions,
-      saveToPhotoAlbum: false
+      saveToPhotoAlbum: false,
+      targetWidth: 500,
+      targetHeight: 500,
     };
   }
 
@@ -39,19 +42,17 @@ angular.module('starter.services', ['firebase'])
     return $q(function(resolve, reject) {
       var options = optionsForType(type);
 
-      $cordovaCamera.getPicture(options).then(function(imageUrl) {
-        var name = imageUrl.substr(imageUrl.lastIndexOf('/') + 1);
-        var namePath = imageUrl.substr(0, imageUrl.lastIndexOf('/') + 1);
-        var newName = makeid() + name;
-        $cordovaFile.copyFile(namePath, name, cordova.file.dataDirectory, newName)
+      $cordovaCamera.getPicture(options).then(function(imageData) {
+          ref.child('profilepicture').child(window.localStorage.uid).update({
+            'profilepicture': imageData,
+          })
           .then(function(info) {
-            FileService.storeImage(newName);
-            resolve();
+            console.log(imageData);
           }, function(e) {
             reject();
           });
       });
-    })
+    });
   }
   return {
     handleMediaDialog: saveMedia

@@ -447,3 +447,31 @@ p.button--input--text {
   padding: 0;
 }
 
+.move__down{
+  position: absolute;
+  top:64px;
+}
+
+.friend__button{
+  position:absolute;
+  bottom:0px;
+  right:0px;
+  width:50%;
+  height:43px;
+}
+
+.chat__button{
+  position:absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 50%;
+  height:43px;
+}
+
+.page__title{
+  font-size: 25px
+}
+
+h2.sections{
+  font-size: 15px
+}
