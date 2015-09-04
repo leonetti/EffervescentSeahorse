@@ -261,7 +261,7 @@ angular.module('starter.controllers', [])
     }
 
   }
-  
+
 })
 
 .controller('MessageCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate) {
@@ -269,15 +269,7 @@ angular.module('starter.controllers', [])
   $scope.text = '';
   $scope.messages = [];
 
-  ref.child("users").child($stateParams.userId).once('value', function (snapshot) {
-    var val = snapshot.val();
-    val.uid = $stateParams.userId;
-    $timeout(function () {
-      $scope.user = (val);
-    });
-  });
-
-  ref.child('rooms').child(parseInt($stateParams.userId,16) + parseInt(window.localStorage['uid'],16)).child('messages').on('value', function(snapshot) {
+  ref.child('rooms').child(window.localStorage['uid']).child($stateParams.userId).on('value', function(snapshot) {
     $scope.messages = [];
     $timeout(function() {
       for(var key in snapshot.val()) {
@@ -299,17 +291,15 @@ angular.module('starter.controllers', [])
         'text-align': 'left'
       }
     }
-
-  }
+  };
 
   $scope.sendMessage = function(message) {
+    $scope.messages = [];
     if(message !== "") {
-      var room;
-      room = ref.child('rooms').child(parseInt($stateParams.userId,16) + parseInt(window.localStorage['uid'],16));
-      room.child('messages').push({
+      ref.child('rooms').child(window.localStorage['uid']).child($stateParams.userId).push({
         sender: window.localStorage['uid'],
         text: message
-      });
+      })
     }
     $ionicScrollDelegate.scrollBottom();
   };
