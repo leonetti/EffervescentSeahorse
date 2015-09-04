@@ -6,7 +6,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('LoginCtrl', function($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope) {
+.controller('LoginCtrl', function($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope, $timeout) {
   var auth = $firebaseAuth(ref);
 
   $ionicModal.fromTemplateUrl('templates/signup.html', {
@@ -56,7 +56,7 @@ angular.module('starter.controllers', [])
         window.localStorage['uid'] = authData.uid;
         ref.child("users").child(authData.uid).once('value', function (snapshot) {
           var val = snapshot.val();
-          $scope.$apply(function() {
+          $timeout(function() {
             window.localStorage['displayName'] = val;
           });
         });
@@ -69,16 +69,6 @@ angular.module('starter.controllers', [])
     } else {
       alert('please enter email and password');
     }
-  };
-})
-
-
-.controller('ChatCtrl', function($scope, Chats, $rootScope) {
-  $scope.messages= Chats.all;
-  $scope.sendMessage = function(message) {
-    ref.child('messages').child($rootScope.uid).push({
-      'text': message
-    });
   };
 })
 
@@ -145,7 +135,7 @@ angular.module('starter.controllers', [])
   $scope.user;
   $scope.interests;
   ref.child('interests').child($stateParams.userId).once('value', function (snapshot) {
-    $scope.$apply(function() {
+    $timeout(function() {
       $scope.interests = snapshot.val();
     });
   });
@@ -166,15 +156,33 @@ angular.module('starter.controllers', [])
     $state.go('tab.chat');
   };
 
-
+  var userId = window.localStorage['uid'];
+  var friendId = $stateParams.userId;
+  // check if they are already friends
+  ref.child('friends').child(userId).on('value', function(snapshot) {
+    for (var id in snapshot.val()) {
+      if (snapshot.val()[id] === friendId) {
+        $timeout(function() {
+          $scope.friendStatus = true;
+          $scope.sentReq = false;
+        });
+      }
+    }
+  });
+  // check if the friend request has already been sent
+  ref.child('friendRequests').child(friendId).on('value', function(snapshot) {
+    for (var id in snapshot.val()) {
+      if (snapshot.val()[id] === userId) {
+        $timeout(function() {
+          $scope.sentReq = true;
+        });
+      }
+    }
+  });
   $scope.addFriend = function(){
-    var userId = window.localStorage['uid'];
-    var friendId = $stateParams.userId;
-    // if they are not already friends, should send the friend a request so they can accept or reject
     ref.child('friends').child(userId).once('value', function(snapshot) {
       for (var id in snapshot.val()) {
         if (snapshot.val()[id] === friendId) {
-          // ideally make the add friend button not available somehow
           return;
         }
       }
@@ -185,7 +193,33 @@ angular.module('starter.controllers', [])
       });
     });
   };
+
+  $scope.removeFriend = function() {
+    var userId = window.localStorage['uid'];
+    var friendId = $stateParams.userId;
+
+    ref.child('friends').child(userId).once('value', function(snapshot) {
+      for (var id in snapshot.val()) {
+        if (snapshot.val()[id] === friendId) {
+          ref.child('friends').child(userId).child(id).remove();
+        }
+      }
+    });
+
+    ref.child('friends').child(friendId).once('value', function(snapshot) {
+      for (var id in snapshot.val()) {
+        if (snapshot.val()[id] === userId) {
+          ref.child('friends').child(friendId).child(id).remove();
+        }
+      }
+    });
+
+    $timeout(function() {
+      $scope.friendStatus = false;
+    });
+  };
 })
+
 .controller('EditProfileCtrl', function ($scope, $rootScope, $ionicActionSheet, ImageService, $timeout) {
   var userId = window.localStorage.uid;
 
@@ -307,94 +341,101 @@ angular.module('starter.controllers', [])
 
 // need to make a new friend request controller to pass in stateparam user id
 .controller('FriendReqCtrl', function($scope, $timeout) {
-  var userId = window.localStorage['uid'];
-  // getting friend requests
-  $scope.acceptRequest = function(friend) {
-    var friendId = friend[0];
+  $scope.$on('$ionicView.enter', function(e) {
+    var userId = window.localStorage['uid'];
+    // getting friend requests
+    $scope.acceptRequest = function(friend) {
+      var friendId = friend[0];
 
-    // if the friend is already in user's friendlist, it won't add them again
-    ref.child('friends').child(userId).once('value', function(snapshot) {
-      for (var id in snapshot.val()) {
-        if (snapshot.val()[id] === friendId) {
-          return;
+      // if the friend is already in user's friendlist, it won't add them again
+      ref.child('friends').child(userId).once('value', function(snapshot) {
+        for (var id in snapshot.val()) {
+          if (snapshot.val()[id] === friendId) {
+            return;
+          }
         }
-      }
-      ref.child('friends').child(userId).push(friendId);
-      ref.child('friends').child(friendId).push(userId);
-    });
-
-    // remove this person from friend request
-    ref.child('friendRequests').child(userId).once('value', function(snapshot) {
-      for (var id in snapshot.val()) {
-        if (snapshot.val()[id] === friendId) {
-          ref.child('friendRequests').child(userId).child(id).remove();
-        }
-      }
-    });
-  };
-
-  $scope.rejectRequest = function(friend) {
-    var friendId = friend[0];
-    // remove from friend request
-    ref.child('friendRequests').child(userId).once('value', function(snapshot) {
-      for (var id in snapshot.val()) {
-        if (snapshot.val()[id] === friendId) {
-          ref.child('friendRequests').child(userId).child(id).remove();
-        }
-      }
-    });
-  };
-
-  // getting friend requests
-  ref.child('friendRequests').child(userId).on('value', function(snapshot) {
-    $scope.friendRequests = [];
-    var friendsId = snapshot.val();
-    for (var id in friendsId) {
-      var uId = friendsId[id];
-      ref.child('users').child(uId).once('value', function(snapshot) {
-        $timeout(function() {
-          $scope.friendRequests.push([uId, snapshot.val()]);
-        });
+        ref.child('friends').child(userId).push(friendId);
+        ref.child('friends').child(friendId).push(userId);
       });
-    }
+
+      // remove this person from friend request
+      ref.child('friendRequests').child(userId).once('value', function(snapshot) {
+        for (var id in snapshot.val()) {
+          if (snapshot.val()[id] === friendId) {
+            ref.child('friendRequests').child(userId).child(id).remove();
+          }
+        }
+      });
+    };
+
+    $scope.rejectRequest = function(friend) {
+      var friendId = friend[0];
+      // remove from friend request
+      ref.child('friendRequests').child(userId).once('value', function(snapshot) {
+        for (var id in snapshot.val()) {
+          if (snapshot.val()[id] === friendId) {
+            ref.child('friendRequests').child(userId).child(id).remove();
+          }
+        }
+      });
+    };
+
+    // getting friend requests
+    ref.child('friendRequests').child(userId).on('value', function(snapshot) {
+      $scope.friendRequests = [];
+      var friendsId = snapshot.val();
+      for (var id in friendsId) {
+        var uId = friendsId[id];
+        ref.child('users').child(uId).once('value', function(snapshot) {
+          $timeout(function() {
+            $scope.friendRequests.push([uId, snapshot.val()]);
+          });
+        });
+      }
+    });
   });
 })
 
 .controller('FriendsCtrl', function($scope, $timeout) {
-  var userId = window.localStorage['uid'];
 
-  // check for friend requests
-  ref.child('friendRequests').child(userId).on('value', function(snapshot) {
-    $timeout(function() {
-      if (snapshot.val()) {
-        $scope.hasReq = true;
-      } else {
-        $scope.hasReq = false;
+  $scope.$on('$ionicView.enter', function(e){
+    var userId = window.localStorage['uid'];
+
+    // check for friend requests
+    ref.child('friendRequests').child(userId).on('value', function(snapshot) {
+      $timeout(function() {
+        if (snapshot.val()) {
+          $scope.hasReq = true;
+        } else {
+          $scope.hasReq = false;
+        }
+      });
+    });
+
+    // getting friends
+    ref.child("friends").child(userId).on('value', function (snapshot) {
+      $scope.friends = [];
+      var friendsId = snapshot.val();
+      for (var id in friendsId) {
+        var uId = friendsId[id];
+        ref.child('users').child(uId).once('value', function(snapshot) {
+          $timeout(function() {
+            $scope.friends.push([uId, snapshot.val()]);
+          });
+        });
       }
     });
   });
-
-  // getting friends
-  ref.child("friends").child(userId).on('value', function (snapshot) {
-    $scope.friends = [];
-    var friendsId = snapshot.val();
-    for (var id in friendsId) {
-      var uId = friendsId[id];
-      ref.child('users').child(uId).once('value', function(snapshot) {
-        $timeout(function() {
-          $scope.friends.push([uId, snapshot.val()]);
-        });
-      });
-    }
-  });
 })
 
-.controller('LogoutCtrl', function($scope, $state, $window) {
+.controller('LogoutCtrl', function($scope, $state, $window, $ionicHistory) {
   $scope.logout = function() {
     delete window.localStorage['displayName'];
     delete window.localStorage['uid'];
     ref.unauth();
+    $ionicHistory.clearCache().then(function() {
+      console.log('cleared views');
+    });
     $state.go('login');
-    $window.location.reload(true);
   };
 });

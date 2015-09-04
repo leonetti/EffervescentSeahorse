@@ -15,10 +15,11 @@
     <ul>
         <li ng-repeat='interest in interests'>{{interest.activity}}</li>
     </ul>
-    <button ng-show="sentReq">Friend Request Sent!</button>
   </ion-content>
-    <button class='chat__button'>
-      <a href="#/messages/{{user.uid}}">CHAT WITH {{user.displayName}} HERE</a>
-    <button>
-    <button ng-click='addFriend()' ng-hide="sentReq" class='friend__button'>Add As Friend</button>
+  <button class='chat__button'>
+    <a href="#/messages/{{user.uid}}">CHAT WITH {{user.displayName}} HERE</a>
+  <button>
+  <button ng-click='addFriend()' ng-hide="friendStatus || sentReq" class='friend__button'>Add As Friend</button>
+  <button ng-show="sentReq" class='friend__button'>Friend Request Sent!</button>
+  <button ng-click='removeFriend()' ng-show="friendStatus" class='friend__button'>Remove Friend</button>
 </ion-view>
