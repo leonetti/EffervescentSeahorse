@@ -13,7 +13,7 @@ angular.module('starter.services', ['firebase'])
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return text;
-  };
+  }
 
   function optionsForType(type) {
     var source;
@@ -56,7 +56,7 @@ angular.module('starter.services', ['firebase'])
   }
   return {
     handleMediaDialog: saveMedia
-  }
+  };
 })
 
 .factory('GPS', ['$cordovaGeolocation', function($cordovaGeolocation) {
@@ -65,7 +65,7 @@ angular.module('starter.services', ['firebase'])
       options = options || { timeout: 30000, enableHighAccuracy: true };
       return $cordovaGeolocation.getCurrentPosition(options);
     }
-  }
+  };
 }]);
 
 
