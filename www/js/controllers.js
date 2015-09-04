@@ -258,7 +258,6 @@ angular.module('starter.controllers', [])
     }
   };
   
-
 })
 
 .controller('MessageCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate) {
@@ -288,6 +287,10 @@ angular.module('starter.controllers', [])
         'text-align': 'left'
       };
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> CSS profile and editprofile
   };
 
   $scope.sendMessage = function(message) {
