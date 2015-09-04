@@ -199,14 +199,16 @@ angular.module('starter.controllers', [])
         $scope.profilepic = snapshot.val().profilepicture[userId].profilepicture;
         //for(var i in $scope.interests)
         for(var i in $scope.interests){
-          activityObj[$scope.interests[i].activity] = 1
+          activityObj[$scope.interests[i].activity] = 1;
         }
-        for(var i = 0; i < activities.length; i++){
-          if(!activityObj[activities[i]]){
-            activitiesArr.push(activities[i]);
+        for(var k = 0; i < activities.length; i++){
+          if(!activityObj[activities[k]]){
+            activitiesArr.push(activities[k]);
           }
         }
         $scope.activities = activitiesArr;
+      }else{
+        $scope.activities = snapshot.val().activities;
       }
     });
   });
@@ -242,7 +244,7 @@ angular.module('starter.controllers', [])
         ref.child('interests').child(userId).push({
           'activity': item
         });
-  }
+  };
 
   $scope.addBio = function(item){
     ref.child('users').child(userId).update({
@@ -260,8 +262,13 @@ angular.module('starter.controllers', [])
       }
     }
 
+<<<<<<< HEAD
   }
 
+=======
+  };
+  
+>>>>>>> CSS profile and editprofile
 })
 
 .controller('MessageCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate) {
@@ -284,13 +291,17 @@ angular.module('starter.controllers', [])
       return {
         'color': 'green',
         'text-align': 'right'
-      }
+      };
     } else {
       return {
         'color': 'red',
         'text-align': 'left'
-      }
+      };
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> CSS profile and editprofile
   };
 
   $scope.sendMessage = function(message) {

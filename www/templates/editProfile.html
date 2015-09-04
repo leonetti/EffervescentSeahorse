@@ -2,18 +2,19 @@
   <ion-nav-back-button id="back__button"
     ng-click="myGoBack()"> &nbsp; Filter
   </ion-nav-back-button>
-  <h4>Edit Profile</h4>
 </ion-nav-bar>
 <ion-view view-title="EditProfile" class='move__down'>
     <ion-content>
-    <img ng-src="data:image/png;base64,{{ profilepic }}">
-    <button class="nav__bar" ng-click="addMedia()">
-      Change Profile Picture!
-    </button>
-    <form>
-        <textarea ng-model='birds' style='background-color:lightgrey;'>Add Biography Here</textarea>
-        <button ng-click='addBio(birds)' class="nav__bar">Add Biography</button>
-    </form>
+    <div class='profile__box'>
+      <img ng-src="data:image/png;base64,{{ profilepic }}" class='profpic'>
+      <button class="nav__bar" ng-click="addMedia()">
+        Change Profile Picture!
+      </button>
+      <form class='bio__info'>
+          <textarea ng-model='birds' style='background-color:lightgrey;'>Add Biography Here</textarea>
+          <button ng-click='addBio(birds)' class="nav__bar">Add Biography</button>
+      </form>
+  </div>
     <ul>
         <h1 ng-repeat='interest in interests' ng-model='hi' ng-click='removeInterest({{interest.activity}})'>{{interest.activity}}</h1>
     </ul>
