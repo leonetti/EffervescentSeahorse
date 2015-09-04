@@ -31,7 +31,22 @@
         </ion-content>
       </div>
     </div>
+  <ion-content class="padding" id="profile--wrapper">
+    <div class='profile__box'>
+      <img ng-src="data:image/png;base64,{{ profpic }}" class='profpic'>
+      <div class='bio__info'>
+        <h2 class='sections'>{{user.displayName}}</h2>
+        <div>{{user.bio}}</div>
+      </div>
+    </div>
+    <div class='profile__box'>
+      <h2 class='sections'>Interests</h2>
+      <ul>
+          <li ng-repeat='interest in interests'>{{interest.activity}}</li>
+      </ul>
+    </div>
     <button ng-show="sentReq">Friend Request Sent!</button>
+  </ion-content>
   <button class='chat__button' ng-hide="blocked">
     <a href="#/messages/{{user.uid}}" id='whitify'>Chat With {{user.displayName}} Here</a>
   <button>

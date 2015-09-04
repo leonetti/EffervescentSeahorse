@@ -205,7 +205,6 @@ angular.module('starter.controllers', [])
         for(var i in $scope.interests){
           activityObj[$scope.interests[i].activity] = 1;
         }
-        console.log(activityObj)
         for(var k = 0; k < activities.length; k++){
           if(!activityObj[activities[k]]){
             activitiesArr.push(activities[k]);
