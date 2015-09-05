@@ -158,6 +158,20 @@ angular.module('starter.controllers', [])
 
   var userId = window.localStorage['uid'];
   var friendId = $stateParams.userId;
+
+  // check if the user is blocked by the person in the profile
+  // if the user is blocked, do not show the add friend or chat buttons
+  ref.child('blockedUsers').child(friendId).on('value', function(snapshot) {
+    for (var id in snapshot.val()) {
+      if (snapshot.val()[id] === userId) {
+        // don't let the user see the friend or chat buttons
+        $timeout(function() {
+          $scope.blocked = true;
+        });
+      }
+    }
+  });
+
   // check if they are already friends
   ref.child('friends').child(userId).on('value', function(snapshot) {
     for (var id in snapshot.val()) {
@@ -217,6 +231,12 @@ angular.module('starter.controllers', [])
     $timeout(function() {
       $scope.friendStatus = false;
     });
+  };
+
+  $scope.blockUser = function() {
+    ref.child('blockedUsers').child(userId).push(friendId);
+    // remove them from friends list if they are currently friends
+    $scope.removeFriend();
   };
 })
 
