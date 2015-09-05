@@ -433,17 +433,23 @@ angular.module('starter.controllers', [])
     });
 
     // getting friends
+    $scope.friends = [];
     ref.child("friends").child(userId).on('value', function (snapshot) {
-      $scope.friends = [];
-      var friendsId = snapshot.val();
-      for (var id in friendsId) {
-        var uId = friendsId[id];
-        ref.child('users').child(uId).once('value', function(snapshot) {
-          $timeout(function() {
-            $scope.friends.push([uId, snapshot.val()]);
+      snapshot.forEach(function(child) {
+        var fId = child.val();
+        ref.child('users').child(fId).once('value', function(snap) {
+          var user = snap.val();
+          user.id = fId;
+          ref.child('profilepicture').child(fId).once('value', function(snap) {
+            if (snap.val()) {
+              user.pic = snap.val().profilepicture;
+            }
+            $timeout(function() {
+              $scope.friends.push(user);
+            });
           });
         });
-      }
+      });
     });
   });
 })
