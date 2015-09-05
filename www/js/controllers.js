@@ -365,7 +365,7 @@ angular.module('starter.controllers', [])
     var userId = window.localStorage['uid'];
     // getting friend requests
     $scope.acceptRequest = function(friend) {
-      var friendId = friend[0];
+      var friendId = friend.id;
 
       // if the friend is already in user's friendlist, it won't add them again
       ref.child('friends').child(userId).once('value', function(snapshot) {
@@ -389,7 +389,7 @@ angular.module('starter.controllers', [])
     };
 
     $scope.rejectRequest = function(friend) {
-      var friendId = friend[0];
+      var friendId = friend.id;
       // remove from friend request
       ref.child('friendRequests').child(userId).once('value', function(snapshot) {
         for (var id in snapshot.val()) {
@@ -403,15 +403,21 @@ angular.module('starter.controllers', [])
     // getting friend requests
     ref.child('friendRequests').child(userId).on('value', function(snapshot) {
       $scope.friendRequests = [];
-      var friendsId = snapshot.val();
-      for (var id in friendsId) {
-        var uId = friendsId[id];
-        ref.child('users').child(uId).once('value', function(snapshot) {
-          $timeout(function() {
-            $scope.friendRequests.push([uId, snapshot.val()]);
+      snapshot.forEach(function(child) {
+        var uId = child.val();
+        ref.child('users').child(uId).on('value', function(snapshot) {
+          var user = snapshot.val();
+          user.id = uId;
+          ref.child('profilepicture').child(uId).once('value', function(snapshot) {
+            if (snapshot.val()) {
+              user.pic = snapshot.val().profilepicture;
+            }
+            $timeout(function() {
+              $scope.friendRequests.push(user);
+            });
           });
         });
-      }
+      });
     });
   });
 })
@@ -433,8 +439,8 @@ angular.module('starter.controllers', [])
     });
 
     // getting friends
-    $scope.friends = [];
     ref.child("friends").child(userId).on('value', function (snapshot) {
+      $scope.friends = [];
       snapshot.forEach(function(child) {
         var fId = child.val();
         ref.child('users').child(fId).once('value', function(snap) {
