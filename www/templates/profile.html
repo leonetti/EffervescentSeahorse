@@ -8,6 +8,7 @@
 <ion-view view-title="{{user.displayName}}">
   <ion-content class="padding" id="profile--wrapper">
     <p class='page__title'>PROFILE PAGE</p>
+    <button ng-click='blockUser()'>Block User</button>
     <img ng-src="data:image/png;base64,{{ profpic }}">
     <h2 class='sections'>Bio</h2>
     <div>{{user.bio}}</div>
@@ -16,10 +17,10 @@
         <li ng-repeat='interest in interests'>{{interest.activity}}</li>
     </ul>
   </ion-content>
-  <button class='chat__button'>
+  <button class='chat__button' ng-hide="blocked">
     <a href="#/messages/{{user.uid}}">CHAT WITH {{user.displayName}} HERE</a>
   <button>
-  <button ng-click='addFriend()' ng-hide="friendStatus || sentReq" class='friend__button'>Add As Friend</button>
+  <button ng-click='addFriend()' ng-hide="friendStatus || sentReq || blocked" class='friend__button'>Add As Friend</button>
   <button ng-show="sentReq" class='friend__button'>Friend Request Sent!</button>
   <button ng-click='removeFriend()' ng-show="friendStatus" class='friend__button'>Remove Friend</button>
 </ion-view>

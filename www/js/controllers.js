@@ -158,6 +158,20 @@ angular.module('starter.controllers', [])
 
   var userId = window.localStorage['uid'];
   var friendId = $stateParams.userId;
+
+  // check if the user is blocked by the person in the profile
+  // if the user is blocked, do not show the add friend or chat buttons
+  ref.child('blockedUsers').child(friendId).on('value', function(snapshot) {
+    for (var id in snapshot.val()) {
+      if (snapshot.val()[id] === userId) {
+        // don't let the user see the friend or chat buttons
+        $timeout(function() {
+          $scope.blocked = true;
+        });
+      }
+    }
+  });
+
   // check if they are already friends
   ref.child('friends').child(userId).on('value', function(snapshot) {
     for (var id in snapshot.val()) {
@@ -217,6 +231,12 @@ angular.module('starter.controllers', [])
     $timeout(function() {
       $scope.friendStatus = false;
     });
+  };
+
+  $scope.blockUser = function() {
+    ref.child('blockedUsers').child(userId).push(friendId);
+    // remove them from friends list if they are currently friends
+    $scope.removeFriend();
   };
 })
 
@@ -345,7 +365,7 @@ angular.module('starter.controllers', [])
     var userId = window.localStorage['uid'];
     // getting friend requests
     $scope.acceptRequest = function(friend) {
-      var friendId = friend[0];
+      var friendId = friend.id;
 
       // if the friend is already in user's friendlist, it won't add them again
       ref.child('friends').child(userId).once('value', function(snapshot) {
@@ -369,7 +389,7 @@ angular.module('starter.controllers', [])
     };
 
     $scope.rejectRequest = function(friend) {
-      var friendId = friend[0];
+      var friendId = friend.id;
       // remove from friend request
       ref.child('friendRequests').child(userId).once('value', function(snapshot) {
         for (var id in snapshot.val()) {
@@ -383,15 +403,21 @@ angular.module('starter.controllers', [])
     // getting friend requests
     ref.child('friendRequests').child(userId).on('value', function(snapshot) {
       $scope.friendRequests = [];
-      var friendsId = snapshot.val();
-      for (var id in friendsId) {
-        var uId = friendsId[id];
-        ref.child('users').child(uId).once('value', function(snapshot) {
-          $timeout(function() {
-            $scope.friendRequests.push([uId, snapshot.val()]);
+      snapshot.forEach(function(child) {
+        var uId = child.val();
+        ref.child('users').child(uId).on('value', function(snapshot) {
+          var user = snapshot.val();
+          user.id = uId;
+          ref.child('profilepicture').child(uId).once('value', function(snapshot) {
+            if (snapshot.val()) {
+              user.pic = snapshot.val().profilepicture;
+            }
+            $timeout(function() {
+              $scope.friendRequests.push(user);
+            });
           });
         });
-      }
+      });
     });
   });
 })
@@ -415,15 +441,21 @@ angular.module('starter.controllers', [])
     // getting friends
     ref.child("friends").child(userId).on('value', function (snapshot) {
       $scope.friends = [];
-      var friendsId = snapshot.val();
-      for (var id in friendsId) {
-        var uId = friendsId[id];
-        ref.child('users').child(uId).once('value', function(snapshot) {
-          $timeout(function() {
-            $scope.friends.push([uId, snapshot.val()]);
+      snapshot.forEach(function(child) {
+        var fId = child.val();
+        ref.child('users').child(fId).once('value', function(snap) {
+          var user = snap.val();
+          user.id = fId;
+          ref.child('profilepicture').child(fId).once('value', function(snap) {
+            if (snap.val()) {
+              user.pic = snap.val().profilepicture;
+            }
+            $timeout(function() {
+              $scope.friends.push(user);
+            });
           });
         });
-      }
+      });
     });
   });
 })
