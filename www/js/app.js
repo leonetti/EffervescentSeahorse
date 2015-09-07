@@ -65,12 +65,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
   // Each tab has its own nav history stack:
 
-  .state('tab.rooms', {
-    url: '/rooms',
+  .state('tab.search', {
+    url: '/search',
     views: {
-      'tab-rooms': {
-        templateUrl: 'templates/tab-rooms.html',
-        controller: 'RoomsCtrl'
+      'tab-search': {
+        templateUrl: 'templates/tab-search.html',
+        controller: 'SearchController as vm'
       }
     },
     resolve: {
