@@ -13,6 +13,7 @@
       <img ng-src="data:image/png;base64,{{user.profilepicture}}" style="width: 64px; height: 64px">
         <h2 id="search--username">{{user.displayName}}</h2>
         <span class="search--activity" ng-repeat='interest in user.interests'>{{interest.activity}} &nbsp;</span>
+        <p>{{user.distance}}</p>
         <i class="icon ion-chevron-right icon-accessory" id="right--arrow--search"></i>
       </ion-item>
     </ion-list>

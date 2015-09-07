@@ -35,6 +35,7 @@
               ref.child("users").child(key).once('value', function (snapshot) {
                 var val = snapshot.val();
                 val.uid = key;
+                val.distance = distance;
 
                 ref.child('interests').child(key).once('value', function (snapshot) {
                   val.interests = snapshot.val();
