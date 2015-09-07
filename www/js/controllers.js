@@ -149,6 +149,7 @@ angular.module('starter.controllers', [])
     });
   };
 
+
   $scope.removeFriend = function() {
     var userId = window.localStorage['uid'];
     var friendId = $stateParams.userId;
@@ -178,6 +179,16 @@ angular.module('starter.controllers', [])
     ref.child('blockedUsers').child(userId).push(friendId);
     // remove them from friends list if they are currently friends
     $scope.removeFriend();
+  }
+
+  $scope.active = 'Interests';
+
+  $scope.setActive = function(type) {
+      $scope.active = type;
+  };
+
+  $scope.isActive = function(type) {
+      return type === $scope.active;
   };
 })
 
@@ -189,14 +200,15 @@ angular.module('starter.controllers', [])
       var activityObj = {};
       var activities = snapshot.val().activities;
       var activitiesArr = [];
-      if(snapshot.val().interests){
+      $scope.bio = snapshot.val().users[userId].bio
+      $scope.profilepic = snapshot.val().profilepicture[userId].profilepicture;
+      if(snapshot.val().interests[userId]){
         $scope.interests = snapshot.val().interests[userId];
-        $scope.profilepic = snapshot.val().profilepicture[userId].profilepicture;
-        //for(var i in $scope.interests)
         for(var i in $scope.interests){
           activityObj[$scope.interests[i].activity] = 1;
         }
-        for(var k = 0; i < activities.length; i++){
+        console.log(activityObj)
+        for(var k = 0; k < activities.length; k++){
           if(!activityObj[activities[k]]){
             activitiesArr.push(activities[k]);
           }
@@ -257,7 +269,7 @@ angular.module('starter.controllers', [])
       }
     }
   };
-  
+
 })
 
 .controller('MessageCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate) {
