@@ -446,7 +446,15 @@ margin-left: 20px;
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .friend--lower {
+  top: 90px;
+}
+
+.friend--filter--lower {
   top: 45px;
+}
+
+.friend-text {
+  color: white;
 }
 
 .rightButton {
