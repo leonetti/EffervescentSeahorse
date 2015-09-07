@@ -380,7 +380,7 @@ angular.module('starter.controllers', [])
     });
 
     // getting friends
-    ref.child("friends").child(userId).on('value', function (snapshot) {
+    ref.child("friends").child(userId).once('value', function (snapshot) {
       $scope.friends = [];
       snapshot.forEach(function(child) {
         var fId = child.val();

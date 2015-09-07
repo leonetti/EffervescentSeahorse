@@ -7,15 +7,6 @@
     <i class="icon ion-search placeholder-icon"></i>
     <input type="text" placeholder="Filter" ng-model="query">
   </label>
-<!-- <ion-view view-title="Rooms">
-  <div id="filter--rooms--wrapper">
-    <span class="input input--makiko">
-      <input class="input__field input__field--makiko" type="text" id="input-16" />
-      <label class="input__label input__label--makiko" for="input-16">
-        <span class="input__label-content input__label-content--makiko">Search</span>
-      </label>
-    </span> -->
-  </div>
   <ion-content>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right search--item" ng-repeat="user in vm.users | filter:query" type="item-text-wrap" href="#/profile/{{user.uid}}" >
