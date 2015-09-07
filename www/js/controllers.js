@@ -149,6 +149,7 @@ angular.module('starter.controllers', [])
     });
   };
 
+
   $scope.removeFriend = function() {
     var userId = window.localStorage['uid'];
     var friendId = $stateParams.userId;
@@ -178,6 +179,16 @@ angular.module('starter.controllers', [])
     ref.child('blockedUsers').child(userId).push(friendId);
     // remove them from friends list if they are currently friends
     $scope.removeFriend();
+  }
+
+  $scope.active = 'Interests';
+
+  $scope.setActive = function(type) {
+      $scope.active = type;
+  };
+
+  $scope.isActive = function(type) {
+      return type === $scope.active;
   };
 
 
