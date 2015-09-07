@@ -73,6 +73,11 @@ body {
   color: rgba(255, 255, 255, 0.8);
 }
 
+@font-face{
+  font-family: "Bariol";
+  src: url(../fonts/Bariol_Regular.otf);
+}
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * LOGIN PAGE
@@ -588,12 +593,77 @@ p.button--input--text {
   top:64px;
 }
 
+
+.page__title{
+  font-size: 25px
+}
+
+h2.sections{
+  font-size: 30px;
+  border-bottom: 1px solid lightgrey;
+  padding: 10px;
+  text-align: center;
+}
+
+.fill__text{
+  font-size: 15px;
+  border-bottom: 1px solid lightgrey;
+  padding: 10px;
+  text-align: center;
+
+}
+
+.profile__box{
+  position:relative;
+  width:100%;
+  height:280px;
+  background-color: #91CC91;  
+}
+
+.profContainer{
+  height:100%;
+  width: 111px;
+}
+
+.profpic{
+  display:block;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 65px;
+  left:0;
+  right:0;
+  height:45%;
+
+}
+
+.clicky{
+   position: absolute; 
+   top: 125px; 
+   left: 5px; 
+   width: 100%; 
+}
+
+.clicky span {
+   color: white; 
+   font: bold 10px/20px Helvetica, Sans-Serif; 
+   letter-spacing: -1px;  
+   background: rgb(0, 0, 0); /* fallback color */
+   background: rgba(0, 0, 0, 0.7);
+   padding: 10px; 
+}
+
+/*a {
+    color: black;
+    font-size: 12px;
+}*/
 .friend__button{
   position:absolute;
   bottom:0px;
   right:0px;
   width:50%;
   height:43px;
+  background-color: #91CC91;
 }
 
 .chat__button{
@@ -602,34 +672,71 @@ p.button--input--text {
   left: 0px;
   width: 50%;
   height:43px;
+  background-color: #91CC91;
+  color: white;
 }
 
-.page__title{
-  font-size: 25px
-}
+.circular {
+  border: 2px solid white;
+  border-radius: 20px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 150px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+  -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+  }
 
-h2.sections{
-  font-size: 15px
-}
-
-.profile__box{
-  width:100%;
-  height:160px;
-  border: 2px solid lightgrey;
-  margin: 5px 5px 5px 5px;
-}
-
-.profpic{
-  height:95%;
-  width:auto;
-  margin: 1px 1px 1px 1px;
-  border: 2px solid black;
+#displayName{
+  text-align: center;
+  display:block;
+  position: absolute;
+  top:70%;
+  left: 0;
+  right: 0;
+  margin-right: auto;
+  margin-left: auto;
+  color: white;
+  font-family:'Bariol', 'Lato', sans-serif;
 }
 
 .bio__info{
+  text-align: center;
+  display:block;
   position: absolute;
-  top: 5px;
+  top:85%;
+  left: 0;
   right: 0;
-  height: 95%;
-  width: 235px;
+  margin-right: auto;
+  margin-left: auto;
+  color: white;
+  font-family:'Bariol', 'Lato', sans-serif;
 }
+
+a.testTest{
+  border-bottom: 5px solid #91CC91 !important;
+  font-family: 'Bariol', 'Lato', sans-serif;
+  font-weight: bold;
+}
+
+#radioButton {
+   background-color: #fff;
+   width: 100px;
+   color: #91CC91;
+   margin: 0px auto;
+   border-bottom: 2px solid #91CC91;
+   border-left-width: 0px;
+   border-right-width: 0px;
+   border-top-width: 0px; 
+ }
+
+ #whitify{
+  color:white;
+ }
+
+ .scroll{height: 100%;}
+
+ .under__box{
+  height:100%;
+ }
+
+

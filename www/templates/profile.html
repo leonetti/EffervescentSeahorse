@@ -6,26 +6,36 @@
 </ion-nav-bar>
 
 <ion-view view-title="{{user.displayName}}">
-  <ion-content class="padding" id="profile--wrapper">
+<!--   <ion-content class="padding" id="profile--wrapper"> -->
     <div class='profile__box'>
-      <img ng-src="data:image/png;base64,{{ profpic }}" class='profpic'>
+      <img ng-src="data:image/png;base64,{{ profpic }}" class='profpic circular'>
+      <h2 class='sections' id='displayName'>{{user.displayName}}</h2>
       <div class='bio__info'>
-        <h2 class='sections'>{{user.displayName}}</h2>
-        <div>{{user.bio}}</div>
+        <div class='fill__text'>{{user.bio}}</div>
       </div>
     </div>
-    <div class='profile__box'>
-      <h2 class='sections'>Interests</h2>
-      <ul>
-          <li ng-repeat='interest in interests'>{{interest.activity}}</li>
-      </ul>
+    <div style='background-color: white;'>
+      <div class="button-bar">
+        <a class="button button-block button-positive activated radioButton" id="radioButton" ng-class="{'testTest': isActive('Interests')}" ng-click="setActive('Interests')">Interests</a>
+        <a class="button button-block button-positive activated" id="radioButton" ng-class="{'testTest': isActive('Accomplishments')}" ng-click="setActive('Accomplishments')">Accomplishments</a>
+        <a class="button button-block button-positive activated" id="radioButton" ng-class="{'testTest': isActive('Photos')}" ng-click="setActive('Photos')">Photos</a>
+      </div>
+      <div class='profile__box' style='background-color: white;'>
+        <ion-content has-header='true' ng-show="isActive('Interests')">
+          <div ng-show='isActive("Interests")'>
+            <h2 class='sections'>Interests</h2>
+            <ul>
+                <li class='fill__text' ng-repeat='interest in interests'>{{interest.activity}}</li>
+            </ul>
+          </div>
+        </ion-content>
+      </div>
     </div>
     <button ng-show="sentReq">Friend Request Sent!</button>
-  </ion-content>
   <button class='chat__button' ng-hide="blocked">
-    <a href="#/messages/{{user.uid}}">CHAT WITH {{user.displayName}} HERE</a>
+    <a href="#/messages/{{user.uid}}" id='whitify'>Chat With {{user.displayName}} Here</a>
   <button>
-  <button ng-click='addFriend()' ng-hide="friendStatus || sentReq || blocked" class='friend__button'>Add As Friend</button>
-  <button ng-show="sentReq" class='friend__button'>Friend Request Sent!</button>
-  <button ng-click='removeFriend()' ng-show="friendStatus" class='friend__button'>Remove Friend</button>
+  <button ng-click='addFriend()' ng-hide="friendStatus || sentReq || blocked" class='friend__button' id='whitify'>Add As Friend</button>
+  <button ng-show="sentReq" class='friend__button' id='whitify'>Friend Request Sent!</button>
+  <button ng-click='removeFriend()' ng-show="friendStatus" class='friend__button' id='whitify'>Remove Friend</button>
 </ion-view>
