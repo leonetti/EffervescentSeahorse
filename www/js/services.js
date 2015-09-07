@@ -4,7 +4,7 @@ angular.module('starter.services', ['firebase'])
   return $firebaseAuth(ref);
 }])
 .factory('ImageService', function($cordovaCamera, $q, $cordovaFile, $firebaseArray) {
- 
+
   function makeid() {
     var text = '';
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
