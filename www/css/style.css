@@ -235,33 +235,33 @@ body {
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * TAB-ROOMS PAGE
+ * TAB-SEARCH PAGE
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-.room--item {
-  padding: 0px;
+.search--item {
+  padding: 0;
 }
 
-.room--item:first-child {
+.search--item:first-child {
   margin-top: 90px;
 }
 
-.room--item:last-child {
+.search--item:last-child {
   margin-bottom: 10px;
 }
 
-.room--activity {
+.search--activity {
   color: #91CC91;
   font-style: italic;
   font-size: 12px;
 }
 
-#filter--rooms {
+#filter--search {
   margin: 44px auto 0 auto;
 }
 
-/*#ios--room--filler {
+/*#ios--search--filler {
   margin-top: 44px;
   width: 100%;
   height: 44px;

@@ -1,0 +1,20 @@
+<ion-nav-bar class="nav__bar">
+</ion-nav-bar>
+<div id="ios--room--filler"></div>
+
+<ion-view view-title="Search">
+  <label class="item item-input" id="filter--search">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="text" placeholder="Filter" ng-model="query">
+  </label>
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right search--item" ng-repeat="user in vm.users | filter:query" type="item-text-wrap" href="#/profile/{{user.uid}}" >
+      <img ng-src="data:image/png;base64,{{user.profilepicture}}" style="width: 64px; height: 64px">
+        <h2 id="search--username">{{user.displayName}}</h2>
+        <span class="search--activity" ng-repeat='interest in user.interests'>{{interest.activity}} &nbsp;</span>
+        <i class="icon ion-chevron-right icon-accessory" id="right--arrow--search"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

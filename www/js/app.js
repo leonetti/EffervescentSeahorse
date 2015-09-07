@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var ref = new Firebase('URL');
+var ref = new Firebase('https://crackling-heat-1995.firebaseio.com/');
 var geoFire = new GeoFire(ref.child("geolocation"));
 
 
@@ -65,12 +65,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
   // Each tab has its own nav history stack:
 
-  .state('tab.rooms', {
-    url: '/rooms',
+  .state('tab.search', {
+    url: '/search',
     views: {
-      'tab-rooms': {
-        templateUrl: 'templates/tab-rooms.html',
-        controller: 'RoomsCtrl'
+      'tab-search': {
+        templateUrl: 'templates/tab-search.html',
+        controller: 'SearchController as vm'
       }
     },
     resolve: {
