@@ -211,7 +211,6 @@ angular.module('starter.controllers', [])
         for(var i in $scope.interests){
           activityObj[$scope.interests[i].activity] = 1;
         }
-        console.log(activityObj)
         for(var k = 0; k < activities.length; k++){
           if(!activityObj[activities[k]]){
             activitiesArr.push(activities[k]);
@@ -272,8 +271,9 @@ angular.module('starter.controllers', [])
         return;
       }
     }
+
   };
-  console.log($scope.activities)
+  
 })
 
 .controller('MessageCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate) {
