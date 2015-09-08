@@ -3,6 +3,10 @@ angular.module('starter.services', ['firebase'])
 .factory("Auth", ["$firebaseAuth", "$rootScope", function ($firebaseAuth, $rootScope) {
   return $firebaseAuth(ref);
 }])
+.factory("editProf", function(){
+  var checker = false;
+  return {checker: checker};
+})
 .factory('ImageService', function($cordovaCamera, $q, $cordovaFile, $firebaseArray) {
 
   function makeid() {

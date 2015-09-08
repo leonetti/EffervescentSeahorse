@@ -1,4 +1,11 @@
-<ion-view view-title="Friends">
+<ion-nav-bar ng-controller="MyCtrl" class="nav__bar">
+  <ion-nav-back-button id="back__button"
+    ng-click="myGoBack()"> &nbsp; Filter
+  </ion-nav-back-button>
+  <h4>Friends List</h4>
+</ion-nav-bar>
+
+<ion-view view-title="Friends" class='move__down'>
   <label class="item item-input">
     <i class="icon ion-search placeholder-icon"></i>
     <input type="text" placeholder="Friend" ng-model="query">
@@ -6,10 +13,14 @@
   <ion-content>
     <ion-list>
       <ion-item href="#/friends/friendrequests" ng-show="vm.hasReq" class="friend--lower">View Friend Requests<div class="ion-alert rightButton"></div></ion-item>
-      <ion-item ng-repeat="friend in vm.friends | filter:query" href="#/profile/{{friend.id}}" class="item-remove-animate item-avatar item-icon-right friend--lower">
+      <ion-item ng-repeat="friend in vm.friends | filter:query" href="#/profile/{{friend.id}}" class="item-remove-animate item-avatar item-icon-right friend--lower" id='friendBox'>
         <img ng-src="data:image/png;base64,{{friend.pic}}" style="width: 64px; height: 64px">
         <h2>{{friend.displayName}}</h2>
-        <i class="icon ion-chevron-right icon-accessory" id="right--arrow--rooms"></i>
+        <div class='friendDesc'>{{friend.bio}}</div>
+        <!-- <i class="icon ion-chevron-right icon-accessory" id="right--arrow--rooms"></i> -->
+        <button class='friendChat' ng-hide="blocked" id='bubblify'>
+          <a href="#/messages/{{friend.id}}" class='ion-chatbubble-working' id='bubblify'></a>
+        </button>
       </ion-item>
     </ion-list>
   </ion-content>

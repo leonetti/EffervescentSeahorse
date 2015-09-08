@@ -1,4 +1,8 @@
-<ion-nav-bar class="nav__bar">
+<ion-nav-bar view-title ng-controller="MyCtrl" class="nav__bar">
+  <ion-nav-back-button id="back__button"
+    ng-click="myGoBack()"> &nbsp; {{user.displayName}}
+    <p class="my-title">{{user.displayName}}</p>
+  </ion-nav-back-button>
 </ion-nav-bar>
 <div id="ios--room--filler"></div>
 

@@ -421,6 +421,7 @@ body {
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .friend--lower {
   top: 45px;
+  font-family: 'Bariol', 'Lato', sans-serif;
 }
 
 .rightButton {
@@ -586,7 +587,7 @@ p.button--input--text {
 
 .move__down{
   position: absolute;
-  top:64px;
+  top:40px;
 }
 
 .friend__button{
@@ -609,6 +610,53 @@ p.button--input--text {
   font-size: 25px
 }
 
-h2.sections{
-  font-size: 15px
+#photoCar img {
+    bottom: 0;
+    left: ;
+    margin: auto;
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
+#photoCar li {
+    height: 220px;
+    width: 175px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+}
+
+.friendDesc{
+  font-size: 12px;
+  color:lightgrey;
+  max-width: 240px;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.friendPic{
+  border: 2px solid #91CC91;
+}
+
+.friendChat{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 50px;
+  height: 78px;
+  background-color: #91CC91;
+}
+
+#friendBox{
+  height: 76px;
+}
+
+ #bubblify{
+  color:white;
+  text-decoration: none;
+  border:none;
+  font-family: 'Bariol', 'Lato', sans-serif;
+  font-size: 30px;
+ }
