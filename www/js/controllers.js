@@ -297,44 +297,6 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('FriendsCtrl', function($scope, $timeout) {
-
-  $scope.$on('$ionicView.enter', function(e){
-    var userId = window.localStorage['uid'];
-
-    // check for friend requests
-    ref.child('friendRequests').child(userId).on('value', function(snapshot) {
-      $timeout(function() {
-        if (snapshot.val()) {
-          $scope.hasReq = true;
-        } else {
-          $scope.hasReq = false;
-        }
-      });
-    });
-
-    // getting friends
-    ref.child("friends").child(userId).on('value', function (snapshot) {
-      $scope.friends = [];
-      snapshot.forEach(function(child) {
-        var fId = child.val();
-        ref.child('users').child(fId).once('value', function(snap) {
-          var user = snap.val();
-          user.id = fId;
-          ref.child('profilepicture').child(fId).once('value', function(snap) {
-            if (snap.val()) {
-              user.pic = snap.val().profilepicture;
-            }
-            $timeout(function() {
-              $scope.friends.push(user);
-            });
-          });
-        });
-      });
-    });
-  });
-})
-
 .controller('LogoutCtrl', function($scope, $state, $window, $ionicHistory) {
   $scope.logout = function() {
     delete window.localStorage['displayName'];
