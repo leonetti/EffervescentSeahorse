@@ -118,18 +118,18 @@ angular.module('starter.controllers', [])
       }
     }
     $scope.blocked = false;
-    // if the profile that the user is viewing is currently blocked by the user, give them option to unblock them
-    ref.child('blockedUsers').child(userId).on('value', function(snapshot) {
-      for (var id in snapshot.val()) {
-        if (snapshot.val()[id] === friendId) {
-          $timeout(function() {
-            $scope.showUnblock = true;
-          });
-        }
-      }
-    });
   });
 
+  // if the profile that the user is viewing is currently blocked by the user, give them option to unblock them
+  ref.child('blockedUsers').child(userId).on('value', function(snapshot) {
+    for (var id in snapshot.val()) {
+      if (snapshot.val()[id] === friendId) {
+        $timeout(function() {
+          $scope.showUnblock = true;
+        });
+      }
+    }
+  });
 
   // check if they are already friends
   ref.child('friends').child(userId).on('value', function(snapshot) {
