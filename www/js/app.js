@@ -82,6 +82,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
+  .state('tab.chat', {
+    url: '/chat',
+    views: {
+      'tab-chat': {
+        templateUrl: 'templates/tab-chat.html',
+        controller: 'ChatController as vm'
+      }
+    },
+    resolve: {
+      "currentAuth" : ["Auth",
+        function(Auth) {
+          return Auth.$requireAuth();
+        }
+      ]
+    }
+  })
+
   .state('profile', {
       url: '/profile/:userId',
       templateUrl: 'templates/profile.html',
@@ -109,7 +126,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
   .state('message', {
     url: '/messages/:userId',
-    templateUrl: 'templates/tab-chat.html',
+    templateUrl: 'templates/tab-message.html',
     controller: 'MessageCtrl',
     resolve: {
       "currentAuth": ["Auth",
