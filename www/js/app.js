@@ -142,7 +142,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     views: {
       'tab-friends': {
         templateUrl: 'templates/tab-friends.html',
-        controller: 'FriendsCtrl'
+        controller: 'FriendsController as vm'
       }
     },
     resolve: {
