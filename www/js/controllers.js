@@ -405,12 +405,15 @@ angular.module('starter.controllers', [])
         ref.child('users').child(fId).once('value', function(snap) {
           var user = snap.val();
           user.id = fId;
-          ref.child('profilepicture').child(fId).once('value', function(snap) {
-            if (snap.val()) {
-              user.pic = snap.val().profilepicture;
-            }
-            $timeout(function() {
-              $scope.friends.push(user);
+          ref.child('interests').child(fId).once('value', function(snap) {
+            user.interests = snap.val();
+            ref.child('profilepicture').child(fId).once('value', function(snap) {
+              if (snap.val()) {
+                user.pic = snap.val().profilepicture;
+              }
+              $timeout(function() {
+                $scope.friends.push(user);
+              });
             });
           });
         });
