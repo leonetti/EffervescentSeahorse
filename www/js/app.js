@@ -157,7 +157,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   .state('friendrequests', {
     url: '/friends/friendrequests',
     templateUrl: 'templates/friendRequests.html',
-    controller: 'FriendReqCtrl',
+    controller: 'FriendsRequestController as vm',
     resolve: {
       "currentAuth": ["Auth",
         function(Auth) {

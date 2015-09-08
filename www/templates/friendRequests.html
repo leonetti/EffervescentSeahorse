@@ -7,11 +7,11 @@
 <ion-view view-title="Friend Requests">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="friend in friendRequests" class="item-remove-animate item-avatar item-icon-right friend--lower">
+      <ion-item ng-repeat="friend in vm.friendRequests" class="item-remove-animate item-avatar item-icon-right friend--lower">
         <img ng-src="data:image/png;base64,{{friend.pic}}" style="width: 64px; height: 64px">
         <h2>{{friend.displayName}}</h2>
-        <button class="ion-checkmark-round rightButton" ng-click="acceptRequest(friend)"></button>
-        <button class="ion-close-round rightButton" ng-click="rejectRequest(friend)"></button>
+        <button class="ion-checkmark-round rightButton" ng-click="vm.acceptRequest(friend)"></button>
+        <button class="ion-close-round rightButton" ng-click="vm.rejectRequest(friend)"></button>
       </ion-item>
     </ion-list>
   </ion-content>
