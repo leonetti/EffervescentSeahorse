@@ -463,6 +463,10 @@ margin-left: 20px;
   border: none;
 }
 
+.friend-header {
+  color: white;
+}
+
 .friend--activity {
   color: #91CC91;
   font-style: italic;

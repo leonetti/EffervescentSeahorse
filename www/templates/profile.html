@@ -2,6 +2,8 @@
   <ion-nav-back-button id="back__button"
     ng-click="myGoBack()"> &nbsp; Filter
   </ion-nav-back-button>
+  <button ng-click='blockUser()' ng-hide='showUnblock'>Block User</button>
+  <button ng-click='unblockUser()' ng-show='showUnblock'>Unblock User</button>
   <h4>Profile</h4>
 </ion-nav-bar>
 
