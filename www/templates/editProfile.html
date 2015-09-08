@@ -2,29 +2,23 @@
   <ion-nav-back-button id="back__button"
     ng-click="myGoBack()"> &nbsp; Filter
   </ion-nav-back-button>
+  <h4>Edit Profile</h4>
 </ion-nav-bar>
-<ion-view view-title="EditProfile">
-    <ion-content class='padding' id="profile--wrapper">
-    <div class='profile__box'>
-      <div class='profContainer'>
-        <img ng-src="data:image/png;base64,{{ profilepic }}" class='profpic' ng-click="addMedia(0)">
-        </img>
-        <h2 class='clicky' ng-click="addMedia(0)"><span>Edit Profile Picture</span></h2>
-      </div>
-      <form class='bio__info'>
-          <textarea ng-model='birds' placeholder='{{bio}}' style='background-color:lightgrey;'>Add Biography Here</textarea>
-          <button ng-click='addBio(birds)' class="nav__bar">Add Biography</button>
-      </form>
-  </div>
-  <div class='profile__box'>
-    <h2 class='sections'>Interests</h2>
+<ion-view view-title="EditProfile" class='move__down'>
+    <ion-content>
+    <img ng-src="data:image/png;base64,{{ profilepic }}">
+    <button class="nav__bar" ng-click="addMedia()">
+      Change Profile Picture!
+    </button>
+    <form>
+        <textarea ng-model='birds' style='background-color:lightgrey;'>Add Biography Here</textarea>
+        <button ng-click='addBio(birds)' class="nav__bar">Add Biography</button>
+    </form>
     <ul>
-        <h1 ng-repeat='interest in interests' ng-model='hi' ng-click='removeInterest({{interest.activity}})' class='fill__text'>{{interest.activity}}</h1>
+        <h1 ng-repeat='interest in interests' ng-model='hi' ng-click='removeInterest({{interest.activity}})'>{{interest.activity}}</h1>
     </ul>
     <select class='nav__bar' ng-model = 'activityOptions' ng-change='addInterest(activityOptions)'>
       <option ng-repeat='activity in activities' value='{{activity}}'>{{ activity }}</option>
     </select>
-  </div>
-  <button ng-click='addMedia(1)'>HIHIHIHIHIHIHI</button>
     </ion-content>
 </ion-view>
