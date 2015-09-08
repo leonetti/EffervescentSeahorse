@@ -13,7 +13,7 @@ angular.module('starter.services', ['firebase'])
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return text;
-  };
+  }
 
   function optionsForType(type) {
     var source;
@@ -38,25 +38,36 @@ angular.module('starter.services', ['firebase'])
     };
   }
 
-  function saveMedia(type) {
+  function saveMedia(type, destination) {
     return $q(function(resolve, reject) {
       var options = optionsForType(type);
 
       $cordovaCamera.getPicture(options).then(function(imageData) {
-          ref.child('profilepicture').child(window.localStorage.uid).update({
-            'profilepicture': imageData,
-          })
-          .then(function(info) {
-            console.log(imageData);
-          }, function(e) {
-            reject();
-          });
+        if(destination === 0){
+            ref.child('profilepicture').child(window.localStorage.uid).update({
+              'profilepicture': imageData,
+            })
+            .then(function(info) {
+              console.log(imageData);
+            }, function(e) {
+              reject();
+            });
+          }else{
+            ref.child('pictures').child(window.localStorage.uid).push({
+              'picture': imageData,
+            })
+            .then(function(info) {
+              console.log(imageData);
+            }, function(e) {
+              reject();
+            });
+          }
       });
     });
   }
   return {
     handleMediaDialog: saveMedia
-  }
+  };
 })
 
 .factory('GPS', ['$cordovaGeolocation', function($cordovaGeolocation) {
@@ -65,7 +76,7 @@ angular.module('starter.services', ['firebase'])
       options = options || { timeout: 30000, enableHighAccuracy: true };
       return $cordovaGeolocation.getCurrentPosition(options);
     }
-  }
+  };
 }]);
 
 
