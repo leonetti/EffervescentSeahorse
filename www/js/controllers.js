@@ -156,10 +156,7 @@ angular.module('starter.controllers', [])
   };
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 600ca94faef3f206a25142dd0fd0917b026843fd
   $scope.removeFriend = function() {
     var userId = window.localStorage['uid'];
     var friendId = $stateParams.userId;
@@ -199,18 +196,6 @@ angular.module('starter.controllers', [])
 
   $scope.isActive = function(type) {
       return type === $scope.active;
-<<<<<<< HEAD
-  };
-
-
-  $scope.setActive = function(type) {
-      $scope.active = type;
-  };
-
-  $scope.isActive = function(type) {
-      return type === $scope.active;
-=======
->>>>>>> 600ca94faef3f206a25142dd0fd0917b026843fd
   };
 })
 
@@ -229,10 +214,6 @@ angular.module('starter.controllers', [])
         for(var i in $scope.interests){
           activityObj[$scope.interests[i].activity] = 1;
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> 600ca94faef3f206a25142dd0fd0917b026843fd
         for(var k = 0; k < activities.length; k++){
           if(!activityObj[activities[k]]){
             activitiesArr.push(activities[k]);
@@ -293,10 +274,6 @@ angular.module('starter.controllers', [])
         return;
       }
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 600ca94faef3f206a25142dd0fd0917b026843fd
   };
 })
 
