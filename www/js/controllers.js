@@ -93,6 +93,12 @@ angular.module('starter.controllers', [])
     });
   });
 
+  ref.child('pictures').child($stateParams.userId).once('value', function (snapshot) {
+    $scope.picGallery = snapshot.val();
+    console.log($scope.picGallery);
+  });
+
+
   $scope.sendChat = function() {
     $state.go('tab.chat');
   };
@@ -221,7 +227,7 @@ angular.module('starter.controllers', [])
     });
   });
 
-  $scope.addMedia = function() {
+  $scope.addMedia = function(destination) {
     $scope.hideSheet = $ionicActionSheet.show({
       buttons: [
         { text: 'Take photo' },
@@ -230,14 +236,14 @@ angular.module('starter.controllers', [])
       titleText: 'Choose Profile Picture',
       cancelText: 'Cancel',
       buttonClicked: function(index) {
-        $scope.addImage(index);
+        $scope.addImage(index, destination);
       }
     });
   };
 
-  $scope.addImage = function(type) {
+  $scope.addImage = function(type, destination) {
     $scope.hideSheet();
-    ImageService.handleMediaDialog(type).then(function() {
+    ImageService.handleMediaDialog(type, destination).then(function() {
       $scope.$apply();
     });
   };

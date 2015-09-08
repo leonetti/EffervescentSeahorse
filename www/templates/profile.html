@@ -8,10 +8,12 @@
 <ion-view view-title="{{user.displayName}}">
 <!--   <ion-content class="padding" id="profile--wrapper"> -->
     <div class='profile__box'>
-      <img ng-src="data:image/png;base64,{{ profpic }}" class='profpic circular'>
-      <h2 class='sections' id='displayName'>{{user.displayName}}</h2>
+      <div class="circular">
+        <img ng-src="data:image/png;base64,{{ profpic }}" class='profpic'>
+      </div>
+      <h2 class='sections' id='displayName' style='border-bottom: none;'>{{user.displayName}}</h2>
       <div class='bio__info'>
-        <div class='fill__text'>{{user.bio}}</div>
+        <div class='fill__text1'>{{user.bio}}</div>
       </div>
     </div>
     <div style='background-color: white;'>
@@ -20,21 +22,29 @@
         <a class="button button-block button-positive activated" id="radioButton" ng-class="{'testTest': isActive('Accomplishments')}" ng-click="setActive('Accomplishments')">Accomplishments</a>
         <a class="button button-block button-positive activated" id="radioButton" ng-class="{'testTest': isActive('Photos')}" ng-click="setActive('Photos')">Photos</a>
       </div>
-      <div class='profile__box' style='background-color: white;'>
+      <div class='profile__box' style='background-color: white;' ng-show='isActive("Interests")'>
         <ion-content has-header='true' ng-show="isActive('Interests')">
           <div ng-show='isActive("Interests")'>
             <h2 class='sections'>Interests</h2>
-            <ul>
-                <li class='fill__text' ng-repeat='interest in interests'>{{interest.activity}}</li>
+            <ul class='icon'>
+                <li class='fill__text2 flaticon-runer' ng-repeat='interest in interests'>{{interest.activity}}</li>
             </ul>
           </div>
         </ion-content>
       </div>
+      <div class='profile__box' style='background-color: white;' ng-show='isActive("Photos")'>
+        <div ng-show='isActive("Photos")'>
+          <h2 class='sections'>Photos</h2>
+          <ul rn-carousel class="item item-image padding profpic">
+              <li ng-repeat='image in picGallery'><img ng-src="data:image/png;base64,{{ image.picture }}" class='layer'></li>
+          </ul>
+        </div>
+      </div>
     </div>
 <!--   </ion-content> -->
-  <button class='chat__button' ng-hide="blocked">
-    <a href="#/messages/{{user.uid}}">CHAT WITH {{user.displayName}} HERE</a>
-  <button>
+  <button class='chat__button' ng-hide="blocked" id='whitify'>
+    <a href="#/messages/{{user.uid}}" id='whitify'>Chat With {{user.displayName}} Here</a>
+  </button>
   <button ng-click='addFriend()' ng-hide="friendStatus || sentReq || blocked" class='friend__button' id='whitify'>Add As Friend</button>
   <button ng-show="sentReq" class='friend__button' id='whitify'>Friend Request Sent!</button>
   <button ng-click='removeFriend()' ng-show="friendStatus" class='friend__button' id='whitify'>Remove Friend</button>
