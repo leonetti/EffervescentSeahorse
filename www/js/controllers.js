@@ -107,13 +107,25 @@ angular.module('starter.controllers', [])
   var friendId = $stateParams.userId;
 
   // check if the user is blocked by the person in the profile
-  // if the user is blocked, do not show the add friend or chat buttons
+  // if the user is blocked, do not show the add friend or chat buttons, also don't let them unblock
   ref.child('blockedUsers').child(friendId).on('value', function(snapshot) {
     for (var id in snapshot.val()) {
       if (snapshot.val()[id] === userId) {
         // don't let the user see the friend or chat buttons
+        $scope.blocked = true;
+        $scope.showUnblock = false;
+        return;
+      }
+    }
+    $scope.blocked = false;
+  });
+
+  // if the profile that the user is viewing is currently blocked by the user, give them option to unblock them
+  ref.child('blockedUsers').child(userId).on('value', function(snapshot) {
+    for (var id in snapshot.val()) {
+      if (snapshot.val()[id] === friendId) {
         $timeout(function() {
-          $scope.blocked = true;
+          $scope.showUnblock = true;
         });
       }
     }
@@ -158,8 +170,6 @@ angular.module('starter.controllers', [])
 
 
   $scope.removeFriend = function() {
-    var userId = window.localStorage['uid'];
-    var friendId = $stateParams.userId;
 
     ref.child('friends').child(userId).once('value', function(snapshot) {
       for (var id in snapshot.val()) {
@@ -186,7 +196,8 @@ angular.module('starter.controllers', [])
     ref.child('blockedUsers').child(userId).push(friendId);
     // remove them from friends list if they are currently friends
     $scope.removeFriend();
-  }
+    $scope.showUnblock = true;
+  };
 
   $scope.active = 'Interests';
 
@@ -195,7 +206,18 @@ angular.module('starter.controllers', [])
   };
 
   $scope.isActive = function(type) {
-      return type === $scope.active;
+    return type === $scope.active;
+  };
+
+  $scope.unblockUser = function() {
+    ref.child('blockedUsers').child(userId).once('value', function(snapshot) {
+      for (var id in snapshot.val()) {
+        if (snapshot.val()[id] === friendId) {
+          ref.child('blockedUsers').child(userId).child(id).remove();
+          $scope.showUnblock = false;
+        }
+      }
+    });
   };
 })
 
@@ -326,6 +348,15 @@ angular.module('starter.controllers', [])
     $scope.acceptRequest = function(friend) {
       var friendId = friend.id;
 
+      // remove this person from block list if they are added and accept their request
+      ref.child('blockedUsers').child(friendId).once('value', function(snapshot) {
+        for (var id in snapshot.val()) {
+          if (snapshot.val()[id] === userId) {
+            ref.child('blockedUsers').child(friendId).child(id).remove();
+          }
+        }
+      });
+
       // if the friend is already in user's friendlist, it won't add them again
       ref.child('friends').child(userId).once('value', function(snapshot) {
         for (var id in snapshot.val()) {
@@ -405,12 +436,15 @@ angular.module('starter.controllers', [])
         ref.child('users').child(fId).once('value', function(snap) {
           var user = snap.val();
           user.id = fId;
-          ref.child('profilepicture').child(fId).once('value', function(snap) {
-            if (snap.val()) {
-              user.pic = snap.val().profilepicture;
-            }
-            $timeout(function() {
-              $scope.friends.push(user);
+          ref.child('interests').child(fId).once('value', function(snap) {
+            user.interests = snap.val();
+            ref.child('profilepicture').child(fId).once('value', function(snap) {
+              if (snap.val()) {
+                user.pic = snap.val().profilepicture;
+              }
+              $timeout(function() {
+                $scope.friends.push(user);
+              });
             });
           });
         });

@@ -48,8 +48,15 @@
                       if (snapshot.val()) {
                         val.profilepicture = snapshot.val().profilepicture;
                       }
-                      $timeout(function () {
-                        vm.users.push(val);
+                      ref.child('blockedUsers').child(val.uid).once('value', function(snapshot) {
+                        for (var id in snapshot.val()) {
+                          if (snapshot.val()[id] === uid) {
+                            return;
+                          }
+                        }
+                        $timeout(function () {
+                          vm.users.push(val);
+                        });
                       });
                     });
                   });

@@ -446,7 +446,31 @@ margin-left: 20px;
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .friend--lower {
+  position: relative;
+  top: 90px;
+}
+
+.friend--filter--lower {
   top: 45px;
+}
+
+.friend-text {
+  font-size: 18px;
+}
+
+.friend-profile {
+  float:right;
+  border: none;
+}
+
+.friend-header {
+  color: white;
+}
+
+.friend--activity {
+  color: #91CC91;
+  font-style: italic;
+  font-size: 12px;
 }
 
 .rightButton {
