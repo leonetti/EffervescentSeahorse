@@ -93,12 +93,6 @@ angular.module('starter.controllers', [])
     });
   });
 
-  ref.child('pictures').child($stateParams.userId).once('value', function (snapshot) {
-    $scope.picGallery = snapshot.val();
-    console.log($scope.picGallery);
-  });
-
-
   $scope.sendChat = function() {
     $state.go('tab.chat');
   };
@@ -155,8 +149,6 @@ angular.module('starter.controllers', [])
     });
   };
 
-
-
   $scope.removeFriend = function() {
     var userId = window.localStorage['uid'];
     var friendId = $stateParams.userId;
@@ -186,16 +178,6 @@ angular.module('starter.controllers', [])
     ref.child('blockedUsers').child(userId).push(friendId);
     // remove them from friends list if they are currently friends
     $scope.removeFriend();
-  }
-
-  $scope.active = 'Interests';
-
-  $scope.setActive = function(type) {
-      $scope.active = type;
-  };
-
-  $scope.isActive = function(type) {
-      return type === $scope.active;
   };
 })
 
@@ -207,26 +189,24 @@ angular.module('starter.controllers', [])
       var activityObj = {};
       var activities = snapshot.val().activities;
       var activitiesArr = [];
-      $scope.bio = snapshot.val().users[userId].bio
-      $scope.profilepic = snapshot.val().profilepicture[userId].profilepicture;
-      if(snapshot.val().interests[userId]){
+      if(snapshot.val().interests){
         $scope.interests = snapshot.val().interests[userId];
+        $scope.profilepic = snapshot.val().profilepicture[userId].profilepicture;
+        //for(var i in $scope.interests)
         for(var i in $scope.interests){
-          activityObj[$scope.interests[i].activity] = 1;
+          activityObj[$scope.interests[i].activity] = 1
         }
-        for(var k = 0; k < activities.length; k++){
-          if(!activityObj[activities[k]]){
-            activitiesArr.push(activities[k]);
+        for(var i = 0; i < activities.length; i++){
+          if(!activityObj[activities[i]]){
+            activitiesArr.push(activities[i]);
           }
         }
         $scope.activities = activitiesArr;
-      }else{
-        $scope.activities = snapshot.val().activities;
       }
     });
   });
 
-  $scope.addMedia = function(destination) {
+  $scope.addMedia = function() {
     $scope.hideSheet = $ionicActionSheet.show({
       buttons: [
         { text: 'Take photo' },
@@ -235,14 +215,14 @@ angular.module('starter.controllers', [])
       titleText: 'Choose Profile Picture',
       cancelText: 'Cancel',
       buttonClicked: function(index) {
-        $scope.addImage(index, destination);
+        $scope.addImage(index);
       }
     });
   };
 
-  $scope.addImage = function(type, destination) {
+  $scope.addImage = function(type) {
     $scope.hideSheet();
-    ImageService.handleMediaDialog(type, destination).then(function() {
+    ImageService.handleMediaDialog(type).then(function() {
       $scope.$apply();
     });
   };
@@ -257,7 +237,7 @@ angular.module('starter.controllers', [])
         ref.child('interests').child(userId).push({
           'activity': item
         });
-  };
+  }
 
   $scope.addBio = function(item){
     ref.child('users').child(userId).update({
@@ -274,7 +254,9 @@ angular.module('starter.controllers', [])
         return;
       }
     }
-  };
+
+  }
+
 })
 
 .controller('MessageCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate) {
@@ -297,12 +279,12 @@ angular.module('starter.controllers', [])
       return {
         'color': 'green',
         'text-align': 'right'
-      };
+      }
     } else {
       return {
         'color': 'red',
         'text-align': 'left'
-      };
+      }
     }
   };
 
