@@ -1,30 +1,20 @@
-<ion-nav-bar view-title ng-controller="MyCtrl" class="nav__bar">
-  <ion-nav-back-button id="back__button"
-    ng-click="myGoBack()"> &nbsp; {{user.displayName}}
-    <p class="my-title">ABC</p>
-  </ion-nav-back-button>
+<ion-nav-bar class="nav__bar">
 </ion-nav-bar>
+<div id="ios--room--filler"></div>
 
-<ion-view view-title="Chat With {{user.displayName}}">
-  <ion-content id="chat-content">
-    <ul id="user-room">
-      <li ng-repeat="message in messages track by $index" ng-style="setStyle(message.sender)">
-       {{message.text}}
-      </li>
-    </ul>
+<ion-view view-title="Chats">
+  <label class="item item-input" id="filter--search">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="text" placeholder="Filter" ng-model="query">
+  </label>
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right search--item" ng-repeat="user in vm.users | filter:query" type="item-text-wrap" href="#/profile/{{user.uid}}" >
+        <img ng-src="data:image/png;base64,{{user.profilepicture}}" style="width: 64px; height: 64px">
+        <h2 id="search--username">{{user.displayName}}</h2>
+        <span class="search--activity" ng-repeat='interest in user.interests'>{{interest.activity}} &nbsp;</span>
+        <i class="icon ion-chevron-right icon-accessory" id="right--arrow--search"></i>
+      </ion-item>
+    </ion-list>
   </ion-content>
-  <div id="footer">
-    <div class="item item-input" id="footer__bar">
-     <form name="search_form" ng-submit="sendMessage(text)" id="user__form">
-      <label class="item-input-wrapper" id="chat__input">
-        <div class="button--input--text button--camera">+</div>
-        <input type="text" name="search_input" ng-model="text" id="user-message">
-        <button class="button button--input">
-          <p class="button--input--text">Send</p>
-        </button>
-      </label>
-    </form>
-   </div>
-  </div>
 </ion-view>
-
