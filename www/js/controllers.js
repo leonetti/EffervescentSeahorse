@@ -205,7 +205,9 @@ angular.module('starter.controllers', [])
         $scope.messages.push(snapshot.val()[key]);
       }
     });
-    $ionicScrollDelegate.scrollBottom();
+    if($scope.messages.length > 10) {
+      $ionicScrollDelegate.scrollBottom();
+    }
   });
 
   $scope.setStyle = function(id) {
@@ -228,9 +230,15 @@ angular.module('starter.controllers', [])
       ref.child('rooms').child(window.localStorage['uid']).child($stateParams.userId).push({
         sender: window.localStorage['uid'],
         text: message
-      })
+      });
+      ref.child('rooms').child($stateParams.userId).child(window.localStorage['uid']).push({
+        sender: window.localStorage['uid'],
+        text: message
+      });
     }
-    $ionicScrollDelegate.scrollBottom();
+    if($scope.messages.length > 10) {
+      $ionicScrollDelegate.scrollBottom();
+    }
   };
 })
 
