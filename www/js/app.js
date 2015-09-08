@@ -99,6 +99,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
+  .state('tab.events', {
+    url:'/events',
+    views: {
+      'tab-events': {
+        templateUrl: 'templates/tab-events.html',
+        controller: 'EventsCtrl as vm'
+      }
+    },
+    resolve: {
+      "currentAuth" : ["Auth",
+        function(Auth) {
+          return Auth.$requireAuth();
+        }
+      ]
+    }
+  })
+
   .state('profile', {
       url: '/profile/:userId',
       templateUrl: 'templates/profile.html',
