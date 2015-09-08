@@ -936,7 +936,7 @@ ul.icon li.runner:before { content: "\e000";}*/
   font-size: 34px;
   padding-right: 5px;
   padding-left: 50px;
-  background-color: pink;
+  cursor: pointer;
 }
 
 
