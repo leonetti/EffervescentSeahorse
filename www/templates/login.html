@@ -13,12 +13,12 @@
       <label class="item item-input" id="user--password--input">
           <input type="password" placeholder="password" ng-model="user.pwdForLogin" id="user--password--text">
       </label>
-      <button ng-click="signIn(user)" class="button button-block button-positive activated" id="sign--in">
+      <button ng-click="vm.signIn(user)" class="button button-block button-positive activated" id="sign--in">
           Sign In
       </button>
     </div>
     <div class="list" style="text-align:center">
-      <button ng-click="modal.show()" class="button button-small button-outline icon-left ion-person-add button-positive" id="create--user">
+      <button ng-click="vm.modal.show()" class="button button-small button-outline icon-left ion-person-add button-positive" id="create--user">
           Signup
       </button>
     </div>

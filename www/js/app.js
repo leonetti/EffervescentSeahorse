@@ -39,7 +39,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
-    controller: 'LoginCtrl',
+    controller: 'AuthenticationController as vm',
     resolve: {
       "currentAuth": ["Auth",
         function(Auth) {
