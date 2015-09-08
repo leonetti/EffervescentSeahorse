@@ -7,9 +7,9 @@
     <ion-content class='padding' id="profile--wrapper">
     <div class='profile__box'>
       <div class='profContainer'>
-        <img ng-src="data:image/png;base64,{{ profilepic }}" class='profpic' ng-click="addMedia()">
+        <img ng-src="data:image/png;base64,{{ profilepic }}" class='profpic' ng-click="addMedia(0)">
         </img>
-        <h2 class='clicky' ng-click="addMedia()"><span>Edit Profile Picture</span></h2>
+        <h2 class='clicky' ng-click="addMedia(0)"><span>Edit Profile Picture</span></h2>
       </div>
       <form class='bio__info'>
           <textarea ng-model='birds' placeholder='{{bio}}' style='background-color:lightgrey;'>Add Biography Here</textarea>
@@ -25,5 +25,6 @@
       <option ng-repeat='activity in activities' value='{{activity}}'>{{ activity }}</option>
     </select>
   </div>
+  <button ng-click='addMedia(1)'>HIHIHIHIHIHIHI</button>
     </ion-content>
 </ion-view>

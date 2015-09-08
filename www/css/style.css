@@ -78,6 +78,27 @@ body {
   src: url(../fonts/Bariol_Regular.otf);
 }
 
+@font-face {
+  font-family: "Flaticon";
+  src: url(../fonts/MyIcons/flaticon.eot);
+  src: url(../fonts/MyIcons/flaticon.eot#iefix) format("embedded-opentype"),
+  url(../fonts/MyIcons/flaticon.woff) format("woff"),
+  url(../fonts/MyIcons/flaticon.ttf) format("truetype"),
+  url(../fonts/MyIcons/flaticon.svg) format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}.flaticon-runer:before {
+  content: "\e000";
+}
+
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * LOGIN PAGE
@@ -603,14 +624,25 @@ h2.sections{
   border-bottom: 1px solid lightgrey;
   padding: 10px;
   text-align: center;
+  font-family: 'Bariol', 'Lato', sans-serif;
+  font-weight: bold;
 }
 
-.fill__text{
+.fill__text1{
   font-size: 15px;
   border-bottom: 1px solid lightgrey;
   padding: 10px;
   text-align: center;
+  font-family: 'Bariol', 'Lato', sans-serif;
+}
 
+.fill__text2{
+  font-size: 20px;
+  border-bottom: 1px solid lightgrey;
+  padding: 10px;
+  text-align: center;
+  font-family: 'Bariol', 'Lato', sans-serif;
+  list-style-type: circle;
 }
 
 .profile__box{
@@ -627,15 +659,29 @@ h2.sections{
 
 .profpic{
   display:block;
+  max-width: 100%;
+  height: auto;
+}
+
+.circular {
+  overflow: hidden;
   position: absolute;
-  margin-left: auto;
-  margin-right: auto;
   top: 65px;
   left:0;
   right:0;
-  height:45%;
+  margin: auto;
+  width: 120px;
+  height: 120px;
 
-}
+
+  border: 2px solid white;
+  
+  border-radius: 50%;
+  
+  box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+  -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+  }
 
 .clicky{
    position: absolute; 
@@ -675,16 +721,6 @@ h2.sections{
   background-color: #91CC91;
   color: white;
 }
-
-.circular {
-  border: 2px solid white;
-  border-radius: 20px;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 150px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-  -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-  }
 
 #displayName{
   text-align: center;
@@ -731,6 +767,9 @@ a.testTest{
 
  #whitify{
   color:white;
+  text-decoration: none;
+  border:none;
+  font-family: 'Bariol', 'Lato', sans-serif;
  }
 
  .scroll{height: 100%;}
@@ -739,3 +778,22 @@ a.testTest{
   height:100%;
  }
 
+ ul.icon
+{
+  list-style-type: none;
+}
+
+ul.icon li
+{
+  text-indent: -2.0em;
+}
+
+/*ul.icon li:before
+{
+  font-family: bullets;
+  content: "\e800";
+  float: left;
+  width: 1.4em;
+}
+
+ul.icon li.runner:before { content: "\e000";}*/
