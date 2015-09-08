@@ -922,4 +922,21 @@ ul.icon li
   float: left;
   width: 1.4em;
 }
+
 ul.icon li.runner:before { content: "\e000";}*/
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * EVENTS TAB
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+.events--create {
+  font-size: 34px;
+  padding-right: 5px;
+  padding-left: 50px;
+  background-color: pink;
+}
+
+
