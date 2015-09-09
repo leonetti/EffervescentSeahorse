@@ -23,7 +23,7 @@ navigation history that also transitions its views in and out.
   </ion-tab>
 
   <!-- Logout Button -->
-  <ion-tab title="Logout" icon-off="ion-android-exit" icon-on="ion-android-exit" ng-controller="LogoutCtrl" ng-click="logout()">
+  <ion-tab title="Logout" icon-off="ion-android-exit" icon-on="ion-android-exit" ng-controller="AuthenticationController as vm" ng-click="vm.logout()">
   </ion-tab>
 
 </ion-tabs>

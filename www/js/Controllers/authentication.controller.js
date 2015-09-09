@@ -3,12 +3,13 @@
   angular.module('starter.controllers')
     .controller('AuthenticationController', AuthenticationController);
 
-  AuthenticationController.$inject = ['$scope', '$ionicModal', '$state', '$firebaseAuth', '$ionicLoading', '$timeout'];
+  AuthenticationController.$inject = ['$scope', '$ionicModal', '$state', '$firebaseAuth', '$ionicLoading', '$timeout', '$ionicHistory'];
 
-  function AuthenticationController ($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $timeout) {
+  function AuthenticationController ($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $timeout, $ionicHistory) {
     var vm = this;
     vm.createUser = createUser;
     vm.signIn = signIn;
+    vm.logout = logout;
 
     var auth = $firebaseAuth(ref);
 
@@ -17,6 +18,16 @@
     }).then(function(modal) {
       vm.modal = modal;
     });
+
+    function logout () {
+      delete window.localStorage['displayName'];
+      delete window.localStorage['uid'];
+      ref.unauth();
+      $ionicHistory.clearCache().then(function() {
+        console.log('cleared views');
+      });
+      $state.go('login');
+    }
 
     function createUser(user) {
       if(user && user.email && user.password && user.displayname) {
@@ -62,6 +73,8 @@
               window.localStorage['displayName'] = val;
             });
           });
+          user.email = '';
+          user.pwdForLogin = '';
           $ionicLoading.hide();
           $state.go("tab.search");
         }).catch(function(error) {
