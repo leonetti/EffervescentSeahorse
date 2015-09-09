@@ -213,28 +213,20 @@ angular.module('starter.controllers', [])
         $scope.messages.push(snapshot.val()[key]);
       }
     });
-    if($scope.messages.length > 10) {
-      $ionicScrollDelegate.scrollBottom();
-    }
+    $ionicScrollDelegate.scrollBottom();
   });
 
   $scope.setStyle = function(id) {
     if(id === window.localStorage['uid']) {
-      return {
-        'color': 'green',
-        'text-align': 'right'
-      }
+      return 'chat-bubble--right';
     } else {
-      return {
-        'color': 'red',
-        'text-align': 'left'
-      }
+      return 'chat-bubble--left';
     }
   };
 
   $scope.sendMessage = function(message) {
-    $scope.messages = [];
     if(message !== "") {
+      $scope.messages = [];
       ref.child('rooms').child(window.localStorage['uid']).child($stateParams.userId).push({
         sender: window.localStorage['uid'],
         text: message
@@ -244,8 +236,6 @@ angular.module('starter.controllers', [])
         text: message
       });
     }
-    if($scope.messages.length > 10) {
-      $ionicScrollDelegate.scrollBottom();
-    }
+    $ionicScrollDelegate.scrollBottom();
   };
 });
