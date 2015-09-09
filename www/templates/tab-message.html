@@ -6,11 +6,11 @@
 
 <ion-view view-title="Chat With {{user.displayName}}">
   <ion-content id="chat-content">
-    <ul id="user-room">
-      <li ng-repeat="message in messages track by $index" ng-style="setStyle(message.sender)">
-       {{message.text}}
-      </li>
-    </ul>
+    <section id="user-room">
+      <div ng-repeat="message in messages track by $index" ng-class="setStyle(message.sender)">
+        <p>{{message.text}}</p>
+      </blockquote>
+    </section>
   </ion-content>
   <div id="footer">
     <div class="item item-input" id="footer__bar">

@@ -451,6 +451,12 @@ body {
   float: right;
 }
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * MESSAGES
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 #footer {
   position: absolute;
   bottom: 0;
@@ -527,6 +533,77 @@ p.button--input--text {
   color: white;
 }
 
+.chat-bubble--right p,
+.chat-bubble--left p {
+  line-height: 20px;
+  color: white;
+}
+
+.chat-bubble--right,
+.chat-bubble--left {
+  position: relative;
+  display: inline-block;
+  background-color: #003333;
+  padding: 7px 12px;
+  width: auto;
+  height: auto;
+  border: 1px solid #333;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  float: right;
+  clear: both;
+  margin-right: 10px;
+  max-width: 250px;
+}
+
+.chat-bubble--right::before,
+.chat-bubble--left::before {
+  display: block;
+  position: absolute;
+  right: 4px;
+  bottom: -11px;
+  content: "";
+  border-color: #333 transparent transparent transparent;
+  border-style: solid;
+  border-width: 5px;
+}
+
+.chat-bubble--right::after,
+.chat-bubble--left::after {
+  display: block;
+  position: absolute;
+  right: 4px;
+  bottom: -9px;
+  content: "";
+  border-color: #003333 transparent transparent transparent;
+  border-style: solid;
+  border-width: 5px;
+}
+
+.chat-bubble--left {
+  clear: both;
+  float: left;
+  background-color: #999999;
+  margin-left: 10px;
+}
+
+.chat-bubble--left::before {
+  right: 100px;
+  left: 4px;
+}
+
+.chat-bubble--left::after {
+  right: 100px;
+  left: 4px;
+  border-color: #999999 transparent transparent transparent;
+}
+
+.chat-bubble--left p {
+  color: #000;
+}
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * EXTRA
@@ -547,9 +624,10 @@ p.button--input--text {
 
 
 #chat-content {
-  margin-top: 50px;
-  margin-bottom: 60px;
+  margin-top: 44px;
+  margin-bottom: 47px;
   font-size: 20px;
+  background-color: #669999;
 }
 
 .button--input {
