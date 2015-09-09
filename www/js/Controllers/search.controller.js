@@ -26,6 +26,7 @@
           var longitude = position.coords.longitude;
           var latitude = position.coords.latitude;
           var uid = window.localStorage['uid'];
+          $ionicLoading.hide();
           geoFire.set(uid, [latitude, longitude]).then(function () {
 
             var geoQuery = geoFire.query({
@@ -44,7 +45,6 @@
                     val.interests = snapshot.val();
 
                     ref.child('profilepicture').child(key).once('value', function (snapshot) {
-                      $ionicLoading.hide();
                       if (snapshot.val()) {
                         val.profilepicture = snapshot.val().profilepicture;
                       }
