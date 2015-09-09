@@ -199,43 +199,4 @@ angular.module('starter.controllers', [])
 
   }
 
-})
-
-.controller('MessageCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate) {
-  $scope.user;
-  $scope.text = '';
-  $scope.messages = [];
-
-  ref.child('rooms').child(window.localStorage['uid']).child($stateParams.userId).on('value', function(snapshot) {
-    $scope.messages = [];
-    $timeout(function() {
-      for(var key in snapshot.val()) {
-        $scope.messages.push(snapshot.val()[key]);
-      }
-    });
-    $ionicScrollDelegate.scrollBottom();
-  });
-
-  $scope.setStyle = function(id) {
-    if(id === window.localStorage['uid']) {
-      return 'chat-bubble--right';
-    } else {
-      return 'chat-bubble--left';
-    }
-  };
-
-  $scope.sendMessage = function(message) {
-    if(message !== "") {
-      $scope.messages = [];
-      ref.child('rooms').child(window.localStorage['uid']).child($stateParams.userId).push({
-        sender: window.localStorage['uid'],
-        text: message
-      });
-      ref.child('rooms').child($stateParams.userId).child(window.localStorage['uid']).push({
-        sender: window.localStorage['uid'],
-        text: message
-      });
-    }
-    $ionicScrollDelegate.scrollBottom();
-  };
 });
