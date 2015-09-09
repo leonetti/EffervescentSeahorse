@@ -119,14 +119,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   .state('createEvent', {
     url:'/events/create',
     templateUrl: 'templates/createEvent.html',
-    controller: 'CreateEventsCtrl as vm',
-    resolve: {
-      "currentAuth": ["Auth",
-        function(Auth) {
-          return Auth.$waitForAuth();
-        }
-      ]
-    }
+    controller: 'CreateEventsCtrl as vm'
+    // resolve: {
+    //   "currentAuth": ["Auth",
+    //     function(Auth) {
+    //       return Auth.$waitForAuth();
+    //     }
+    //   ]
+    // }
   })
 
   .state('profile', {

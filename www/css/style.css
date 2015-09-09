@@ -939,4 +939,18 @@ ul.icon li.runner:before { content: "\e000";}*/
   cursor: pointer;
 }
 
+#ce--interest {
+  margin-top: 200px;
+  background-color: pink;
+}
 
+#save--event {
+  background-color: pink;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#event--list {
+  background-color: pink;
+  margin-top: 200px;
+}

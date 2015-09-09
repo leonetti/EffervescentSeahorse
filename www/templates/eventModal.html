@@ -1,0 +1,11 @@
+<ion-modal-view id="event--modal--wrapper">
+  <ion-header-bar class="bar bar-header">
+    <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+    <h1>Choose Activities</h1>
+  </ion-header-bar>
+  <ul class="list">
+    <li class="item" ng-repeat="activity in vm.activities | filter:search | orderBy:activity">{{activity.title}}
+      <input type="checkbox" ng-model="activity.model">
+    </li>
+  </ul>
+</ion-modal-view>

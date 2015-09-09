@@ -5,4 +5,19 @@
 </ion-nav-bar>
 
 <ion-view>
+  <div id="ce--interest" ng-click="modal.show()">
+    <p>Activities</p>
+    <p ng-repeat="activity in vm.activities" ng-show="activity.model">{{activity.title}}</p>
+  </div>
+
+  <div id="ce--description">
+    <input type="text" placeholder="description" ng-model="vm.description">
+    <input type="number" min="2" placeholder="number of people" ng-model="vm.numPeople">
+    <input type="date" placeholder="date" ng-model="vm.eventDate">
+    <input type="text" placeholder="location" ng-model="vm.eventLoc">
+  </div>
+
+  <div id="save--event" ng-click="vm.sendEventInfo()">
+    <p>Create Event</p>
+  </div>
 </ion-view>
