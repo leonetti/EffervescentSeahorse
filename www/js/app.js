@@ -127,7 +127,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   .state('message', {
     url: '/messages/:userId',
     templateUrl: 'templates/tab-message.html',
-    controller: 'MessageCtrl',
+    controller: 'MessagesController as vm',
     resolve: {
       "currentAuth": ["Auth",
         function(Auth) {
