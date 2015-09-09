@@ -225,8 +225,8 @@ angular.module('starter.controllers', [])
   };
 
   $scope.sendMessage = function(message) {
-    $scope.messages = [];
     if(message !== "") {
+      $scope.messages = [];
       ref.child('rooms').child(window.localStorage['uid']).child($stateParams.userId).push({
         sender: window.localStorage['uid'],
         text: message

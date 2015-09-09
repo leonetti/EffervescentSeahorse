@@ -590,12 +590,12 @@ p.button--input--text {
 }
 
 .chat-bubble--left::before {
-  right: 100px;
+  right: 250px;
   left: 4px;
 }
 
 .chat-bubble--left::after {
-  right: 100px;
+  right: 250px;
   left: 4px;
   border-color: #999999 transparent transparent transparent;
 }
@@ -616,6 +616,7 @@ p.button--input--text {
   bottom: 0;
   text-align: center;
   width: 100%;
+  height: 48px;
 }
 
 #user-message {
@@ -627,7 +628,7 @@ p.button--input--text {
   margin-top: 44px;
   margin-bottom: 47px;
   font-size: 20px;
-  background-color: #669999;
+  background-color: #FFF;
 }
 
 .button--input {
