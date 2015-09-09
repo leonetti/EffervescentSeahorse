@@ -45,7 +45,7 @@
             displayName: user.displayname
           });
           $ionicLoading.hide();
-          $scope.modal.hide();
+          vm.modal.hide();
         }).catch(function(error) {
           alert('Error: ' + error);
           $ionicLoading.hide();

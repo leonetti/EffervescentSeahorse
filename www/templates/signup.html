@@ -1,7 +1,7 @@
 <ion-modal-view id="signup--wrapper">
   <ion-header-bar class="bar bar-header">
     <h1 class="title" id="new--account--title">Create New Account</h1>
-    <button class="button button-clear button-primary" ng-click="modal.hide()" id="new--account--cancel">Cancel</button>
+    <button class="button button-clear button-primary" ng-click="vm.modal.hide()" id="new--account--cancel">Cancel</button>
   </ion-header-bar>
   <div class="padding">
     <div class="list" id="create--new--user">
@@ -14,7 +14,7 @@
       <label class="item item-input signup--input bottom--input">
         <input ng-model="user.displayname" placeholder="display name" type="text" class="input--text bottom--input" id="signup--display--input">`
       </label>
-      <button class="button button-full button-positive" ng-click="createUser(user)" id="signup--user">Create</button>
+      <button class="button button-full button-positive" ng-click="vm.createUser(user)" id="signup--user">Create</button>
     </div>
   </div>
 </ion-modal-view>
