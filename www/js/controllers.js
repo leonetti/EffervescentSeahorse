@@ -1,14 +1,22 @@
 angular.module('starter.controllers', [])
 
-.controller('MyCtrl', function($scope, $ionicHistory) {
+.controller('MyCtrl', function($scope, editProf, $ionicHistory) {
   $scope.myGoBack = function() {
     $ionicHistory.goBack();
   };
+  $scope.editProf = function(){
+    editProf.checker = !editProf.checker;
+    console.log(editProf.checker);
+  };
 })
 
-.controller('ProfileCtrl', function($scope, $state, $stateParams, $timeout) {
+
+
+.controller('ProfileCtrl', function($scope, $state, $stateParams, $timeout, editProf) {
   $scope.user;
   $scope.interests;
+  $scope.edit = editProf.checker;
+  console.log($scope.edit)
   ref.child('interests').child($stateParams.userId).once('value', function (snapshot) {
     $timeout(function() {
       $scope.interests = snapshot.val();
