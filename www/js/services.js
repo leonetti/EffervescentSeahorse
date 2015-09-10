@@ -64,7 +64,7 @@ angular.module('starter.services', ['firebase'])
             console.log(imageData);
           }, function(e) {
             reject();
-          });          
+          });
         }
       });
     });
@@ -72,16 +72,7 @@ angular.module('starter.services', ['firebase'])
   return {
     handleMediaDialog: saveMedia
   }
-})
-
-.factory('GPS', ['$cordovaGeolocation', function($cordovaGeolocation) {
-  return {
-    getGeo: function(options) {
-      options = options || { timeout: 30000, enableHighAccuracy: true };
-      return $cordovaGeolocation.getCurrentPosition(options);
-    }
-  }
-}]);
+});
 
 
 // .factory('Chats', function() {
