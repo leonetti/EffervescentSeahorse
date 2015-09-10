@@ -59,6 +59,7 @@ html {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
+  font-size: 62.5%;
 }
 
 body {
@@ -94,7 +95,7 @@ body {
   font-size: 20px;
   font-style: normal;
   margin-left: 20px;
-}.flaticon-runer:before {
+}.
    content: "\e000";
  }
 
@@ -117,13 +118,13 @@ body {
 
 .logo {
   display: block;
-  width: 150px;
-  margin: 50px auto;
+  width: 60%;
+  margin: 10% auto 30px auto;
 }
 
 .logo--text {
   color: #fff;
-  font-size: 24px;
+  font-size: 2.4rem;
   text-align: center;
   text-transform: uppercase;
   font-weight: 200;
@@ -136,61 +137,66 @@ body {
 #user--email--input,
 #user--password--input {
   background-color: #91CC91;
-  border: 2px solid #fff;
+  border: .2rem solid #fff;
   text-align: center;
 }
 
 #user--email--input {
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  border-bottom: 2px;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+  border-bottom: .2rem;
 }
 
 #user--password--input {
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: .5rem;
+  border-bottom-right-radius: .5rem;
 }
 
 #user--password--text,
 #user--email--text {
   text-align: center;
   color: #fff;
-  font-size: 24px;
+  font-size: 2.4rem;
 }
 
 #user--password--text::-webkit-input-placeholder,
 #user--email--text::-webkit-input-placeholder {
   color: #fff;
-  line-height: 24px;
-  font-size: 18px;
+  line-height: 2.4rem;
+  font-size: 1.8rem;
 }
 
 #sign--in {
   background-color: #fff;
-  border: 2px solid #fff;
+  border: .2rem solid #fff;
   width: 100%;
   color: #91CC91;
-  border-radius: 5px;
-  margin: 20px auto 10px auto;
+  border-radius: .5rem;
+  margin: 2rem auto 1rem auto;
 }
 
 #sign--in:hover {
-  border: 2px solid #5B805B;
+  border: .2rem solid #5B805B;
 }
 
 #sign--in:active {
   background-color: #91CC91;
   color: #fff;
-  border: 2px solid #fff;
+  border: .2rem solid #fff;
 }
 
 #create--user {
   color: #fff;
   border-color: #fff;
   background-color: #91CC91;
-  padding: 10px 30px;
+  padding: 1rem 3rem;
 }
 
+@media screen and (max-width: 350px) {
+  .logo {
+    margin: 5% auto;
+  }
+}
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * SIGNUP MODAL
@@ -207,67 +213,67 @@ body {
 }
 
 #create--new--user {
-  margin: 100px 15px;
+  margin: 10rem 1.5rem;
 }
 
 .signup--input {
   background-color: #91CC91;
-  border: 2px solid #fff;
+  border: .2rem solid #fff;
   border-bottom: 0;
 }
 
 .top--input {
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
 }
 
 .bottom--input {
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border: 2px solid #FFF;
+  border-bottom-left-radius: .5rem;
+  border-bottom-right-radius: .5rem;
+  border: .2rem solid #FFF;
 }
 
 #signup--input--top {
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
 }
 
 .input--text {
   text-align: center;
   color: #fff;
-  font-size: 24px;
+  font-size: 2.4rem;
 }
 
 .input--text::-webkit-input-placeholder {
   color: #fff;
-  font-size: 18px;
-  line-height: 25px;
+  font-size: 1.8rem;
+  line-height: 2.5rem;
 }
 
 #signup--email--input,
 #signup--password--input,
 #signup--display--input {
   color: white;
-  font-size: 24px;
+  font-size: 2.4rem;
 }
 
 #signup--user {
   background-color: #fff;
-  border: 2px solid #fff;
+  border: .2rem solid #fff;
   width: 100%;
   color: #91CC91;
-  border-radius: 5px;
-  margin: 20px auto;
+  border-radius: .5rem;
+  margin: 2rem auto;
 }
 
 #signup--user:hover {
-  border: 2px solid #5B805B;
+  border: .2rem solid #5B805B;
 }
 
 #signup--user:active {
   background-color: #91CC91;
   color: #fff;
-  border: 2px solid #fff;
+  border: .2rem solid #fff;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -281,83 +287,21 @@ body {
 }
 
 .search--item:first-child {
-  margin-top: 90px;
+  margin-top: 9rem;
 }
 
 .search--item:last-child {
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 .search--activity {
   color: #91CC91;
   font-style: italic;
-  font-size: 12px;
+  font-size: 1.2rem;
 }
 
 #filter--search {
-  margin: 44px auto 0 auto;
-}
-
-/*#ios--search--filler {
-=======
-#filter--rooms {
-  padding: 70px 0 0 0;
-  width: 100%;
-}
-#filter--rooms--wrapper {
-  margin-top: 70px;
-}
-.input {
-  position: relative;
-  z-index: 1;
-  display: inline-block;
-  margin: 1em;
-  max-width: 350px;
-  width: calc(100% - 2em);
-  vertical-align: top;
-}
-.input__field {
-  position: relative;
-  display: block;
-  float: right;
-  padding: 0.8em;
-  width: 60%;
-  border: none;
-  border-radius: 0;
-  background: #f0f0f0;
-  color: #aaa;
-  font-weight: 400;
-  font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  -webkit-appearance: none; /* for box shadows to show on iOS */
-}
-
-.input__field:focus {
-  outline: none;
-}
-
-.input__label {
-  display: inline-block;
-  float: right;
-  padding: 0 1em;
-  width: 40%;
-  color: #696969;
-  font-weight: bold;
-  font-size: 70.25%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.input__label-content {
-  position: relative;
-  display: block;
-  padding: 1.6em 0;
-  width: 100%;
+  margin: 4.4rem auto 0 auto;
 }
 
 .graphic {
@@ -369,63 +313,9 @@ body {
 
 .icon {
   color: #ddd;
-  font-size: 150%;
+  font-size: 3rem;
 }
 
-.input--makiko {
-  overflow: hidden;
-  background: #91CC91;
-}
-
-.input__field--makiko {
-  width: 100%;
-  background: transparent;
-  color: #797693;
-  z-index: 10;
-  font-weight: 500;
-}
-
-.input__label--makiko {
-  position: absolute;
-  width: 100%;
-  text-align: left;
-  pointer-events: none;
-  color: #fff;
-}
-
-.input__label--makiko::before {
-  content: '';
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  top: 45%;
-  left: 20px;
-  background: url(../img/search.svg) no-repeat center center;
-  background-size: 100%;
-  -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.7,0,0.3,1);
-  transition: transform 0.4s cubic-bezier(0.7,0,0.3,1);
-}
-
-.input__label-content--makiko {
-  display: block;
-  padding: 1.5em 0 0 2.75em;
-  -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.7,0,0.3,1);
-  transition: transform 0.4s cubic-bezier(0.7,0,0.3,1);
-}
-
-.input__field--makiko:focus + .input__label--makiko::before,
-.input--filled .input__label--makiko::before {
-  -webkit-transform: scale3d(38, 38, 1);
-  transform: scale3d(38, 38, 1);
-}
-
-
-/*#ios--room--filler {
-  margin-top: 44px;
-  width: 100%;
-  height: 44px;
-  background-color: green;
-}*/
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -434,7 +324,7 @@ body {
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #profile--wrapper {
-  margin-top: 50px;
+  margin-top: 5rem;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -443,7 +333,7 @@ body {
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .friend--lower {
-  top: 45px;
+  top: 4.5rem;
   font-family: 'Bariol', 'Lato', sans-serif;
 }
 
@@ -955,7 +845,7 @@ ul.icon li
   background-color: #3d805b;
   color: white;
   border:none;
-  border-radius: 5px; 
+  border-radius: 5px;
 }
 
 .exInterest{
@@ -986,7 +876,7 @@ ul.icon li
 }
 
 #changeTextArea{
-  background-color:#91CC91; 
+  background-color:#91CC91;
   color:white;
 }
 
@@ -1091,7 +981,7 @@ input[type=date], input[type=time] {
 
 #save--event {
   display: block;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 100;
   text-align: center;
   background-color: #91CC91;
@@ -1103,6 +993,7 @@ input[type=date], input[type=time] {
   width: 70%;
   padding: 10px;
   margin: 0 auto;
+  height: 40px;
 }
 
 #save--event:active {

@@ -5,13 +5,13 @@
   </ion-header-bar>
   <div class="padding">
     <div class="list" id="create--new--user">
-      <label class="item item-input signup--input" id="signup--input--top">
+      <label class="item-input signup--input" id="signup--input--top">
         <input ng-model="user.email" placeholder="email" type="text" class="input--text" id="signup--email--input">
       </label>
-      <label class="item item-input signup--input">
+      <label class="item-input signup--input">
         <input ng-model="user.password" placeholder="password" type="password" class="input--text" id="signup--password--input">
       </label>
-      <label class="item item-input signup--input bottom--input">
+      <label class="item-input signup--input bottom--input">
         <input ng-model="user.displayname" placeholder="display name" type="text" class="input--text bottom--input" id="signup--display--input">`
       </label>
       <button class="button button-full button-positive" ng-click="vm.createUser(user)" id="signup--user">Create</button>
