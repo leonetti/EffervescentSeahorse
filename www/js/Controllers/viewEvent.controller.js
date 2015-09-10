@@ -27,7 +27,7 @@
               });
             }
           }
-        })
+        });
       });
 
       vm.joinEvent = function() {
@@ -50,7 +50,7 @@
           // used to toggle join/unjoin button
           $timeout(function() {
             vm.joined = true;
-          })
+          });
         });
       };
 
@@ -75,8 +75,5 @@
           }
         });
       };
-
-      // TODO: make variables to show when the user has already joined the event and make
-      // the check in ionicview.enter
     };
 })();

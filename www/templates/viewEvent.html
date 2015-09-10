@@ -6,10 +6,10 @@
 
 <ion-view>
   <div id="event--description">
-    <div id="event--description">Description: {{vm.description}}</div>
-    <div>Location: {{vm.location}}</div>
-    <div>Date: {{vm.eventDate}}</div>
-    <div>Number of People: {{vm.numPeople}}</div>
+    <div id="event--description--description">Description: {{vm.description}}</div>
+    <div id="event--description--location">Location: {{vm.location}}</div>
+    <div id="event--description--date">Date: {{vm.eventDate}}</div>
+    <div id="event--description--people">Number of People: {{vm.numPeople}}</div>
   </div>
 
   <button ng-click="vm.joinEvent()" ng-hide="vm.joined">JOIN</button>
