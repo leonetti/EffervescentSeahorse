@@ -99,42 +99,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('tab.events', {
-    url:'/events',
-    views: {
-      'tab-events': {
-        templateUrl: 'templates/tab-events.html',
-        controller: 'EventsCtrl as vm'
-      }
-    },
-    resolve: {
-      "currentAuth" : ["Auth",
-        function(Auth) {
-          return Auth.$requireAuth();
-        }
-      ]
-    }
-  })
-
-  .state('createEvent', {
-    url:'/events/create',
-    templateUrl: 'templates/createEvent.html',
-    controller: 'CreateEventsCtrl as vm'
-    // resolve: {
-    //   "currentAuth": ["Auth",
-    //     function(Auth) {
-    //       return Auth.$waitForAuth();
-    //     }
-    //   ]
-    // }
-  })
-
-  .state('viewEvent', {
-    url:'/events/:eventId',
-    templateUrl: 'templates/viewEvent.html',
-    controller: 'EventsCtrl as vm'
-  })
-
   .state('profile', {
       url: '/profile/:userId',
       templateUrl: 'templates/profile.html',
@@ -201,7 +165,56 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       ]
     }
-  });
+  })
+
+  .state('settings', {
+    url: '/settings',
+    templateUrl: 'templates/settings.html',
+    controller: 'SettingsController as vm',
+    resolve: {
+      'currentAuth': ['Auth',
+        function(Auth) {
+          return Auth.$requireAuth();
+        }
+      ]
+    }
+  })
+
+  .state('tab.events', {
+   url:'/events',
+   views: {
+     'tab-events': {
+       templateUrl: 'templates/tab-events.html',
+       controller: 'EventsCtrl as vm'
+     }
+   },
+   resolve: {
+     "currentAuth" : ["Auth",
+       function(Auth) {
+         return Auth.$requireAuth();
+       }
+     ]
+   }
+ })
+
+ .state('createEvent', {
+   url:'/events/create',
+   templateUrl: 'templates/createEvent.html',
+   controller: 'CreateEventsCtrl as vm'
+   // resolve: {
+   //   "currentAuth": ["Auth",
+   //     function(Auth) {
+   //       return Auth.$waitForAuth();
+   //     }
+   //   ]
+   // }
+ })
+
+ .state('viewEvent', {
+   url:'/events/:eventId',
+   templateUrl: 'templates/viewEvent.html',
+   controller: 'EventsCtrl as vm'
+ })
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');

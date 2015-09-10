@@ -4,7 +4,7 @@
     .controller('SearchController', SearchController);
 
     SearchController.$inject = ['$scope','$state', 'GPS', '$ionicLoading', '$timeout'];
-
+    
     function SearchController ($scope, $state, GPS, $ionicLoading, $timeout) {
       var vm = this;
 
