@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var ref = new Firebase('URL');
+var ref = new Firebase('https://crackling-heat-1995.firebaseio.com/');
 var geoFire = new GeoFire(ref.child("geolocation"));
 
 
@@ -44,39 +44,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       "currentAuth": ["Auth",
         function(Auth) {
           return Auth.$waitForAuth();
-        }
-      ]
-    }
-  })
-
-  // setup an abstract state for the tabs directive
-    .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'templates/tabs.html',
-    resolve: {
-      "currentAuth" : ["Auth",
-        function(Auth) {
-          return Auth.$requireAuth();
-        }
-      ]
-    }
-  })
-
-  // Each tab has its own nav history stack:
-
-  .state('tab.search', {
-    url: '/search',
-    views: {
-      'tab-search': {
-        templateUrl: 'templates/tab-search.html',
-        controller: 'SearchController as vm'
-      }
-    },
-    resolve: {
-      "currentAuth" : ["Auth",
-        function(Auth) {
-          return Auth.$requireAuth();
         }
       ]
     }
