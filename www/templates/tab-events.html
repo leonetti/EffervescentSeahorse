@@ -6,13 +6,21 @@
 
 <ion-view>
   <ion-content>
-    <ul class="list" id="event--list">
-      <li class="item" ng-repeat="event in vm.events | filter:search">
+    <ion-list>
+      <ion-item ng-repeat="event in vm.events | filter:search" href="#/events/{{event.eventId}}">
+        {{event.description}}
+        {{event.eventDate}}
+        {{event.location}}
+        <i class="icon ion-chevron-right icon-accessory" id="right--arrow--search"></i>
+      </ion-item>
+    </ion-list>
+<!--     <ul class="list" id="event--list">
+      <li class="item" ng-repeat="event in vm.events | filter:search" href="#/events/{{event.eventId}}">
         {{event.description}}
         {{event.eventDate}}
         {{event.location}}
         <i class="icon ion-chevron-right icon-accessory" id="right--arrow--search"></i>
       </li>
-    </ul>
+    </ul> -->
   </ion-content>
 </ion-view>
