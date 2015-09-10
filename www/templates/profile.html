@@ -8,7 +8,7 @@
   <h4>Profile</h4>
 </ion-nav-bar>
 
-<ion-view view-title="{{user.displayName}}">
+<ion-view view-title="{{user.displayName}}" id="profile" >
 <!--   <ion-content class="padding" id="profile--wrapper"> -->
     <div class='profile__box'>
       <div class="circular">
@@ -26,13 +26,13 @@
             <button ng-click='addBio(birds)' class='bioButton'>Add Biography</button>
         </form>
     </div>
-    <div id='whitey'>
+    <div class='whitey'>
       <div class="button-bar">
         <a class="button button-block button-positive activated radioButton" id="radioButton" ng-class="{'testTest': isActive('Interests')}" ng-click="setActive('Interests')">Interests</a>
         <a class="button button-block button-positive activated" id="radioButton" ng-class="{'testTest': isActive('Accomplishments')}" ng-click="setActive('Accomplishments')">Accomplishments</a>
         <a class="button button-block button-positive activated" id="radioButton" ng-class="{'testTest': isActive('Photos')}" ng-click="setActive('Photos')">Photos</a>
       </div>
-      <div class='profile__box' id='whitey' ng-show='isActive("Interests")'>
+      <div class='profile__box whitey' ng-show='isActive("Interests")'>
         <ion-content has-header='true'>
           <div ng-show='isActive("Interests")'>
             <h2 class='sections'>Interests</h2>
@@ -45,7 +45,7 @@
           </div>
         </ion-content>
       </div>
-      <div class='profile__box' id='whitey' ng-show='isActive("Photos")'>
+      <div class='profile__box' class='whitey' ng-show='isActive("Photos")'>
         <div ng-show='isActive("Photos")'>
           <h2 class='sections'>Photos</h2>
           <ul ng-hide='isEdit("on")' rn-carousel class="item item-image padding profpic" id='photoCar'><li ng-repeat='image in picGallery'><img ng-src="data:image/png;base64,{{ image.picture }}" class='layer'></li>
