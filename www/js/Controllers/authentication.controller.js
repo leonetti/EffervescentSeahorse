@@ -16,10 +16,8 @@
     $ionicModal.fromTemplateUrl('templates/signup.html', {
       scope: $scope
     }).then(function(modal) {
-      $scope.modal = modal;
+      vm.modal = modal;
     });
-
-
 
     function logout () {
       delete window.localStorage['displayName'];
@@ -37,6 +35,14 @@
           template: 'Signing Up'
         });
 
+        var onComplete = function(error) {
+          if (!error) {
+            user.email = '';
+            user.password = '';
+            user.displayname = '';
+          }
+        };
+
         auth.$createUser({
           email: user.email,
           password: user.password
@@ -45,9 +51,9 @@
           ref.child('users').child(userData.uid).set({
             email: user.email,
             displayName: user.displayname
-          });
+          }, onComplete);
           $ionicLoading.hide();
-          $scope.modal.hide();
+          vm.modal.hide();
         }).catch(function(error) {
           alert('Error: ' + error);
           $ionicLoading.hide();
