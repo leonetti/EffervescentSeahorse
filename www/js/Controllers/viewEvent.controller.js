@@ -17,6 +17,17 @@
           vm.location = snapshot.val().location;
           vm.numPeople = snapshot.val().numPeople;
         });
+
+        // check if the user has already joined this event; show unjoin if already joined
+        ref.child('attendees').child(eventId).once('value', function(snapshot) {
+          for (var id in snapshot.val()) {
+            if (snapshot.val()[id] === userId) {
+              $timeout(function() {
+                vm.joined = true;
+              });
+            }
+          }
+        })
       });
 
       vm.joinEvent = function() {
@@ -35,6 +46,11 @@
             var numPepes = snapshot.val().numPeople - 1;
             ref.child('events').child(eventId).update({numPeople: numPepes});
           });
+
+          // used to toggle join/unjoin button
+          $timeout(function() {
+            vm.joined = true;
+          })
         });
       };
 
@@ -49,6 +65,11 @@
               ref.child('events').child(eventId).once('value', function(snapshot) {
                 var numPepes = snapshot.val().numPeople + 1;
                 ref.child('events').child(eventId).update({numPeople: numPepes});
+              });
+
+              // used to toggle join/unjoin button
+              $timeout(function() {
+                vm.joined = false;
               });
             }
           }
