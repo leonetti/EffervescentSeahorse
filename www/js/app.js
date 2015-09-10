@@ -54,7 +54,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html',
-    controller: 'AuthenticationController',
     resolve: {
       "currentAuth" : ["Auth",
         function(Auth) {
