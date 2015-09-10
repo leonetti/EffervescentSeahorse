@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var ref = new Firebase('URL');
+var ref = new Firebase('https://crackling-heat-1995.firebaseio.com/');
 var geoFire = new GeoFire(ref.child("geolocation"));
 
 
@@ -54,6 +54,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html',
+    controller: 'AuthenticationController',
     resolve: {
       "currentAuth" : ["Auth",
         function(Auth) {
@@ -198,6 +199,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       "currentAuth": ["Auth",
         function(Auth) {
           return Auth.$waitForAuth();
+        }
+      ]
+    }
+  })
+
+  .state('settings', {
+    url: '/settings',
+    templateUrl: 'templates/settings.html',
+    controller: 'SettingsController as vm',
+    resolve: {
+      'currentAuth': ['Auth',
+        function(Auth) {
+          return Auth.$requireAuth();
         }
       ]
     }

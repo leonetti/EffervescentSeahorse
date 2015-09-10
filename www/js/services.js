@@ -42,11 +42,12 @@ angular.module('starter.services', ['firebase'])
     };
   }
 
-  function saveMedia(type) {
+  function saveMedia(type, destination) {
+    console.log(destination);
     return $q(function(resolve, reject) {
       var options = optionsForType(type);
-
       $cordovaCamera.getPicture(options).then(function(imageData) {
+        if(destination === 0){
           ref.child('profilepicture').child(window.localStorage.uid).update({
             'profilepicture': imageData,
           })
@@ -55,6 +56,16 @@ angular.module('starter.services', ['firebase'])
           }, function(e) {
             reject();
           });
+        }else{
+          ref.child('pictures').child(window.localStorage.uid).push({
+            'picture': imageData,
+          })
+          .then(function(info) {
+            console.log(imageData);
+          }, function(e) {
+            reject();
+          });          
+        }
       });
     });
   }

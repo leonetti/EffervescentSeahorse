@@ -19,6 +19,8 @@
       $scope.modal = modal;
     });
 
+
+
     function logout () {
       delete window.localStorage['displayName'];
       delete window.localStorage['uid'];

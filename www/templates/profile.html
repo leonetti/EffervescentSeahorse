@@ -14,13 +14,17 @@
       <div class="circular">
         <img ng-src="data:image/png;base64,{{ profpic }}" class='profpic'>
       </div>
-      <div class="circular" ng-show='edit'>
-        <span class='profpic'>hihihihihihihi</span>
+      <div class="circular" ng-show='isEdit("on")'>
+        <div class='changeProfPic' ng-click='addMedia(0)'><div class='circText'>Change Profile Picture</div></div>
       </div>
       <h2 class='sections' id='displayName' style='border-bottom: none;'>{{user.displayName}}</h2>
       <div class='bio__info'>
-        <div class='fill__text1'>{{user.bio}}</div>
+        <div class='fill__text1' ng-hide='isEdit("on")'>{{user.bio}}</div>
       </div>
+        <form ng-show='isEdit("on")' class='editBio'>
+            <textarea ng-model='birds' style='background-color:#91CC91; color:white;'>Add Biography Here</textarea>
+            <button ng-click='addBio(birds)' class='bioButton'>Add Biography</button>
+        </form>
     </div>
     <div style='background-color: white;'>
       <div class="button-bar">
@@ -29,28 +33,32 @@
         <a class="button button-block button-positive activated" id="radioButton" ng-class="{'testTest': isActive('Photos')}" ng-click="setActive('Photos')">Photos</a>
       </div>
       <div class='profile__box' style='background-color: white;' ng-show='isActive("Interests")'>
-        <ion-content has-header='true' ng-show="isActive('Interests')">
+        <ion-content has-header='true'>
           <div ng-show='isActive("Interests")'>
             <h2 class='sections'>Interests</h2>
             <ul class='icon'>
-                <li class='fill__text2 flaticon-runer' ng-repeat='interest in interests'>{{interest.activity}}</li>
+                <li class='fill__text2 flaticon-runer' ng-repeat='interest in interests' ng-model='activity'>{{interest.activity}}<div class='ion-close-circled exInterest' ng-show='isEdit("on")' ng-click='removeInterest({{interst.activity}})'></div></li>
             </ul>
-            <div class="circular" ng-show='edit'>
-      </div>
+            <select class='nav__bar' ng-show='isEdit("on")' ng-model = 'activityOptions' ng-change='addInterest(activityOptions)'>
+              <option ng-repeat='activity in activities' value='{{activity}}'>{{ activity }}</option>
+            </select>
           </div>
         </ion-content>
       </div>
       <div class='profile__box' style='background-color: white;' ng-show='isActive("Photos")'>
         <div ng-show='isActive("Photos")'>
           <h2 class='sections'>Photos</h2>
-          <ul rn-carousel class="item item-image padding profpic" id='photoCar'><li ng-repeat='image in picGallery'><img ng-src="data:image/png;base64,{{ image.picture }}" class='layer'></li>
+          <ul ng-hide='isEdit("on")' rn-carousel class="item item-image padding profpic" id='photoCar'><li ng-repeat='image in picGallery'><img ng-src="data:image/png;base64,{{ image.picture }}" class='layer'></li>
           </ul>
+          <div ng-show='isEdit("on")' class='addPhotoBox' ng-click='addMedia(1)'><div class='photoBoxText'>Add Photos Here!</div></div>
         </div>
       </div>
     </div>
 <!--   </ion-content> -->
-  <button class='chat__button' ng-hide="blocked" id='whitify'>
+  <button class='chat__button' ng-hide="blocked ableToEdit()"  id='whitify'>
     <a href="#/messages/{{user.uid}}" id='whitify'>Chat With {{user.displayName}} Here</a>
+  </button>
+  <button class='chat__button' ng-show='ableToEdit()' ng-click='editMode()' id='whitify'>Edit Profile
   </button>
   <button ng-click='addFriend()' ng-hide="friendStatus || sentReq || blocked" class='friend__button' id='whitify'>Add As Friend</button>
   <button ng-show="sentReq" class='friend__button' id='whitify'>Friend Request Sent!</button>

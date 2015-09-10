@@ -12,26 +12,46 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('ProfileCtrl', function($scope, $state, $stateParams, $timeout, editProf) {
+.controller('ProfileCtrl', function ($scope, $state, $stateParams, $timeout, $ionicActionSheet, ImageService, editProf) {
   $scope.user;
   $scope.interests;
-  $scope.edit = editProf.checker;
-  console.log($scope.edit)
-  ref.child('interests').child($stateParams.userId).once('value', function (snapshot) {
+  $scope.edit = 'off';
+  $scope.userID = window.localStorage['uid'];
+
+  ref.child('interests').child($stateParams.userId).on('value', function (snapshot) {
     $timeout(function() {
       $scope.interests = snapshot.val();
     });
   });
 
-  ref.child('profilepicture').child($stateParams.userId).once('value', function (snapshot) {
+  ref.child('profilepicture').child($stateParams.userId).on('value', function (snapshot) {
     $scope.profpic = snapshot.val().profilepicture;
   });
 
-  ref.child("users").child($stateParams.userId).once('value', function (snapshot) {
+  ref.child("users").child($stateParams.userId).on('value', function (snapshot) {
     var val = snapshot.val();
     val.uid = $stateParams.userId;
     $timeout(function () {
       $scope.user = (val);
+    });
+  });
+
+  ref.on('value', function(snapshot){
+    $timeout(function(){
+      var activityObj = {};
+      var activities = snapshot.val().activities;
+      var activitiesArr = [];
+      if(snapshot.val().interests){
+        for(var i in $scope.interests){
+          activityObj[$scope.interests[i].activity] = 1
+        }
+        for(var i = 0; i < activities.length; i++){
+          if(!activityObj[activities[i]]){
+            activitiesArr.push(activities[i]);
+          }
+        }
+        $scope.activities = activitiesArr;
+      }
     });
   });
 
@@ -121,6 +141,83 @@ angular.module('starter.controllers', [])
     // remove them from friends list if they are currently friends
     $scope.removeFriend();
   };
+
+  $scope.active = 'Interests';
+  $scope.setActive = function(type) {
+      $scope.active = type;
+  };
+  $scope.isActive = function(type) {
+      return type === $scope.active;
+  };
+
+  $scope.ableToEdit = function(){
+    return userId === friendId;
+  };
+
+  $scope.editMode = function(){
+    if($scope.edit === 'off'){
+      $scope.edit = 'on'
+    }else{
+      $scope.edit = 'off'
+    };
+    console.log($scope.edit)
+  };
+
+  $scope.isEdit = function(type){
+    return $scope.edit === type
+  };
+
+  $scope.addInterest = function(item){
+    for(var i in $scope.interests){
+      if($scope.interests[i].activity === item){
+        alert('Already have that interests');
+        return;
+      }
+    }
+    ref.child('interests').child(userId).push({
+      'activity': item
+    });
+  };
+
+  $scope.removeInterest = function(item){
+    var activity = this.interest.activity;
+    for(var i in $scope.interests){
+      if($scope.interests[i].activity === activity){
+        ref.child('interests').child(userId).child(i).remove();
+        alert('removed that shit!');
+        return;
+      }
+    }
+  };
+
+  $scope.addBio = function(item){
+    ref.child('users').child(userId).update({
+      'bio': item,
+    });
+  };
+
+  $scope.addMedia = function(destination) {
+    $scope.hideSheet = $ionicActionSheet.show({
+      buttons: [
+        { text: 'Take photo' },
+        { text: 'Photo from library' }
+      ],
+      titleText: 'Choose Profile Picture',
+      cancelText: 'Cancel',
+      buttonClicked: function(index) {
+        $scope.addImage(index, destination);
+      }
+    });
+  };
+
+  $scope.addImage = function(type, destination) {
+    $scope.hideSheet();
+    ImageService.handleMediaDialog(type, destination).then(function() {
+      $scope.$apply();
+    });
+  };
+
+
 })
 
 .controller('EditProfileCtrl', function ($scope, $rootScope, $ionicActionSheet, ImageService, $timeout) {
@@ -132,9 +229,6 @@ angular.module('starter.controllers', [])
       var activities = snapshot.val().activities;
       var activitiesArr = [];
       if(snapshot.val().interests){
-        $scope.interests = snapshot.val().interests[userId];
-        $scope.profilepic = snapshot.val().profilepicture[userId].profilepicture;
-        //for(var i in $scope.interests)
         for(var i in $scope.interests){
           activityObj[$scope.interests[i].activity] = 1
         }
@@ -148,7 +242,7 @@ angular.module('starter.controllers', [])
     });
   });
 
-  $scope.addMedia = function() {
+  $scope.addMedia = function(destination) {
     $scope.hideSheet = $ionicActionSheet.show({
       buttons: [
         { text: 'Take photo' },
@@ -157,7 +251,7 @@ angular.module('starter.controllers', [])
       titleText: 'Choose Profile Picture',
       cancelText: 'Cancel',
       buttonClicked: function(index) {
-        $scope.addImage(index);
+        $scope.addImage(index, destination);
       }
     });
   };
@@ -196,7 +290,7 @@ angular.module('starter.controllers', [])
         return;
       }
     }
+  };
 
-  }
 
 });
