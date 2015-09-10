@@ -16,7 +16,7 @@
     $ionicModal.fromTemplateUrl('templates/signup.html', {
       scope: $scope
     }).then(function(modal) {
-      vm.modal = modal;
+      $scope.modal = modal;
     });
 
     function logout () {
