@@ -5,11 +5,14 @@
 </ion-nav-bar>
 
 <ion-view>
-  <ul class="list" id="event--list">
-    <li class="item" ng-repeat="event in vm.events | filter:search">
-      {{event.description}}
-      {{event.eventDate}}
-      {{event.location}}
-    </li>
-  </ul>
+  <ion-content>
+    <ul class="list" id="event--list">
+      <li class="item" ng-repeat="event in vm.events | filter:search">
+        {{event.description}}
+        {{event.eventDate}}
+        {{event.location}}
+        <i class="icon ion-chevron-right icon-accessory" id="right--arrow--search"></i>
+      </li>
+    </ul>
+  </ion-content>
 </ion-view>

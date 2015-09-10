@@ -129,6 +129,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     // }
   })
 
+  .state('viewEvent', {
+    url:'/events/:eventId',
+    templateUrl: 'templates/viewEvent.html',
+    controller: 'EventsCtrl as vm'
+  })
+
   .state('profile', {
       url: '/profile/:userId',
       templateUrl: 'templates/profile.html',

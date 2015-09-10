@@ -932,6 +932,106 @@ ul.icon li.runner:before { content: "\e000";}*/
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+
+ #ce--interest {
+   margin-top: 50px;
+ }
+
+ #ce--interest label {
+  margin-left: 15%;
+  margin-bottom: 100px;
+ }
+
+ #ce--description label,
+ label.ce--date {
+  margin-top: 10px;
+  margin-left: 15%;
+  font-size: 12px;
+  margin-bottom: 0;
+ }
+
+
+ .event--title {
+   display: block;
+   font-size: 20px;
+   font-weight: 100;
+   text-align: center;
+   background-color: #91CC91;
+   border: 2px solid #91CC91;
+   border-radius: 5px;
+   color: #FFF;
+   text-transform: uppercase;
+   letter-spacing: 2px;
+   width: 70%;
+   padding: 3px;
+   margin: 0 auto;
+ }
+
+ .event--title:active {
+  background-color: #3d805b;
+  border: 2px solid #91CC91;
+ }
+
+#ce--description textarea {
+  width: 70%;
+  height: 100px;
+  margin: 0 auto 10px auto;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+#ce--description textarea::-webkit-input-placeholder {
+  text-align: center;
+  line-height: 85px;
+}
+
+#ce--description input {
+  width: 70%;
+  height: 10px;
+  border: 1px solid #000;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 15px;
+  height: 50px;
+  padding: 5px;
+}
+
+input[type=date], input[type=time] {
+   height: 35px;
+   margin: 0 auto;
+   width: 100%;
+   font-size: 18px;
+   font-weight: bold;
+   text-transform: uppercase;
+   background-color: lighten(#2f2f2f,40%);
+   outline: none;
+   border: 0;
+   border-radius: 3px;
+   padding: 0 3px;
+}
+
+#save--event {
+  display: block;
+  font-size: 30px;
+  font-weight: 100;
+  text-align: center;
+  background-color: #91CC91;
+  border: 2px solid #91CC91;
+  border-radius: 5px;
+  color: #FFF;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  width: 70%;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+#save--event:active {
+  background-color: #3d805b;
+  border: 2px solid #91CC91;
+ }
+
 .events--create {
   font-size: 34px;
   padding-right: 5px;
@@ -939,18 +1039,21 @@ ul.icon li.runner:before { content: "\e000";}*/
   cursor: pointer;
 }
 
-#ce--interest {
-  margin-top: 200px;
-  background-color: pink;
-}
-
-#save--event {
-  background-color: pink;
-  padding: 10px;
-  cursor: pointer;
-}
-
 #event--list {
   background-color: pink;
-  margin-top: 200px;
+  margin-top: 43px;
+}
+
+#right--arrow--search {
+  float: right;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * EVENTS VIEW
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+#event--description {
+
 }

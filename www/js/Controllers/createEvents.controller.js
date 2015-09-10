@@ -27,6 +27,7 @@
       });
 
       vm.sendEventInfo = function() {
+        $scope.modal.hide();
         vm.userId = window.localStorage.uid;
         var curActivities = [];
         for(var i=0; i<vm.activities.length; i++) {
@@ -40,8 +41,9 @@
           description: vm.description,
           numPeople: vm.numPeople,
           eventDate: vm.eventDate.toString().substring(0,15),
+          eventTime: vm.eventTime,
           location: vm.eventLoc,
-          creator: vm.userId
+          creator: vm.userId,
         });
       };
     };

@@ -5,19 +5,33 @@
 </ion-nav-bar>
 
 <ion-view>
-  <div id="ce--interest" ng-click="modal.show()">
-    <p>Activities</p>
-    <p ng-repeat="activity in vm.activities" ng-show="activity.model">{{activity.title}}</p>
-  </div>
+  <ion-content>
+    <div id="ce--interest" ng-click="modal.show()">
+      <label class="ce--date">Choose Related Activities:
+        <h1 class="event--title">Activities</h1>
+      </label>
+    </div>
 
-  <div id="ce--description">
-    <input type="text" placeholder="description" ng-model="vm.description">
-    <input type="number" min="2" placeholder="number of people" ng-model="vm.numPeople">
-    <input type="date" placeholder="date" ng-model="vm.eventDate">
-    <input type="text" placeholder="location" ng-model="vm.eventLoc">
-  </div>
+    <div id="ce--description">
+      <label class="ce--date">Enter Date:
+        <input type="date" ng-model="vm.eventDate">
+      </label>
+      <label class="ce--time">Enter Time:
+        <input type="time" ng-model="vm.eventTime">
+      </label>
+      <label class="ce--description">Enter Description:
+        <textarea rows="4" cols="50" maxlength="160" ng-model="vm.description"></textarea>
+      </label>
+      <label class="ce--people">Number of People Needed (including yourself)
+        <input type="number" min="2" ng-model="vm.numPeople">
+      </label>
+      <label class="ce--location">Enter Location:
+        <input type="text" placeholder="location" ng-model="vm.eventLoc">
+      </label>
+    </div>
 
-  <div id="save--event" ng-click="vm.sendEventInfo()">
-    <p>Create Event</p>
-  </div>
+    <div id="save--event" ng-click="vm.sendEventInfo()" ui-sref="tab.events">
+      <p>Create Event</p>
+    </div>
+  </ion-content>
 </ion-view>
