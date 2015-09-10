@@ -55,7 +55,7 @@
       </div>
     </div>
 <!--   </ion-content> -->
-  <button class='chat__button' ng-hide="blocked ableToEdit()"  id='whitify'>
+  <button class='chat__button' ng-hide="blocked || ableToEdit()"  id='whitify'>
     <a href="#/messages/{{user.uid}}" id='whitify'>Chat With {{user.displayName}} Here</a>
   </button>
   <button class='chat__button' ng-show='ableToEdit()' ng-click='editMode()' id='whitify'>Edit Profile
