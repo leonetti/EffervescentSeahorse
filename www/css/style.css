@@ -811,6 +811,7 @@ h2.sections{
   margin-left: auto;
   color: white;
   font-family:'Bariol', 'Lato', sans-serif;
+  border-bottom: none;
 }
 
 .bio__info{
@@ -982,6 +983,15 @@ ul.icon li
   position: absolute;
   top:43%;
   left: 20%;
+}
+
+#changeTextArea{
+  background-color:#91CC91; 
+  color:white;
+}
+
+#whitey{
+  background-color: white;
 }
 /*ul.icon li:before
 {
