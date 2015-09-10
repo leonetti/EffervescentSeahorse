@@ -1032,3 +1032,7 @@ input[type=date], input[type=time] {
   font-size: 18px;
 }
 
+#event--attending {
+  margin-top: 100px;
+  font-size: 18px;
+}

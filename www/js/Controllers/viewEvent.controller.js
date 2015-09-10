@@ -28,6 +28,27 @@
             }
           }
         });
+
+        // show the list of people going to the event
+        vm.attendees = [];
+        ref.child('attendees').child(eventId).once('value', function(snapshot) {
+          snapshot.forEach(function(child) {
+            var attendeeId = child.val();
+            ref.child('users').child(attendeeId).once('value', function(snapshot) {
+              var attendee = snapshot.val();
+              attendee.id = attendeeId;
+              attendee.name = snapshot.val().displayName;
+              ref.child('profilepicture').child(attendeeId).once('value', function(snapshot) {
+                if (snapshot.val()) {
+                  attendee.pic = snapshot.val().profilepicture;
+                }
+                $timeout(function() {
+                  vm.attendees.push(attendee);
+                });
+              });
+            });
+          });
+        });
       });
 
       vm.joinEvent = function() {
