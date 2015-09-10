@@ -48,8 +48,11 @@
       <div class='profile__box' class='whitey' ng-show='isActive("Photos")'>
         <div ng-show='isActive("Photos")'>
           <h2 class='sections'>Photos</h2>
-          <ul ng-hide='isEdit("on")' rn-carousel class="item item-image padding profpic" id='photoCar'><li ng-repeat='image in picGallery'><img ng-src="data:image/png;base64,{{ image.picture }}" class='layer'></li>
-          </ul>
+          <slick ng-hide='isEdit("on")' class="profpic" init-onload=true id='photoCar'>
+            <div ng-repeat='image in picGallery'>
+              <img ng-src="data:image/png;base64,{{ image }}">
+            </div>
+          </slick>
           <div ng-show='isEdit("on")' class='addPhotoBox' ng-click='addMedia(1)'><div class='photoBoxText'>Add Photos Here!</div></div>
         </div>
       </div>

@@ -36,6 +36,15 @@ angular.module('starter.controllers', [])
     });
   });
 
+  ref.child('pictures').child($stateParams.userId).on('value', function (snapshot) {
+    var newArr = [];
+    for (var i in snapshot.val()){
+      newArr.push(snapshot.val()[i].picture);
+    }
+    $scope.picGallery = newArr;
+    console.log(newArr.length)
+  });
+
   ref.on('value', function(snapshot){
     $timeout(function(){
       var activityObj = {};
