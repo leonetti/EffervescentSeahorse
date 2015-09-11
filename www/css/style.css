@@ -1024,5 +1024,15 @@ input[type=date], input[type=time] {
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #event--description {
+  margin-top: 50px;
+}
 
+#event--description div {
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+#event--attending {
+  margin-top: 100px;
+  font-size: 18px;
 }

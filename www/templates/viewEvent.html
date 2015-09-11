@@ -5,7 +5,24 @@
 </ion-nav-bar>
 
 <ion-view>
-  <div id="event--description">
+  <ion-content>
+    <div id="event--description">
+      <div id="event--description--description">Description: {{vm.description}}</div>
+      <div id="event--description--location">Location: {{vm.location}}</div>
+      <div id="event--description--date">Date: {{vm.eventDate}}</div>
+      <div id="event--description--people">Number of People: {{vm.numPeople}}</div>
+    </div>
 
-  </div>
+    <button ng-click="vm.joinEvent()" ng-hide="vm.joined">JOIN</button>
+    <button ng-click="vm.unjoinEvent()" ng-show="vm.joined">UNJOIN</button>
+
+    <h2 id="event--attending">People Going</h2>
+    <ion-list>
+      <ion-item ng-repeat="attendee in vm.attendees">
+        <img ng-src="data:image/png;base64,{{attendee.pic}}" style="width: 64px; height: 64px">
+        <h2>{{attendee.name}}</h2>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
 </ion-view>
