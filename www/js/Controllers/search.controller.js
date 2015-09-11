@@ -3,9 +3,9 @@
   angular.module('starter.controllers')
     .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['$scope','$state', 'GPS', '$ionicLoading', '$timeout'];
-    
-    function SearchController ($scope, $state, GPS, $ionicLoading, $timeout) {
+    SearchController.$inject = ['$scope','$state', 'GPS', '$ionicLoading', '$timeout', 'userService'];
+
+    function SearchController ($scope, $state, GPS, $ionicLoading, $timeout, userService) {
       var vm = this;
 
       vm.sendToProfile = function () {
@@ -34,26 +34,14 @@
               radius: 10.000 //kilometers
             });
 
-            geoQuery.on("key_entered", function (key, location, distance) {
-              if (key !== uid) {
-                ref.child("users").child(key).once('value', function (snapshot) {
-                  var val = snapshot.val();
-                  val.uid = key;
-                  val.distance = distance;
-
-                  ref.child('interests').child(key).once('value', function (snapshot) {
-                    val.interests = snapshot.val();
-
-                    ref.child('profilepicture').child(key).once('value', function (snapshot) {
-                      if (snapshot.val()) {
-                        val.profilepicture = snapshot.val().profilepicture;
-                      }
-                      $timeout(function () {
-                        vm.users.push(val);
-                      });
-                    });
-                  });
-                });
+            geoQuery.on("key_entered", function (id, location, distance) {
+              if (id !== uid) {
+                 userService.getCompleteUser(id).then(function(user){
+                   user.distance = distance;
+                   $timeout(function(){
+                     vm.users.push(user);
+                   });
+                 })
               }
             });
 
