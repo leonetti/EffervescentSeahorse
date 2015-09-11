@@ -49,39 +49,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  // setup an abstract state for the tabs directive
-    .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'templates/tabs.html',
-    resolve: {
-      "currentAuth" : ["Auth",
-        function(Auth) {
-          return Auth.$requireAuth();
-        }
-      ]
-    }
-  })
-
-  // Each tab has its own nav history stack:
-
-  .state('tab.search', {
-    url: '/search',
-    views: {
-      'tab-search': {
-        templateUrl: 'templates/tab-search.html',
-        controller: 'SearchController as vm'
-      }
-    },
-    resolve: {
-      "currentAuth" : ["Auth",
-        function(Auth) {
-          return Auth.$requireAuth();
-        }
-      ]
-    }
-  })
-
   .state('tab.chat', {
     url: '/chat',
     views: {

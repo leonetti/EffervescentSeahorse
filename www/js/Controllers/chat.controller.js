@@ -16,9 +16,7 @@
       vm.users = [];
       var uid = window.localStorage['uid'];
       ref.child('rooms').child(uid).once('value', function (snapshot) {
-        console.log('rooms', snapshot.val());
         Object.keys(snapshot.val()).forEach(function(key) {
-          console.log('key', key);
           ref.child("users").child(key).once('value', function (snapshot) {
             var val = snapshot.val();
             val.uid = key;
