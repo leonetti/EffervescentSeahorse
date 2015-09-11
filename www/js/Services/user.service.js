@@ -3,6 +3,13 @@
   angular.module('starter.services')
     .factory('userService', userService);
 
+  function getCurrentUserId(){
+    return window.localStorage['uid'];
+  }
+
+  function setCurrentUserId(id){
+    window.localStorage['uid'] = id;
+  }
   function userService() {
     function get(key, id){
       return new Promise(function(resolve, reject){
@@ -35,7 +42,10 @@
 
     return {
       'get': get,
-      'getCompleteUser': getCompleteUser
+      'getCompleteUser': getCompleteUser,
+      'getCurrentUserId': getCurrentUserId,
+      'setCurrentUserId': setCurrentUserId
+
     }
   }
 })();
