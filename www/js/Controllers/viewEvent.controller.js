@@ -30,8 +30,8 @@
         });
 
         // show the list of people going to the event
-        vm.attendees = [];
-        ref.child('attendees').child(eventId).once('value', function(snapshot) {
+        ref.child('attendees').child(eventId).on('value', function(snapshot) {
+          vm.attendees = [];
           snapshot.forEach(function(child) {
             var attendeeId = child.val();
             ref.child('users').child(attendeeId).once('value', function(snapshot) {
@@ -68,8 +68,8 @@
             ref.child('events').child(eventId).update({numPeople: numPepes});
           });
 
-          // used to toggle join/unjoin button
           $timeout(function() {
+            // used to toggle join/unjoin button
             vm.joined = true;
           });
         });
@@ -88,8 +88,8 @@
                 ref.child('events').child(eventId).update({numPeople: numPepes});
               });
 
-              // used to toggle join/unjoin button
               $timeout(function() {
+                // toggle join/unjoin button
                 vm.joined = false;
               });
             }
