@@ -10,6 +10,7 @@
       console.log('initialized EventViewController');
       var eventId = $stateParams.eventId;
       var userId = window.localStorage['uid'];
+
       $scope.$on('$ionicView.enter', function(e) {
         ref.child('events').child(eventId).on('value', function(snapshot) {
           vm.description = snapshot.val().description;
@@ -30,7 +31,7 @@
         });
 
         // show the list of people going to the event
-        ref.child('attendees').child(eventId).on('value', function(snapshot) {
+        ref.child('attendees').child(eventId).on('child_removed', function(snapshot) {
           vm.attendees = [];
           snapshot.forEach(function(child) {
             var attendeeId = child.val();

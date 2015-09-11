@@ -1049,7 +1049,9 @@ input[type=date], input[type=time] {
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #event--description {
-  margin-top: 50px;
+  margin-top: 12%;
+  height: 40%;
+  background-color: #91CC91;
 }
 
 #event--description div {
@@ -1060,4 +1062,24 @@ input[type=date], input[type=time] {
 #event--attending {
   margin-top: 100px;
   font-size: 18px;
+}
+
+#event--description--description {
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+#event--description--location {
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+#event--description--date {
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+#event--description--people {
+  padding-bottom: 10px;
+  text-align: center;
 }

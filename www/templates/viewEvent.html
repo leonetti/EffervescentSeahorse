@@ -7,10 +7,22 @@
 <ion-view>
   <ion-content>
     <div id="event--description">
-      <div id="event--description--description">Description: {{vm.description}}</div>
-      <div id="event--description--location">Location: {{vm.location}}</div>
-      <div id="event--description--date">Date: {{vm.eventDate}}</div>
-      <div id="event--description--people">Number of People: {{vm.numPeople}}</div>
+      <div id="event--description--description">
+        <h2>Description:</h2>
+        <p>{{vm.description}}</p>
+      </div>
+      <div id="event--description--location">
+        <h2>Where:</h2>
+        <p>{{vm.location}}</p>
+      </div>
+      <div id="event--description--date">
+        <h2>Date:</h2>
+        <p>{{vm.eventDate}}</p>
+      </div>
+      <div id="event--description--people">
+        <h2>Number of People:</h2>
+        <p>{{vm.numPeople}}</p>
+      </div>
     </div>
 
     <button ng-click="vm.joinEvent()" ng-hide="vm.joined">JOIN</button>
