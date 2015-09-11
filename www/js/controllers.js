@@ -41,6 +41,7 @@ angular.module('starter.controllers', [])
     for (var i in snapshot.val()){
       newArr.push(snapshot.val()[i].picture);
     }
+    $scope.picGallery = newArr;
   });
 
   ref.on('value', function(snapshot){
