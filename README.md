@@ -17,7 +17,7 @@
 ## Running on Ionic View
 ###### download Ionic View from the Google Play Store or the App Store
 ###### Click the eye in the upper left hand corner
-###### Enter the App ID ####25978CF1
+###### Enter the App ID: 25978CF1
 ###### Click to View the app
 ###### Use three fingers and swipe down to close the app
 
