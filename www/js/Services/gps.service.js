@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('starter.services')
-    .factory('GPS', ['$cordovaGeolocation', GPS]);
+    .factory('GPS', GPS);
 
   GPS.$insert = ['$cordovaGelocation'];
   function GPS($cordovaGeolocation) {
