@@ -45,16 +45,32 @@
           </div>
         </ion-content>
       </div>
-      <div class='profile__box' class='whitey' ng-show='isActive("Photos")'>
+      <div class='profile__box whitey' ng-show='isActive("Photos")'>
+      <ion-content has-header='true'>
         <div ng-show='isActive("Photos")'>
           <h2 class='sections'>Photos</h2>
-          <slick ng-hide='isEdit("on")' class="profpic" init-onload=true id='photoCar'>
+<!--           <slick ng-hide='isEdit("on")' init-onload=true slides-to-scroll=1>
             <div ng-repeat='image in picGallery'>
               <img ng-src="data:image/png;base64,{{ image }}">
             </div>
-          </slick>
+          </slick> -->
+            <div class="row" ng-repeat="image in picGallery" ng-if="$index % 3 === 0">
+              <div class="col col-33" ng-if="$index < picGallery.length">
+                <img ng-src="data:image/png;base64,{{picGallery[$index]}}" width="100%" />
+              </div>
+              <div class="col col-33" ng-if="$index + 1 < picGallery.length">
+                <img ng-src="data:image/png;base64,{{picGallery[$index + 1]}}" width="100%" />
+              </div>
+              <div class="col col-33" ng-if="$index + 2 < picGallery.length">
+                <img ng-src="data:image/png;base64,{{picGallery[$index + 2]}}" width="100%" />
+              </div>
+<!--               <div class="col col-25" ng-if="$index + 3 < picGallery.length">
+                <img ng-src="data:image/png;base64,{{picGallery[$index + 3]}}" width="100%" />
+              </div> -->
+            </div>
           <div ng-show='isEdit("on")' class='addPhotoBox' ng-click='addMedia(1)'><div class='photoBoxText'>Add Photos Here!</div></div>
         </div>
+      </ion-content>
       </div>
     </div>
 <!--   </ion-content> -->

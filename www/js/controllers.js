@@ -42,7 +42,7 @@ angular.module('starter.controllers', [])
       newArr.push(snapshot.val()[i].picture);
     }
     $scope.picGallery = newArr;
-    console.log(newArr.length)
+    console.log($scope.picGallery)
   });
 
   ref.on('value', function(snapshot){
