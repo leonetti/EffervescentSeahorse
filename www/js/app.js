@@ -102,6 +102,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     controller: 'EventViewCtrl as vm'
   })
 
+  .state('groupChat', {
+    url: '/chat/:eventId',
+    templateUrl: 'templates/eventChat.html',
+    controller: 'EventGroupCtrl as vm'
+  })
+
   .state('profile', {
       url: '/profile/:userId',
       templateUrl: 'templates/profile.html',

@@ -43,7 +43,7 @@
           eventDate: vm.eventDate.toString().substring(0,15),
           eventTime: vm.eventTime,
           location: vm.eventLoc,
-          creator: vm.userId,
+          creator: vm.userId
         });
       };
     };

@@ -1,0 +1,27 @@
+<ion-nav-bar ng-controller="MyCtrl" class="nav__bar">
+  <ion-nav-back-button id="back__button"
+    ng-click="myGoBack()"> &nbsp; Back
+  </ion-nav-back-button>
+</ion-nav-bar>
+
+<ion-view view-title="Group Chat">
+  <ion-content id="group--content">
+    <section id="group--room">
+      <div ng-repeat="message in vm.messages track by $index" class="group--chat">
+        <p>{{message.text}}</p>
+      </div>
+    </section>
+  </ion-content>
+  <div id="footer">
+    <div class="item item-input" id="footer__bar">
+     <form name="search_form" ng-submit="vm.sendMessage(vm.text);" id="user__form">
+      <label class="item-input-wrapper" id="chat__input">
+        <input type="text" name="search_input" ng-model="vm.text" id="user-message">
+        <button class="button button--input">
+          <p class="button--input--text">Send</p>
+        </button>
+      </label>
+    </form>
+   </div>
+  </div>
+</ion-view>
