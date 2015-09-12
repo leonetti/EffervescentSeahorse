@@ -12,9 +12,13 @@
       <ion-item class="item-remove-animate item-avatar item-icon-right search--item" ng-repeat="user in vm.users | orderBy: '[distance, displayName]' | filter:query" type="item-text-wrap" href="#/profile/{{user.uid}}" >
       <img ng-src="data:image/png;base64,{{user.profilepicture}}" style="width: 64px; height: 64px">
         <h2 id="search--username">{{user.displayName}}</h2>
+        <div id="interest--search">Interests:&nbsp;</div>
         <span class="search--activity" ng-repeat='interest in user.interests'>{{interest.activity}} &nbsp;</span>
-        <p>{{user.distance}}</p>
+        <p class="user--distance--search">{{user.distance}}</p>
         <i class="icon ion-chevron-right icon-accessory" id="right--arrow--search"></i>
+        <button class='friendChat' ng-hide="blocked" id='bubblify'>
+          <a href="#/messages/{{user.id}}" class='ion-chatbubble-working' id='bubblify'></a>
+        </button>
       </ion-item>
     </ion-list>
   </ion-content>

@@ -286,6 +286,16 @@ body {
   padding: 0;
 }
 
+#interest--search {
+  float: left;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.user--distance--search {
+  clear: both;
+}
+
 .search--item:first-child {
   margin-top: 9rem;
 }
@@ -339,6 +349,10 @@ body {
 
 .rightButton {
   float: right;
+}
+
+#friends--content {
+  margin-top: 44px;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -426,14 +440,14 @@ p.button--input--text {
 .chat-bubble--right p,
 .chat-bubble--left p {
   line-height: 20px;
-  color: white;
+  color: #000;
 }
 
 .chat-bubble--right,
 .chat-bubble--left {
   position: relative;
   display: inline-block;
-  background-color: #003333;
+  background-color: lightgreen;
   padding: 7px 12px;
   width: auto;
   height: auto;
@@ -467,7 +481,7 @@ p.button--input--text {
   right: 4px;
   bottom: -9px;
   content: "";
-  border-color: #003333 transparent transparent transparent;
+  border-color: lightgreen transparent transparent transparent;
   border-style: solid;
   border-width: 5px;
 }
@@ -475,7 +489,7 @@ p.button--input--text {
 .chat-bubble--left {
   clear: both;
   float: left;
-  background-color: #999999;
+  background-color: #ccc;
   margin-left: 10px;
 }
 
@@ -487,7 +501,7 @@ p.button--input--text {
 .chat-bubble--left::after {
   right: 250px;
   left: 4px;
-  border-color: #999999 transparent transparent transparent;
+  border-color: #ccc transparent transparent transparent;
 }
 
 .chat-bubble--left p {
@@ -806,6 +820,17 @@ ul.icon li
   border:none;
   font-family: 'Bariol', 'Lato', sans-serif;
   font-size: 30px;
+  height: 90px;
+  padding: 25px 7px;
+}
+
+#bubblify--2 {
+  color:white;
+  text-decoration: none;
+  border:none;
+  font-family: 'Bariol', 'Lato', sans-serif;
+  font-size: 30px;
+  padding: 10px 5px;
 }
 
 .changeProfPic{
