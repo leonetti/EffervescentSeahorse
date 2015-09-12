@@ -17,6 +17,7 @@
           vm.eventDate = snapshot.val().eventDate;
           vm.location = snapshot.val().location;
           vm.numPeople = snapshot.val().numPeople;
+          vm.activities = snapshot.val().activities;
         });
 
         // check if the user has already joined this event; show unjoin if already joined
@@ -31,20 +32,31 @@
         });
 
         // show the list of people going to the event
-        ref.child('attendees').child(eventId).on('child_removed', function(snapshot) {
+        ref.child('attendees').child(eventId).on('value', function(snapshot) {
           vm.attendees = [];
+          var included = false;
           snapshot.forEach(function(child) {
             var attendeeId = child.val();
             ref.child('users').child(attendeeId).once('value', function(snapshot) {
               var attendee = snapshot.val();
               attendee.id = attendeeId;
               attendee.name = snapshot.val().displayName;
-              ref.child('profilepicture').child(attendeeId).once('value', function(snapshot) {
-                if (snapshot.val()) {
-                  attendee.pic = snapshot.val().profilepicture;
-                }
-                $timeout(function() {
-                  vm.attendees.push(attendee);
+              ref.child('interests').child(attendeeId).once('value', function(snapshot) {
+                attendee.interests = snapshot.val();
+                ref.child('profilepicture').child(attendeeId).once('value', function(snapshot) {
+                  if (snapshot.val()) {
+                    attendee.pic = snapshot.val().profilepicture;
+                  }
+                  $timeout(function() {
+                    for (var i = 0; i < vm.attendees.length; i++) {
+                      if (vm.attendees[i].id === attendeeId) {
+                        included = true;
+                      }
+                    }
+                    if(!included) {
+                      vm.attendees.push(attendee);
+                    }
+                  });
                 });
               });
             });
