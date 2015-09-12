@@ -17,7 +17,9 @@
         <img ng-src="data:image/png;base64,{{user.profilepicture}}" style="width: 64px; height: 64px">
         <h2 id="search--username">{{user.displayName}}</h2>
         <span class="search--activity" ng-repeat='interest in user.interests'>{{interest.activity}} &nbsp;</span>
-        <i class="icon ion-chevron-right icon-accessory" id="right--arrow--search"></i>
+        <button class='friendChat' ng-hide="blocked" id='bubblify--2'>
+          <a href="#/messages/{{user.uid}}" class='ion-chatbubble-working' id='bubblify--2'></a>
+        </button>
       </ion-item>
     </ion-list>
   </ion-content>

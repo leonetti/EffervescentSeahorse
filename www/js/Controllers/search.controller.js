@@ -37,7 +37,13 @@
             geoQuery.on("key_entered", function (id, location, distance) {
               if (id !== uid) {
                  userService.getCompleteUser(id).then(function(user){
+                   if(distance < 1.61) {
+                    distance = Math.floor((distance * 3280)) + ' feet away'
+                   } else {
+                    distance = (distance / 1.61).toFixed(1) + ' miles away'
+                   }
                    user.distance = distance;
+                   user.id = id;
                    $timeout(function(){
                      vm.users.push(user);
                    });
