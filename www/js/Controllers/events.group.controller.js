@@ -3,6 +3,7 @@
   angular.module('starter.controllers')
     .controller('EventGroupCtrl', EventGroupCtrl);
 
+<<<<<<< HEAD
     EventGroupCtrl.$inject = ['$scope', '$state', '$timeout', '$stateParams', '$ionicScrollDelegate', 'userService'];
 
     function EventGroupCtrl ($scope, $state, $timeout, $stateParams, $ionicScrollDelegate, userService) {
@@ -44,4 +45,12 @@
         vm.photo = user.profilepicture;
       });
     }
+=======
+    EventGroupCtrl.$inject = ['$scope', '$state', '$timeout'];
+
+    function EventGroupCtrl ($scope, $state, $timeout) {
+      var vm = this;
+      vm.messages = [];
+    };
+>>>>>>> stashing changes
 })();
