@@ -1042,14 +1042,50 @@ input[type=date], input[type=time] {
   float: right;
 }
 
+#event--item {
+  margin-top: 42px;
+}
+
+.event--item--p {
+  line-height: 20px;
+}
+
+#event--item--des {
+  font-weight: bold;
+}
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * EVENTS VIEW
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+#event--content {
+  margin-top: 85%;
+}
+
 #event--description {
-  margin-top: 50px;
+  margin-top: 10%;
+  height: 40%;
+  background-color: #91CC91;
+}
+
+.event--description--general {
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.event--description--general h2{
+  font-weight: bold;
+}
+
+.event--description--general p {
+  padding-top: 5px;
+}
+
+#event--activities {
+  padding-top: 10px;
+  text-align: center;
 }
 
 #event--description div {
@@ -1058,6 +1094,26 @@ input[type=date], input[type=time] {
 }
 
 #event--attending {
-  margin-top: 100px;
   font-size: 18px;
+}
+
+
+#event--description--description {
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+#event--description--location {
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+#event--description--date {
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+#event--description--people {
+  padding-bottom: 10px;
+  text-align: center;
 }

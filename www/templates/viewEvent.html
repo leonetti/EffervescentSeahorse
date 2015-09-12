@@ -2,25 +2,43 @@
   <ion-nav-back-button id="back__button"
     ng-click="myGoBack()"> &nbsp; Events
   </ion-nav-back-button>
+  <ion-nav-buttons side="right">
+    <button ng-click="vm.joinEvent()" ng-hide="vm.joined">JOIN</button>
+    <button ng-click="vm.unjoinEvent()" ng-show="vm.joined">UNJOIN</button>
+  </ion-nav-buttons>
 </ion-nav-bar>
 
 <ion-view>
-  <ion-content>
-    <div id="event--description">
-      <div id="event--description--description">Description: {{vm.description}}</div>
-      <div id="event--description--location">Location: {{vm.location}}</div>
-      <div id="event--description--date">Date: {{vm.eventDate}}</div>
-      <div id="event--description--people">Number of People: {{vm.numPeople}}</div>
+  <div id="event--description">
+    <div id="event--activities"><span ng-repeat="activity in vm.activities">{{activity}} </span></div>
+    <div class="event--description--general">
+      <p>{{vm.description}}</p>
     </div>
+    <div class="event--description--general">
+      <h2>Where:</h2>
+      <p>{{vm.location}}</p>
+    </div>
+    <div class="event--description--general">
+      <h2>Date:</h2>
+      <p>{{vm.eventDate}}</p>
+    </div>
+    <div class="event--description--general">
+      <h2>Number of People:</h2>
+      <p>{{vm.numPeople}}</p>
+    </div>
+  </div>
 
-    <button ng-click="vm.joinEvent()" ng-hide="vm.joined">JOIN</button>
-    <button ng-click="vm.unjoinEvent()" ng-show="vm.joined">UNJOIN</button>
 
+  <ion-content id="event--content">
     <h2 id="event--attending">People Going</h2>
     <ion-list>
-      <ion-item ng-repeat="attendee in vm.attendees">
+      <ion-item class="item-remove-animate item-avatar" ng-repeat="attendee in vm.attendees">
         <img ng-src="data:image/png;base64,{{attendee.pic}}" style="width: 64px; height: 64px">
         <h2>{{attendee.name}}</h2>
+        <span class="search--activity" ng-repeat='interest in attendee.interests'>{{interest.activity}} &nbsp;</span>
+        <button class='friendChat' ng-hide="blocked" id='bubblify--2'>
+          <a href="#/messages/{{attendee.id}}" class='ion-chatbubble-working' id='bubblify--2'></a>
+        </button>
       </ion-item>
     </ion-list>
   </ion-content>
