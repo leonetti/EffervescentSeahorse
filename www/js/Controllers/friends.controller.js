@@ -3,14 +3,14 @@
   angular.module('starter.controllers')
     .controller('FriendsController', FriendsController);
 
-  FriendsController.$inject = ['$scope', '$timeout'];
+  FriendsController.$inject = ['$scope', '$timeout', 'userService'];
 
-  function FriendsController ($scope, $timeout) {
+  function FriendsController ($scope, $timeout, userService) {
     var vm = this;
 
 
     $scope.$on('$ionicView.enter', function(e) {
-      var userId = window.localStorage['uid'];
+      var userId = userService.getCurrentUserId();
       vm.hasReq;
       vm.friends = [];
       // check for friend requests
