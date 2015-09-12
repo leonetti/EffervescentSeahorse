@@ -903,6 +903,7 @@ ul.icon li
 #changeTextArea{
   background-color:#91CC91;
   color:white;
+  border: 1px solid #3d805b;
 }
 
 #profile .whitey{

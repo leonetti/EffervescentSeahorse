@@ -33,6 +33,7 @@ angular.module('starter.controllers', [])
     val.uid = $stateParams.userId;
     $timeout(function () {
       $scope.user = (val);
+      $scope.stats = snapshot.val().stats
     });
   });
 
@@ -225,6 +226,29 @@ angular.module('starter.controllers', [])
     });
   };
 
+  $scope.postStats = function(item, stat) {
+    if(item === 'bench'){
+      console.log(stat)
+     ref.child('users').child(userId).child('stats').update({
+      'bench' : stat
+     });
+    }
+    if(item === 'squat'){
+     ref.child('users').child(userId).child('stats').update({
+      'squat' : stat
+     });
+    }
+    if(item === 'press'){
+     ref.child('users').child(userId).child('stats').update({
+      'press' : stat
+     });
+    }
+    if(item === 'dead'){
+     ref.child('users').child(userId).child('stats').update({
+      'dead' : stat
+     });
+    }
+  };
 
 })
 

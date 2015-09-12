@@ -29,7 +29,7 @@
     <div class='whitey'>
       <div class="button-bar">
         <a class="button button-block button-positive activated radioButton" id="radioButton" ng-class="{'testTest': isActive('Interests')}" ng-click="setActive('Interests')">Interests</a>
-        <a class="button button-block button-positive activated" id="radioButton" ng-class="{'testTest': isActive('Accomplishments')}" ng-click="setActive('Accomplishments')">Accomplishments</a>
+        <a class="button button-block button-positive activated" id="radioButton" ng-class="{'testTest': isActive('Stats')}" ng-click="setActive('Stats')">Stats</a>
         <a class="button button-block button-positive activated" id="radioButton" ng-class="{'testTest': isActive('Photos')}" ng-click="setActive('Photos')">Photos</a>
       </div>
       <div class='profile__box whitey' ng-show='isActive("Interests")'>
@@ -63,6 +63,29 @@
           <div ng-show='isEdit("on")' class='addPhotoBox' ng-click='addMedia(1)'><div class='photoBoxText'>Add Photos Here!</div></div>
         </div>
       </ion-content>
+      </div>
+      <div class='profile__box whitey' ng-show='isActive("Stats")'>
+        <h2 class='sections'>Stats</h2>
+        <div>I benchpress {{ stats.bench}} pounds</div>
+        <form ng-show='isEdit("on")'>
+          <input ng-model='benchs'></input>
+          <button ng-click='postStats("bench", benchs)'>Submit</button>
+        </form>
+        <div>I squat {{ stats.squat }} pounds </div>
+        <form ng-show='isEdit("on")'>
+          <input ng-model='squats'></input>
+          <button ng-click='postStats("squat", squats)'>Submit</button>
+        </form>
+        <div>I military press {{ stats.press }} pounds </div>
+        <form ng-show='isEdit("on")'>
+          <input ng-model='presses'></input>
+          <button ng-click='postStats("press", presses)'>Submit</button>
+        </form>
+        <div>I deadlift {{ stats.dead }} pounds </div>
+        <form ng-show='isEdit("on")'>
+          <input ng-model='deads'></input>
+          <button ng-click='postStats("dead", deads)'>Submit</button>
+        </form>
       </div>
     </div>
 <!--   </ion-content> -->
