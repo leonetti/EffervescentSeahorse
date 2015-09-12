@@ -9,6 +9,7 @@
       var vm = this;
       console.log('initialized EventViewController');
       var eventId = $stateParams.eventId;
+      vm.eventId = $stateParams.eventId;
       var userId = window.localStorage['uid'];
 
       $scope.$on('$ionicView.enter', function(e) {
