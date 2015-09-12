@@ -821,6 +821,7 @@ ul.icon li
   font-family: 'Bariol', 'Lato', sans-serif;
   font-size: 30px;
   height: 90px;
+  padding: 25px 7px;
 }
 
 #bubblify--2 {
@@ -829,6 +830,7 @@ ul.icon li
   border:none;
   font-family: 'Bariol', 'Lato', sans-serif;
   font-size: 30px;
+  padding: 10px 5px;
 }
 
 .changeProfPic{
