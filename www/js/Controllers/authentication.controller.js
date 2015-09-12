@@ -3,9 +3,9 @@
   angular.module('starter.controllers')
     .controller('AuthenticationController', AuthenticationController);
 
-  AuthenticationController.$inject = ['$scope', '$ionicModal', '$state', '$firebaseAuth', '$ionicLoading', '$timeout', '$ionicHistory'];
+  AuthenticationController.$inject = ['$scope', '$ionicModal', '$state', '$firebaseAuth', '$ionicLoading', '$timeout', '$ionicHistory', 'userService'];
 
-  function AuthenticationController ($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $timeout, $ionicHistory) {
+  function AuthenticationController ($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $timeout, $ionicHistory, userService) {
     var vm = this;
     vm.createUser = createUser;
     vm.signIn = signIn;
@@ -20,7 +20,6 @@
     });
 
     function logout () {
-      delete window.localStorage['displayName'];
       delete window.localStorage['uid'];
       ref.unauth();
       $ionicHistory.clearCache().then(function() {
@@ -74,13 +73,7 @@
           email: user.email,
           password: user.pwdForLogin
         }).then(function(authData) {
-          window.localStorage['uid'] = authData.uid;
-          ref.child("users").child(authData.uid).once('value', function (snapshot) {
-            var val = snapshot.val();
-            $timeout(function() {
-              window.localStorage['displayName'] = val;
-            });
-          });
+          userService.setCurrentUserId(authData.uid);
           user.email = '';
           user.pwdForLogin = '';
           $ionicLoading.hide();

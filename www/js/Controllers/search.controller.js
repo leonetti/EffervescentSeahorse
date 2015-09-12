@@ -25,7 +25,8 @@
         GPS.getGeo().then(function (position) {
           var longitude = position.coords.longitude;
           var latitude = position.coords.latitude;
-          var uid = window.localStorage['uid'];
+          var uid = userService.getCurrentUserId();
+
           $ionicLoading.hide();
           geoFire.set(uid, [latitude, longitude]).then(function () {
 
