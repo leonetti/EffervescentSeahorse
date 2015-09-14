@@ -909,6 +909,14 @@ ul.icon li
 #profile .whitey{
   background-color: white;
 }
+
+.move__margin{
+  margin-top: 43px;
+}
+
+#override__pad{
+  padding-right: 16px;
+}
 /*ul.icon li:before
 {
   font-family: bullets;
@@ -916,6 +924,7 @@ ul.icon li
   float: left;
   width: 1.4em;
 }
+
 
 ul.icon li.runner:before { content: "\e000";}*/
 

@@ -10,7 +10,6 @@
     "firebase": "~2.2.9",
     "geofire": "~3.2.2",
     "ngCordova": "~0.1.20-alpha",
-    "angular-slick": "~0.2.1",
     "jquery": "~2.1.4"
   }
 }

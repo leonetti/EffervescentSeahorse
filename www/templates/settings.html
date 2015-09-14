@@ -5,16 +5,13 @@
   <h4>Profile</h4>
 </ion-nav-bar>
 
-<ion-view view-title="Settings">
-<ion-content>
-    <ion-list>
-		<ion-item type="item-text-wrap" padding='true' href='#/profile/{{ vm.userID}}'>View Profile
+<ion-view view-title="Settings" has-header='true' class='move__margin'>
+	<ion-list>
+		<ion-item type="item-text-wrap" href='#/profile/{{ vm.userID}}' id="override_pad">View Profile
 	        <i class="icon ion-chevron-right icon-accessory" id="right--arrow--search"></i>
 		</ion-item>
-		<ion-item type="item-text-wrap" padding='true' ng-click="vm.logout()">Logout
+		<ion-item type="item-text-wrap" ng-click="vm.logout()">Logout
 			<i class="icon ion-chevron-right icon-accessory" id="right--arrow--search"></i>
-		</ion-item>
-
+		</ion-item>	
 	</ion-list>
-</ion-content>
 </ion-view>
