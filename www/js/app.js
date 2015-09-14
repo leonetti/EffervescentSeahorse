@@ -9,7 +9,7 @@ var ref = new Firebase('URL');
 var geoFire = new GeoFire(ref.child("geolocation"));
 
 
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova', 'firebase', 'slick'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova', 'firebase'])
 .run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
