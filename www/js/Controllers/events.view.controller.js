@@ -3,9 +3,9 @@
   angular.module('starter.controllers')
     .controller('EventViewCtrl', EventViewCtrl);
 
-    EventViewCtrl.$inject = ['$scope', '$state', '$timeout', '$stateParams'];
+    EventViewCtrl.$inject = ['$scope', '$state', '$timeout', '$stateParams', 'eventsService'];
 
-    function EventViewCtrl ($scope, $state, $timeout, $stateParams) {
+    function EventViewCtrl ($scope, $state, $timeout, $stateParams, eventsService) {
       var vm = this;
       console.log('initialized EventViewController');
       var eventId = $stateParams.eventId;
