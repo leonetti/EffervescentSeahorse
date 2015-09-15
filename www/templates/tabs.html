@@ -15,9 +15,6 @@ navigation history that also transitions its views in and out.
       <ion-nav-view name="tab-chat"></ion-nav-view>
   </ion-tab>
 
-  <ion-tab title="Edit Profile" icon-off="ion-ios-compose-outline" icon-on="ion-ios-compose" href="#/settings">
-    <ion-nav-view name='settings'></ion-nav-view>
-  </ion-tab>
 
   <ion-tab title="Friends" icon-off="ion-ios-people-outline" icon-on="ion-ios-people" href="#/tab/friends">
     <ion-nav-view name="tab-friends"></ion-nav-view>
@@ -27,9 +24,13 @@ navigation history that also transitions its views in and out.
     <ion-nav-view name="tab-events"></ion-nav-view>
   </ion-tab>
 
-  <!-- Logout Button -->
-  <ion-tab title="Logout" icon-off="ion-android-exit" icon-on="ion-android-exit" ng-controller="AuthenticationController as vm" ng-click="vm.logout()">
+  <ion-tab title="Settings" icon-off="ion-ios-compose-outline" icon-on="ion-ios-compose" href="#/settings">
+    <ion-nav-view name='settings'></ion-nav-view>
   </ion-tab>
+  
+  <!-- Logout Button -->
+<!--   <ion-tab title="Logout" icon-off="ion-android-exit" icon-on="ion-android-exit" ng-controller="AuthenticationController as vm" ng-click="vm.logout()">
+  </ion-tab> -->
 
 </ion-tabs>
 

@@ -903,10 +903,19 @@ ul.icon li
 #changeTextArea{
   background-color:#91CC91;
   color:white;
+  border: 1px solid #3d805b;
 }
 
 #profile .whitey{
   background-color: white;
+}
+
+.move__margin{
+  margin-top: 43px;
+}
+
+#override__pad{
+  padding-right: 16px;
 }
 /*ul.icon li:before
 {
@@ -915,6 +924,7 @@ ul.icon li
   float: left;
   width: 1.4em;
 }
+
 
 ul.icon li.runner:before { content: "\e000";}*/
 

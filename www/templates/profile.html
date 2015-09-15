@@ -2,9 +2,6 @@
   <ion-nav-back-button id="back__button"
     ng-click="myGoBack()"> &nbsp; Back
   </ion-nav-back-button>
-  <ion-nav-buttons side='right'>
-    <button ng-click='editProf()'> &nbsp; Edit </button>
-  </ion-nav-buttons>
   <h4>Profile</h4>
 </ion-nav-bar>
 
@@ -29,7 +26,7 @@
     <div class='whitey'>
       <div class="button-bar">
         <a class="button button-block button-positive activated radioButton" id="radioButton" ng-class="{'testTest': isActive('Interests')}" ng-click="setActive('Interests')">Interests</a>
-        <a class="button button-block button-positive activated" id="radioButton" ng-class="{'testTest': isActive('Accomplishments')}" ng-click="setActive('Accomplishments')">Accomplishments</a>
+        <a class="button button-block button-positive activated" id="radioButton" ng-class="{'testTest': isActive('Stats')}" ng-click="setActive('Stats')">Stats</a>
         <a class="button button-block button-positive activated" id="radioButton" ng-class="{'testTest': isActive('Photos')}" ng-click="setActive('Photos')">Photos</a>
       </div>
       <div class='profile__box whitey' ng-show='isActive("Interests")'>
@@ -45,13 +42,47 @@
           </div>
         </ion-content>
       </div>
-      <div class='profile__box' class='whitey' ng-show='isActive("Photos")'>
+      <div class='profile__box whitey' ng-show='isActive("Photos")'>
+      <ion-content has-header='true'>
         <div ng-show='isActive("Photos")'>
           <h2 class='sections'>Photos</h2>
-          <ul ng-hide='isEdit("on")' rn-carousel class="item item-image padding profpic" id='photoCar'><li ng-repeat='image in picGallery'><img ng-src="data:image/png;base64,{{ image.picture }}" class='layer'></li>
-          </ul>
+            <div class="row" ng-repeat="image in picGallery" ng-if="$index % 3 === 0">
+              <div class="col col-33" ng-if="$index < picGallery.length">
+                <img ng-src="data:image/png;base64,{{picGallery[$index]}}" width="100%" />
+              </div>
+              <div class="col col-33" ng-if="$index + 1 < picGallery.length">
+                <img ng-src="data:image/png;base64,{{picGallery[$index + 1]}}" width="100%" />
+              </div>
+              <div class="col col-33" ng-if="$index + 2 < picGallery.length">
+                <img ng-src="data:image/png;base64,{{picGallery[$index + 2]}}" width="100%" />
+              </div>
+            </div>
           <div ng-show='isEdit("on")' class='addPhotoBox' ng-click='addMedia(1)'><div class='photoBoxText'>Add Photos Here!</div></div>
         </div>
+      </ion-content>
+      </div>
+      <div class='profile__box whitey' ng-show='isActive("Stats")'>
+        <h2 class='sections'>Stats</h2>
+        <div>I benchpress {{ stats.bench}} pounds</div>
+        <form ng-show='isEdit("on")'>
+          <input ng-model='benchs'></input>
+          <button ng-click='postStats("bench", benchs)'>Submit</button>
+        </form>
+        <div>I squat {{ stats.squat }} pounds </div>
+        <form ng-show='isEdit("on")'>
+          <input ng-model='squats'></input>
+          <button ng-click='postStats("squat", squats)'>Submit</button>
+        </form>
+        <div>I military press {{ stats.press }} pounds </div>
+        <form ng-show='isEdit("on")'>
+          <input ng-model='presses'></input>
+          <button ng-click='postStats("press", presses)'>Submit</button>
+        </form>
+        <div>I deadlift {{ stats.dead }} pounds </div>
+        <form ng-show='isEdit("on")'>
+          <input ng-model='deads'></input>
+          <button ng-click='postStats("dead", deads)'>Submit</button>
+        </form>
       </div>
     </div>
 <!--   </ion-content> -->
