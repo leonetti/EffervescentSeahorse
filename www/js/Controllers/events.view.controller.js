@@ -31,37 +31,45 @@
           }
         });
 
-        // show the list of people going to the event
-        ref.child('attendees').child(eventId).on('value', function(snapshot) {
-          vm.attendees = [];
-          var included = false;
-          snapshot.forEach(function(child) {
-            var attendeeId = child.val();
-            ref.child('users').child(attendeeId).once('value', function(snapshot) {
-              var attendee = snapshot.val();
-              attendee.id = attendeeId;
-              attendee.name = snapshot.val().displayName;
-              ref.child('interests').child(attendeeId).once('value', function(snapshot) {
-                attendee.interests = snapshot.val();
-                ref.child('profilepicture').child(attendeeId).once('value', function(snapshot) {
-                  if (snapshot.val()) {
-                    attendee.pic = snapshot.val().profilepicture;
-                  }
-                  $timeout(function() {
-                    for (var i = 0; i < vm.attendees.length; i++) {
-                      if (vm.attendees[i].id === attendeeId) {
-                        included = true;
-                      }
-                    }
-                    if(!included) {
-                      vm.attendees.push(attendee);
-                    }
-                  });
-                });
-              });
-            });
+        eventsService.getAttendees().then(function(attendeeList) {
+          // vm.attendees = attendeeList;
+          $timeout(function() {
+            vm.attendees = attendeeList;
           });
         });
+
+
+        // show the list of people going to the event
+        // ref.child('attendees').child(eventId).on('value', function(snapshot) {
+        //   vm.attendees = [];
+        //   var included = false;
+        //   snapshot.forEach(function(child) {
+        //     var attendeeId = child.val();
+        //     ref.child('users').child(attendeeId).once('value', function(snapshot) {
+        //       var attendee = snapshot.val();
+        //       attendee.id = attendeeId;
+        //       attendee.name = snapshot.val().displayName;
+        //       ref.child('interests').child(attendeeId).once('value', function(snapshot) {
+        //         attendee.interests = snapshot.val();
+        //         ref.child('profilepicture').child(attendeeId).once('value', function(snapshot) {
+        //           if (snapshot.val()) {
+        //             attendee.pic = snapshot.val().profilepicture;
+        //           }
+        //           $timeout(function() {
+        //             for (var i = 0; i < vm.attendees.length; i++) {
+        //               if (vm.attendees[i].id === attendeeId) {
+        //                 included = true;
+        //               }
+        //             }
+        //             if(!included) {
+        //               vm.attendees.push(attendee);
+        //             }
+        //           });
+        //         });
+        //       });
+        //     });
+        //   });
+        // });
       });
 
       vm.joinEvent = function() {
