@@ -5,9 +5,7 @@
   eventsService.$inject = ['userService', '$stateParams', '$timeout'];
   function eventsService(userService, $stateParams, $timeout) {
     function getEventId() {
-      return new Promise(function(resolve, reject) {
-        resolve($stateParams.eventId);
-      });
+      return $stateParams.eventId;
     }
 
     function getEvent() {
@@ -26,35 +24,68 @@
       });
     }
 
-    function getAttendees() {
+    function getAttendees(attendees) {
       return new Promise(function(resolve, reject) {
-        getEventId().then(function(eventId) {
-          var attendeeList = [];
-          userService.get('attendees', eventId).then(function(attendees) {
-            for (var pushId in attendees) {
-              var attendeeId = attendees[pushId];
-              userService.getCompleteUser(attendeeId).then(function(user) {
-                $timeout(function() {
-                  attendeeList.push(user);
-                });
-              });
-            }
-          });
-          resolve(attendeeList);
+        var attendeeList = [];
+        for (var id in attendees) {
+          if (attendees.hasOwnProperty(id)) {
+            var attendeeId = attendees[id];
+            userService.getCompleteUser(attendeeId).then(function(attendee) {
+              attendeeList.push(attendee);
+              if (attendeeList.length === Object.keys(attendees).length) {
+                resolve(attendeeList);
+              }
+            });
+          }
+        }
+      });
+    }
+
+    function joinEvent() {
+      var userId = userService.getCurrentUserId();
+      var eventId = getEventId();
+      userService.get('attendees', eventId).then(function(attendees) {
+        for (var id in attendees) {
+          if (attendees[id] === userId) {
+            return;
+          }
+        }
+        ref.child('attendees').child(eventId).push(userId);
+
+        // decrement the number of people required for that event
+        ref.child('events').child(eventId).once('value', function(snapshot) {
+          var numPepes = snapshot.val().numPeople - 1;
+          ref.child('events').child(eventId).update({numPeople: numPepes});
         });
       });
     }
 
-    // function joinEvent() {
-    //   getEventId().then(function(eventId) {
+    function leaveEvent() {
+      var userId = userService.getCurrentUserId();
+      var eventId = getEventId();
+      userService.get('attendees', eventId).then(function(attendees) {
+        for (var id in attendees) {
+          if (attendees.hasOwnProperty(id)) {
+            if (attendees[id] === userId) {
+              ref.child('attendees').child(eventId).child(id).remove();
 
-    //   });
-    // }
+              // increment numPeople
+              ref.child('events').child(eventId).once('value', function(snapshot) {
+                var numPepes = snapshot.val().numPeople + 1;
+                ref.child('events').child(eventId).update({numPeople: numPepes});
+              });
+            }
+          }
+        }
+      });
+    }
 
     return {
       'getEvent': getEvent,
       'getEventId': getEventId,
-      'getAttendees': getAttendees
+      'getAttendees': getAttendees,
+      'joinEvent': joinEvent,
+      'leaveEvent': leaveEvent
     };
   }
 })();
