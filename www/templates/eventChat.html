@@ -5,12 +5,20 @@
 </ion-nav-bar>
 
 <ion-view view-title="Group Chat">
-  HELLO WORLD
+  <ion-content id="chat-content">
+    <section id="user-room">
+      <div ng-repeat="message in vm.messages track by $index" class="group__chat--message">
+        <img class="group__chat--pic" ng-src="data:image/png;base64,{{message.photo}}"></img>
+        <h3 class="group__chat--name">{{message.displayName}}</h3>
+        <p class="group__chat--time">{{message.date | date:'MMM d h:mm a'}}</p>
+        <p class="group__chat--text">{{message.text}}</p>
+      </div>
+    </section>
+  </ion-content>
   <div id="footer">
     <div class="item item-input" id="footer__bar">
      <form name="search_form" ng-submit="vm.sendMessage(vm.text);" id="user__form">
       <label class="item-input-wrapper" id="chat__input">
-<!--         <div class="button--input--text button--camera">+</div> -->
         <input type="text" name="search_input" ng-model="vm.text" id="user-message">
         <button class="button button--input">
           <p class="button--input--text">Send</p>

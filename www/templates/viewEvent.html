@@ -2,10 +2,6 @@
   <ion-nav-back-button id="back__button"
     ng-click="myGoBack()"> &nbsp; Events
   </ion-nav-back-button>
-  <ion-nav-buttons side="right">
-    <button ng-click="vm.joinEvent()" ng-hide="vm.joined">JOIN</button>
-    <button ng-click="vm.unjoinEvent()" ng-show="vm.joined">UNJOIN</button>
-  </ion-nav-buttons>
 </ion-nav-bar>
 
 <ion-view>
@@ -26,9 +22,11 @@
       <h2>Number of People:</h2>
       <p>{{vm.numPeople}}</p>
     </div>
+    <a id="event__group--chat" href="#/chat/{{vm.eventId}}">Group Chat</a>
+    <div class="event__group--join" ng-click="vm.joinEvent()" ng-hide="vm.joined"><p class="event__group--text">JOIN</p></div>
+    <div class="event__group--join" id="joined" ng-click="vm.unjoinEvent()" ng-show="vm.joined"><p class="event__group--text">LEAVE</p></div>
   </div>
 
-  <a href="#/chat/{{vm.eventId}}">Group Chat</a>
 
   <ion-content id="event--content">
     <h2 id="event--attending">People Going</h2>
@@ -38,7 +36,7 @@
         <h2>{{attendee.displayName}}</h2>
         <span class="search--activity" ng-repeat='interest in attendee.interests'>{{interest.activity}} &nbsp;</span>
         <button class='friendChat' ng-hide="blocked" id='bubblify--2'>
-          <a href="#/messages/{{attendee.uid}}" class='ion-chatbubble-working' id='bubblify--2'></a>
+          <a href="#/messages/{{attendee.id}}" class='ion-chatbubble-working' id='bubblify--2' ng-hide="attendee.me"></a>
         </button>
       </ion-item>
     </ion-list>
