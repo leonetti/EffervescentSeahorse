@@ -41,6 +41,11 @@
             ref.child('users').child(attendeeId).once('value', function(snapshot) {
               var attendee = snapshot.val();
               attendee.id = attendeeId;
+              if(attendee.id === window.localStorage.uid) {
+                attendee.me = true;
+              } else {
+                attendee.me = false;
+              }
               attendee.name = snapshot.val().displayName;
               ref.child('interests').child(attendeeId).once('value', function(snapshot) {
                 attendee.interests = snapshot.val();

@@ -1090,6 +1090,7 @@ input[type=date], input[type=time] {
 }
 
 .event--description--general p {
+  font-size: 1.5rem;
   padding-top: 5px;
 }
 
@@ -1104,7 +1105,11 @@ input[type=date], input[type=time] {
 }
 
 #event--attending {
-  font-size: 18px;
+  font-size: 2rem;
+  margin: 20px 0;
+  text-align: center;
+  letter-spacing: 1px;
+  font-weight: 100;
 }
 
 
@@ -1127,3 +1132,90 @@ input[type=date], input[type=time] {
   padding-bottom: 10px;
   text-align: center;
 }
+
+#event__group--chat {
+  font-size: 2rem;
+  text-decoration: none;
+  color: #91CC91;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  background-color: #FFF;
+  width: 50%;
+  padding: 16px;
+  float: left;
+  text-transform: uppercase;
+  font-weight: 100;
+  letter-spacing: 1px;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.event__group--join {
+  color: #91CC91;
+  background-color: #FFF;
+  height: 52px
+}
+
+.event__group--text {
+  font-size: 2rem;
+  line-height: 52px;
+  text-align: center;
+  font-weight: 100;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+#joined {
+  background-color: #3d805b;
+  color: #FFF;
+  border: none;
+  border-top: 1px solid #ccc;
+  height: 53px;
+}
+
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * EVENTS GROUP CHAT
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+.group__chat--message {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.group__chat--pic {
+  width: 30px;
+  height: 30px;
+  float: left;
+  border-radius: 50%;
+  margin-top: 5px;
+}
+
+.group__chat--text {
+  font-size: 1.5rem;
+  margin-left: 40px;
+  clear: left;
+}
+
+
+.group__chat--name,
+.group__chat--time
+ {
+  display: block;
+  float: left;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.group__chat--time {
+  font-size: 1.2rem;
+  line-height: 2rem;
+  color: #aaa;
+}
+
+
