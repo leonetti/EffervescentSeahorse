@@ -1,17 +1,14 @@
-<ion-nav-bar ng-controller="MyCtrl" class="nav__bar">
-  <ion-nav-back-button id="back__button"
-    ng-click="myGoBack()"> &nbsp; Back
-  </ion-nav-back-button>
-  <h4>Profile</h4>
+<ion-nav-bar class="nav__bar">
 </ion-nav-bar>
 
-<ion-view view-title="Settings" has-header='true' class='move__margin'>
-	<ion-list>
-		<ion-item type="item-text-wrap" href='#/profile/{{ vm.userID}}' id="override_pad">View Profile
-	        <i class="icon ion-chevron-right icon-accessory" id="right--arrow--search"></i>
-		</ion-item>
-		<ion-item type="item-text-wrap" ng-click="vm.logout()">Logout
-			<i class="icon ion-chevron-right icon-accessory" id="right--arrow--search"></i>
-		</ion-item>	
-	</ion-list>
+
+<ion-view view-title="Settings" class='move__margin'>
+  	<ion-list>
+  		<ion-item type="item-text-wrap" href='#/profile/{{ vm.userID}}' id="override_pad">View Profile
+  	        <i class="icon ion-chevron-right icon-accessory" id="right--arrow--search"></i>
+  		</ion-item>
+  		<ion-item type="item-text-wrap" ng-click="vm.logout()">Logout
+  			<i class="icon ion-chevron-right icon-accessory" id="right--arrow--search"></i>
+  		</ion-item>
+  	</ion-list>
 </ion-view>

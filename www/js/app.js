@@ -176,19 +176,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('settings', {
+  .state('tab.settings', {
     url: '/settings',
-    templateUrl: 'templates/settings.html',
-    controller: 'SettingsController as vm',
+    views: {
+      'tab-settings': {
+        templateUrl: 'templates/settings.html',
+        controller: 'SettingsController as vm'
+      }
+    },
     resolve: {
-      'currentAuth': ['Auth',
+      "currentAuth": ["Auth",
         function(Auth) {
-          return Auth.$requireAuth();
+          return Auth.$waitForAuth();
         }
       ]
     }
-  })
-
+  });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
 
