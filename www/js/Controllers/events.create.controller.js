@@ -43,8 +43,16 @@
           eventDate: vm.eventDate.toString().substring(0,15),
           eventTime: vm.eventTime,
           location: vm.eventLoc,
-          creator: vm.userId,
+          creator: vm.userId
         });
+
+
+        // the creator of the event should join it automatically
+        // ref.child('attendees').once('value', function(snapshot) {
+        //   for (var id in snapshot.val()) {
+        //     if (snapshot.val()[id].creator === )
+        //   }
+        // })
       };
     };
 })();
