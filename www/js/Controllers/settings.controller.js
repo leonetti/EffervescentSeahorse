@@ -9,7 +9,7 @@
 		var vm = this;
 		vm.logout = logout;
 		vm.userID = window.localStorage.uid;
-
+		console.log('initialized settings controller');
 
 		function logout () {
 			delete window.localStorage['uid'];
