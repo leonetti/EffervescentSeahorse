@@ -31,7 +31,7 @@
     }
 
     function rejectRequest(friend) {
-      var friendId = friend.id;
+      var friendId = friend.uid;
       friendService.rejectFriend(friendId);
     }
   }
