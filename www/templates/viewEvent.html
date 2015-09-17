@@ -33,7 +33,7 @@
   <ion-content id="event--content">
     <h2 id="event--attending">People Going</h2>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar" ng-repeat="attendee in vm.attendees">
+      <ion-item class="item-avatar" ng-repeat="attendee in vm.attendees">
         <img ng-src="data:image/png;base64,{{attendee.profilepicture}}" style="width: 64px; height: 64px">
         <h2>{{attendee.displayName}}</h2>
         <span class="search--activity" ng-repeat='interest in attendee.interests'>{{interest.activity}} &nbsp;</span>

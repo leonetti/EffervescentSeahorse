@@ -9,7 +9,7 @@
   </label>
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right search--item" ng-repeat="user in vm.users | filter:query" type="item-text-wrap" href="#/profile/{{user.uid}}" >
+      <ion-item class="item-avatar item-icon-right search--item" ng-repeat="user in vm.users | filter:query" type="item-text-wrap" href="#/profile/{{user.uid}}" >
         <img ng-src="data:image/png;base64,{{user.profilepicture}}" style="width: 64px; height: 64px">
         <h2 id="search--username">{{user.displayName}}</h2>
         <span class="search--activity" ng-repeat='interest in user.interests'>{{interest.activity}} &nbsp;</span>

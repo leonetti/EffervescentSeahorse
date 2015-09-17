@@ -5,7 +5,7 @@
 
     EventViewCtrl.$inject = ['$scope', '$state', '$timeout', '$stateParams', 'userService', 'eventsService', '$ionicLoading', '$ionicScrollDelegate'];
 
-    function EventViewCtrl ($scope, $state, $timeout, $stateParams, userService, $ionicScrollDelegate, eventsService, $ionicLoading) {
+    function EventViewCtrl ($scope, $state, $timeout, $stateParams, userService, eventsService, $ionicLoading ,$ionicScrollDelegate) {
       var vm = this;
       console.log('initialized EventViewController');
       var eventId = $stateParams.eventId;
@@ -42,8 +42,8 @@
           eventsService.getAttendees(snapshot.val()).then(function(attendees) {
             $timeout(function() {
               vm.attendees = attendees;
-            }
-          }
+            });
+          });
           vm.attendees = [];
           var included = false;
           snapshot.forEach(function(child) {

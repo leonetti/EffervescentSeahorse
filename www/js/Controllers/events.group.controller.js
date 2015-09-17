@@ -3,8 +3,6 @@
   angular.module('starter.controllers')
     .controller('EventGroupCtrl', EventGroupCtrl);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     EventGroupCtrl.$inject = ['$scope', '$state', '$timeout', '$stateParams', '$ionicScrollDelegate', 'userService'];
 
     function EventGroupCtrl ($scope, $state, $timeout, $stateParams, $ionicScrollDelegate, userService) {
