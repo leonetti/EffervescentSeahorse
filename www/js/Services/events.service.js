@@ -2,8 +2,8 @@
   'use strict';
   angular.module('starter.services').factory('eventsService', eventsService);
 
-  eventsService.$inject = ['userService', '$stateParams', '$timeout'];
-  function eventsService(userService, $stateParams, $timeout) {
+  eventsService.$inject = ['userService', '$stateParams'];
+  function eventsService(userService, $stateParams) {
     function getEventId() {
       return $stateParams.eventId;
     }

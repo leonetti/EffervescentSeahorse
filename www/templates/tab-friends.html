@@ -8,15 +8,15 @@
   </label>
   <ion-content id="friends--content">
     <ion-list>
-        <ion-item href="#/friends/friendrequests" ng-show="vm.hasReq" class="friend--lower">View Friend Requests
+        <ion-item href="#/friends/friendrequests" ng-show="vm.hasReq">View Friend Requests
           <div class="ion-alert rightButton"></div>
         </ion-item>
 
-        <ion-item class="item-avatar item-icon-right search--item" ng-repeat="friend in vm.friends | filter:query" type="item-text-wrap" href="#/profile/{{friend.id}}" >
+        <ion-item class="item-avatar item-icon-right search--item" ng-repeat="friend in vm.friends | filter:query" type="item-text-wrap" href="#/profile/{{friend.uid}}" >
           <img ng-src="data:image/png;base64,{{friend.pic}}" style="width: 64px; height: 64px">
           <h2 id="search--username">{{friend.displayName}}</h2>
           <button class='friendChat' ng-hide="blocked" id='bubblify--2'>
-            <a href="#/messages/{{friend.id}}" class='ion-chatbubble-working' id='bubblify--2'></a>
+            <a href="#/messages/{{friend.uid}}" class='ion-chatbubble-working' id='bubblify--2'></a>
           </button>
         </ion-item>
       </ion-list>
