@@ -54,14 +54,6 @@
       });
 
       rejectFriend(friendId);
-      // remove from friend request
-      // ref.child('friendRequests').child(userId).once('value', function(snapshot) {
-      //   for (var id in snapshot.val()) {
-      //     if (snapshot.val()[id] === friendId) {
-      //       ref.child('friendRequests').child(userId).child(id).remove();
-      //     }
-      //   }
-      // });
     }
 
     function rejectFriend(friendId) {
