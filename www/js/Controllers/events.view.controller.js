@@ -11,7 +11,12 @@
       var eventId = $stateParams.eventId;
       vm.eventId = $stateParams.eventId;
       var userId = window.localStorage['uid'];
+
       vm.attendees = [];
+
+      vm.isUser = function(id){
+        return userId === id;
+      }
 
       $ionicScrollDelegate.scrollTop();
 
