@@ -2,6 +2,9 @@
   "name": "chat-v2",
   "version": "1.0.0",
   "description": "chat-v2: An Ionic project",
+  "scripts": {
+    "test": "karma start"
+  },
   "dependencies": {
     "chai": "^3.2.0",
     "firebase": "^2.2.9",
