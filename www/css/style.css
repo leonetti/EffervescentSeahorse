@@ -1222,4 +1222,15 @@ input[type=date], input[type=time] {
   margin-top: 20px;
 }
 
+.ion-happy-outline,
+.ion-happy {
+  float: right;
+  color: #91CC91;
+  cursor: pointer;
+}
+
+.ion-happy-outline {
+  color: #ccc;
+}
+
 

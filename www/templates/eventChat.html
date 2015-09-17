@@ -11,6 +11,8 @@
         <img class="group__chat--pic" ng-src="data:image/png;base64,{{message.photo}}"></img>
         <h3 class="group__chat--name">{{message.displayName}}</h3>
         <p class="group__chat--time">{{message.date | date:'MMM d h:mm a'}}</p>
+        <div class="ion-happy-outline" ng-show="!message.liked" ng-click="vm.like(message)"></div>
+        <div class="ion-happy" ng-show="message.liked" ng-click="vm.unLike(message)"></div>
         <p class="group__chat--text">{{message.text}}</p>
       </div>
     </section>
