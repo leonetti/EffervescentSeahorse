@@ -41,6 +41,7 @@
       }
 
       userService.getCompleteUser(window.localStorage['uid']).then(function(user){
+<<<<<<< HEAD
         vm.photo = user.profilepicture || userService.getDefaultPicture();
       });
     }
@@ -82,6 +83,8 @@
       }
 
       userService.getCompleteUser(window.localStorage['uid']).then(function(user){
+=======
+>>>>>>> 89c73efaee8f056b275fb4498c1b8826e0115138
         vm.photo = user.profilepicture;
       });
     }
