@@ -3,15 +3,18 @@
   angular.module('starter.controllers')
     .controller('EventViewCtrl', EventViewCtrl);
 
-    EventViewCtrl.$inject = ['$scope', '$state', '$timeout', '$stateParams', 'eventsService', '$ionicLoading'];
+    EventViewCtrl.$inject = ['$scope', '$state', '$timeout', '$stateParams', 'userService', 'eventsService', '$ionicLoading', '$ionicScrollDelegate'];
 
-    function EventViewCtrl ($scope, $state, $timeout, $stateParams, eventsService, $ionicLoading) {
+    function EventViewCtrl ($scope, $state, $timeout, $stateParams, userService, $ionicScrollDelegate, eventsService, $ionicLoading) {
       var vm = this;
       console.log('initialized EventViewController');
       var eventId = $stateParams.eventId;
       vm.eventId = $stateParams.eventId;
       var userId = window.localStorage['uid'];
       vm.attendees = [];
+
+      $ionicScrollDelegate.scrollTop();
+
       $scope.$on('$ionicView.enter', function(e) {
 
         ref.child('events').child(eventId).on('value', function(snapshot) {
@@ -31,6 +34,7 @@
               });
             }
           }
+          $ionicScrollDelegate.scrollTop();
         });
 
         // get users who are attending the event
@@ -52,24 +56,25 @@
               } else {
                 attendee.me = false;
               }
+              attendee.pic = userService.getDefaultPicture();
+              ref.child('profilepicture').child(attendeeId).once('value', function(snapshot) {
+                if (snapshot.val()) {
+                  attendee.pic = snapshot.val().profilepicture || userService.getDefaultPicture();
+                }
+                $timeout(function() {
+                  for (var i = 0; i < vm.attendees.length; i++) {
+                    if (vm.attendees[i].id === attendeeId) {
+                      included = true;
+                    }
+                  }
+                  if(!included) {
+                    vm.attendees.push(attendee);
+                  }
+                });
+              });
               attendee.name = snapshot.val().displayName;
               ref.child('interests').child(attendeeId).once('value', function(snapshot) {
                 attendee.interests = snapshot.val();
-                ref.child('profilepicture').child(attendeeId).once('value', function(snapshot) {
-                  if (snapshot.val()) {
-                    attendee.pic = snapshot.val().profilepicture;
-                  }
-                  $timeout(function() {
-                    for (var i = 0; i < vm.attendees.length; i++) {
-                      if (vm.attendees[i].id === attendeeId) {
-                        included = true;
-                      }
-                    }
-                    if(!included) {
-                      vm.attendees.push(attendee);
-                    }
-                  });
-                });
               });
             });
           });

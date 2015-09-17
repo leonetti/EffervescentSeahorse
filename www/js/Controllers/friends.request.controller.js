@@ -3,9 +3,9 @@
   angular.module('starter.controllers')
     .controller('FriendsRequestController', FriendsRequestController);
 
-  FriendsRequestController.$inject = ['$scope', '$timeout'];
+  FriendsRequestController.$inject = ['$scope', '$timeout', 'userService'];
 
-  function FriendsRequestController ($scope, $timeout) {
+  function FriendsRequestController ($scope, $timeout, userService) {
     var vm = this;
 
     vm.acceptRequest = acceptRequest;
@@ -29,7 +29,7 @@
             user.id = uId;
             ref.child('profilepicture').child(uId).once('value', function(snapshot) {
               if (snapshot.val()) {
-                user.pic = snapshot.val().profilepicture;
+                user.pic = snapshot.val().profilepicture || userService.getProfilePicture();
               }
               $timeout(function() {
                 vm.friendRequests.push(user);

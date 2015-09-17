@@ -3,9 +3,9 @@
   angular.module('starter.controllers')
     .controller('ChatController', ChatController);
 
-  ChatController.$inject = ['$scope', '$state', '$timeout'];
+  ChatController.$inject = ['$scope', '$state', '$timeout', 'userService'];
 
-  function ChatController ($scope, $state, $timeout) {
+  function ChatController ($scope, $state, $timeout, userService) {
     var vm = this;
 
     vm.sendToProfile = function () {
@@ -20,18 +20,16 @@
           ref.child("users").child(key).once('value', function (snapshot) {
             var val = snapshot.val();
             val.uid = key;
-
+            ref.child('profilepicture').child(key).once('value', function (snapshot) {
+              if (snapshot.val()) {
+                val.profilepicture = snapshot.val().profilepicture || userService.getDefaultPicture();
+              }
+            });
             ref.child('interests').child(key).once('value', function (snapshot) {
               val.interests = snapshot.val();
-
-              ref.child('profilepicture').child(key).once('value', function (snapshot) {
-                if (snapshot.val()) {
-                  val.profilepicture = snapshot.val().profilepicture;
-                }
-                $timeout(function () {
-                  vm.users.push(val);
-                });
-              });
+            });
+            $timeout(function () {
+              vm.users.push(val);
             });
           });
         });

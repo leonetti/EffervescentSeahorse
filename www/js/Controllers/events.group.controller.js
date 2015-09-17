@@ -43,7 +43,7 @@
       }
 
       userService.getCompleteUser(window.localStorage['uid']).then(function(user){
-        vm.photo = user.profilepicture;
+        vm.photo = user.profilepicture || userService.getDefaultPicture();
       });
     }
 =======
