@@ -39,9 +39,48 @@
       });
     }
 
+    function acceptFriend(friendId) {
+      var userId = userService.getCurrentUserId();
+
+      // if the friend is already in user's friendlist, do not add again
+      ref.child('friends').child(userId).once('value', function(snapshot) {
+        for (var id in snapshot.val()) {
+          if (snapshot.val()[id] === friendId) {
+            return;
+          }
+        }
+        ref.child('friends').child(userId).push(friendId);
+        ref.child('friends').child(friendId).push(userId);
+      });
+
+      rejectFriend(friendId);
+      // remove from friend request
+      // ref.child('friendRequests').child(userId).once('value', function(snapshot) {
+      //   for (var id in snapshot.val()) {
+      //     if (snapshot.val()[id] === friendId) {
+      //       ref.child('friendRequests').child(userId).child(id).remove();
+      //     }
+      //   }
+      // });
+    }
+
+    function rejectFriend(friendId) {
+      var userId = userService.getCurrentUserId();
+
+      ref.child('friendRequests').child(userId).once('value', function(snapshot) {
+        for (var id in snapshot.val()) {
+          if (snapshot.val()[id] === friendId) {
+            ref.child('friendRequests').child(userId).child(id).remove();
+          }
+        }
+      });
+    }
+
     return {
       'getFriends': getFriends,
-      'getFriendRequests': getFriendRequests
+      'getFriendRequests': getFriendRequests,
+      'acceptFriend': acceptFriend,
+      'rejectFriend': rejectFriend
     };
   }
 })();
