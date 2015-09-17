@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "chat-v2: An Ionic project",
   "scripts": {
-    "test": "karma start"
+    "test": "karma start",
+    "preinstall": "bower install"
   },
   "dependencies": {
     "chai": "^3.2.0",
