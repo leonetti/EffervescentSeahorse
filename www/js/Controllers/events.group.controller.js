@@ -46,20 +46,12 @@
         vm.photo = user.profilepicture || userService.getDefaultPicture();
       });
     }
-=======
-    EventGroupCtrl.$inject = ['$scope', '$state', '$timeout'];
-=======
     EventGroupCtrl.$inject = ['$scope', '$state', '$timeout', '$stateParams', '$ionicScrollDelegate', 'userService'];
->>>>>>> stashing changes
 
     function EventGroupCtrl ($scope, $state, $timeout, $stateParams, $ionicScrollDelegate, userService) {
       var vm = this;
       vm.text = '';
       vm.messages = [];
-<<<<<<< HEAD
-    };
->>>>>>> stashing changes
-=======
       vm.eventId = $stateParams.eventId;
       vm.photo;
 
@@ -95,5 +87,4 @@
         vm.photo = user.profilepicture;
       });
     }
->>>>>>> stashing changes
 })();
