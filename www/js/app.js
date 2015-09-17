@@ -120,18 +120,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         ]
       }
     })
-  .state('editprofile', {
-      url: '/editprofile',
-      templateUrl: 'templates/editProfile.html',
-      controller: 'EditProfileCtrl',
-      resolve: {
-        "currentAuth": ["Auth",
-          function(Auth) {
-            return Auth.$waitForAuth();
-          }
-        ]
-      }
-    })
 
   .state('message', {
     url: '/messages/:userId',
