@@ -33,11 +33,11 @@
     <h2 id="event--attending">People Going</h2>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar" ng-repeat="attendee in vm.attendees">
-        <img ng-src="data:image/png;base64,{{attendee.pic}}" style="width: 64px; height: 64px">
-        <h2>{{attendee.name}}</h2>
+        <img ng-src="data:image/png;base64,{{attendee.profilepicture}}" style="width: 64px; height: 64px">
+        <h2>{{attendee.displayName}}</h2>
         <span class="search--activity" ng-repeat='interest in attendee.interests'>{{interest.activity}} &nbsp;</span>
         <button class='friendChat' ng-hide="blocked" id='bubblify--2'>
-          <a href="#/messages/{{attendee.id}}" class='ion-chatbubble-working' id='bubblify--2'></a>
+          <a href="#/messages/{{attendee.uid}}" class='ion-chatbubble-working' id='bubblify--2'></a>
         </button>
       </ion-item>
     </ion-list>
