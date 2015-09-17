@@ -44,40 +44,6 @@
               vm.attendees = attendees;
             });
           });
-          vm.attendees = [];
-          var included = false;
-          snapshot.forEach(function(child) {
-            var attendeeId = child.val();
-            ref.child('users').child(attendeeId).once('value', function(snapshot) {
-              var attendee = snapshot.val();
-              attendee.id = attendeeId;
-              if(attendee.id === window.localStorage.uid) {
-                attendee.me = true;
-              } else {
-                attendee.me = false;
-              }
-              attendee.pic = userService.getDefaultPicture();
-              ref.child('profilepicture').child(attendeeId).once('value', function(snapshot) {
-                if (snapshot.val()) {
-                  attendee.pic = snapshot.val().profilepicture || userService.getDefaultPicture();
-                }
-                $timeout(function() {
-                  for (var i = 0; i < vm.attendees.length; i++) {
-                    if (vm.attendees[i].id === attendeeId) {
-                      included = true;
-                    }
-                  }
-                  if(!included) {
-                    vm.attendees.push(attendee);
-                  }
-                });
-              });
-              attendee.name = snapshot.val().displayName;
-              ref.child('interests').child(attendeeId).once('value', function(snapshot) {
-                attendee.interests = snapshot.val();
-              });
-            });
-          });
         });
       });
 
