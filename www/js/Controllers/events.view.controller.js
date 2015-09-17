@@ -56,7 +56,6 @@
               } else {
                 attendee.me = false;
               }
-<<<<<<< HEAD
               attendee.pic = userService.getDefaultPicture();
               ref.child('profilepicture').child(attendeeId).once('value', function(snapshot) {
                 if (snapshot.val()) {
@@ -73,8 +72,6 @@
                   }
                 });
               });
-=======
->>>>>>> 89c73efaee8f056b275fb4498c1b8826e0115138
               attendee.name = snapshot.val().displayName;
               ref.child('interests').child(attendeeId).once('value', function(snapshot) {
                 attendee.interests = snapshot.val();
