@@ -7,6 +7,8 @@
 
     function SearchController ($scope, $state, GPS, $ionicLoading, $timeout, userService) {
       var vm = this;
+      vm.users = [];
+      vm.position = {};
 
       vm.sendToProfile = function () {
         $state.go('profile');
@@ -23,6 +25,7 @@
 
         //set User position
         GPS.getGeo().then(function (position) {
+          vm.position = position;
           var longitude = position.coords.longitude;
           var latitude = position.coords.latitude;
           var uid = userService.getCurrentUserId();
