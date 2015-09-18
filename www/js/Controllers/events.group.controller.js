@@ -12,6 +12,7 @@
       vm.messages = [];
       vm.eventId = $stateParams.eventId;
       vm.photo;
+      vm.liked = [];
 
       ref.child('events').child(vm.eventId).child('messages').on('value', function(snapshot) {
         vm.messages = [];
@@ -23,22 +24,45 @@
         });
       });
 
-      vm.like = function(message) {
-        console.log('like');
-        message.liked++;
-        ref.child('events').child(vm.eventId).once('value', function(snapshot) {
-          for (var timestamp in snapshot.val()) {
-            if (snapshot.val()[timestamp] === message.date) {
-              $timeout(function() {
+      vm.like = function($index) {
+        var message = vm.messages[$index];
 
-              });
-            }
+        ref.child('events').child(vm.eventId).child('messages').once('value', function(snapshot) {
+          for(var eid in snapshot.val()) {
+            ref.child('events').child(vm.eventId).child('messages').child(eid).once('value', function(snap) {
+              if(snap.val().date === message.date) {
+                var likes = snap.val().liked + 1;
+                ref.child('events').child(vm.eventId).child('messages').child(eid).update({
+                  liked: likes
+                });
+                vm.liked.push(snap.val().date);
+                console.log(vm.liked);
+              }
+            })
           }
         });
       }
 
-      vm.unLike = function(message) {
-        console.log(message);
+      vm.unLike = function($index) {
+        var message = vm.messages[$index];
+        ref.child('events').child(vm.eventId).child('messages').once('value', function(snapshot) {
+          for(var eid in snapshot.val()) {
+            ref.child('events').child(vm.eventId).child('messages').child(eid).once('value', function(snap) {
+              if(snap.val().date === message.date) {
+                var index = vm.liked.indexOf(snap.val().date);
+                if(index !== -1) {
+                  var likes = snap.val().liked - 1;
+                  ref.child('events').child(vm.eventId).child('messages').child(eid).update({
+                    liked: likes
+                  });
+                  vm.liked.splice(index);
+                } else {
+                  vm.like($index);
+                }
+              }
+            })
+          }
+        })
       }
 
       vm.sendMessage = function(message) {

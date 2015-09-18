@@ -7,8 +7,6 @@
 
   function MessagesController ($scope, $stateParams, $timeout, $ionicScrollDelegate) {
     var vm = this;
-
-
     vm.user;
     vm.text = '';
     vm.messages = [];

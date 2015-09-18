@@ -302,9 +302,9 @@ angular.module('starter.controllers', [])
         return;
       }
     }
-        ref.child('interests').child(userId).push({
-          'activity': item
-        });
+    ref.child('interests').child(userId).push({
+      'activity': item
+    });
   }
 
   $scope.addBio = function(item){

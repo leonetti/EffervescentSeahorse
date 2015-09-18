@@ -1226,11 +1226,18 @@ input[type=date], input[type=time] {
 .ion-happy {
   float: right;
   color: #91CC91;
+  opacity: 0.7;
   cursor: pointer;
 }
 
 .ion-happy-outline {
   color: #ccc;
+}
+
+.message__liked {
+  position: absolute;
+  right: 5px;
+  font-size: 1rem;
 }
 
 
